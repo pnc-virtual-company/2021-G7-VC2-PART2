@@ -1,15 +1,17 @@
 <template>
   <v-app>
+    <FormLogin></FormLogin>
     <v-main>
-      <router-view/>
+      <router-view />
     </v-main>
   </v-app>
 </template>
 
 <script>
-
+import FormLogin from "./components/form/FormLogin.vue";
 export default {
-  name: 'App',
+  components: { FormLogin },
+  name: "App",
 
   data: () => ({
     //
