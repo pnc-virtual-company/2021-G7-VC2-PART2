@@ -18,8 +18,8 @@ class CreateStudentsTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('class');
-            $table->integer('phone');
-            $table->string('picture');
+            $table->integer('phone')->nullable();
+            $table->string('picture')->nullable();
             $table->string('gender');
             $table->timestamps();
         });

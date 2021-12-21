@@ -33,17 +33,17 @@ class StudentController extends Controller
             'gender' => 'required',
             'picture' => 'nullable|image|mimes:jpg,jpeg,png,gif,jfif|max:1999'
         ]);
-        $request->file('picture')->store('public/images');
+       
         $student = new Student();
         $student->first_name = $request->first_name;
         $student->last_name = $request->last_name;
         $student->class = $request->class;
         $student->phone = $request->phone;
         $student->gender = $request->gender;
-        $student->picture = $request->file('picture')->hashName();
+        $student->picture = $request->file('picture')->store('public/images');
         $student->save();
 
-        return response()->json(['message' => 'Sutdent created successfully'], 201);
+        return response()->json(['message' => 'Sutdent created successfully', 'data' => $student ], 201);
     }
 
     /**
@@ -72,16 +72,15 @@ class StudentController extends Controller
             'class' => 'required',
             'phone' => 'required' | 'min:9 || max:10',
             'gender' => 'required',
-            'picture' => 'nullable|image|mimes:jpg,jpeg,png,gif,jfif|max:2000'
+            'picture' => 'nullable|image|mimes:jpg,jpeg,png,gif,jfif|max:1999'
         ]);
-        $request->file('picture')->store('public/images');
         $student = Student::findOrFail($id);
         $student->first_name = $request->first_name;
         $student->last_name = $request->last_name;
         $student->class = $request->class;
         $student->phone = $request->phone;
         $student->gender = $request->gender;
-        $student->picture = $request->file('image')->hashName();
+        $student->picture = $request->file('picture')->store('public/images');
         $student->save();
 
         return response()->json(['message' => 'Sutdent updated successfully'], 200);

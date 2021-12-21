@@ -5,6 +5,10 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path:'/',
+    component:() => import('@/components/views/StudentList.vue')
+  },
+  {
     path: '/user',
     name: 'User',
     component: () => import('@/components/views/User.vue')
