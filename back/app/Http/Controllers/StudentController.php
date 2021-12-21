@@ -24,26 +24,26 @@ class StudentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    { 
-            $request->validate([
+    {
+        $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
             'class' => 'required',
-            'phone'=>'min:9 || max:10',
+            'phone' => 'min:9 || max:10',
             'gender' => 'required',
-            'picture'=>'nullable|image|mimes:jpg,jpeg,png,gif,jfif|max:1999'
+            'picture' => 'nullable|image|mimes:jpg,jpeg,png,gif,jfif|max:1999'
         ]);
-        $request -> file('picture')->store('public/images');
+       
         $student = new Student();
         $student->first_name = $request->first_name;
         $student->last_name = $request->last_name;
         $student->class = $request->class;
         $student->phone = $request->phone;
         $student->gender = $request->gender;
-        $student->picture =$request->file('picture')->hashName();
+        $student->picture = $request->file('picture')->store('public/images');
         $student->save();
 
-        return response()->json(['message' => 'Sutdent created successfully'], 201);
+        return response()->json(['message' => 'Sutdent created successfully', 'data' => $student ], 201);
     }
 
     /**
@@ -66,22 +66,21 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-            $request->validate([
+        $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
             'class' => 'required',
-            'phone'=>'min:9 || max:10',
+            'phone' => 'required' | 'min:9 || max:10',
             'gender' => 'required',
-            'picture'=>'nullable|image|mimes:jpg,jpeg,png,gif,jfif|max:2000'
+            'picture' => 'nullable|image|mimes:jpg,jpeg,png,gif,jfif|max:1999'
         ]);
-        $request -> file('picture')->updateStudent('public/images');
         $student = Student::findOrFail($id);
         $student->first_name = $request->first_name;
         $student->last_name = $request->last_name;
         $student->class = $request->class;
         $student->phone = $request->phone;
         $student->gender = $request->gender;
-        $student->picture =$request->file('image')->hashName();
+        $student->picture = $request->file('picture')->store('public/images');
         $student->save();
 
         return response()->json(['message' => 'Sutdent updated successfully'], 200);
@@ -102,4 +101,10 @@ class StudentController extends Controller
             return response()->json(['massage' => 'Not Found'], 404);
         }
     }
+    
+    public function search($first_name)
+    {
+        return Student::where('first_name', 'like', '%' . $first_name . '%')->get();
+    }
+
 }
