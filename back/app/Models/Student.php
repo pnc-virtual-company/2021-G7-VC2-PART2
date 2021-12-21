@@ -13,11 +13,7 @@ class Student extends Model
         'last_name',
         'class',
         'phone',
-        // 'picture',
         'gender'
     ];
-    // protected $hidden = [
-    //     'created_at',
-    //     'updated_at',
-    // ];
+   
 }
