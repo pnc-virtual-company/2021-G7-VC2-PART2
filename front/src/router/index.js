@@ -1,23 +1,30 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import FormLogin from '../components/form/FormLogin.vue';
+import Users from '../components/views/Users.vue';
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/login',
+    path: '/',
     name: 'Login',
-    component: () => import('@/components/form/FormLogin.vue')
+    component: FormLogin
   },
-  // {
-  //   path: '/user',
-  //   name: 'User',
-  //   component: () => import('@/components/views/User.vue')
-  // },
   {
-    path: '/navbar',
-    name: 'Navbar',
-    component: () => import('@/components/nav/Navbar.vue')
+    path: '/logout',
+    name: 'logout',
+    component: FormLogin
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: FormLogin
+  },
+  {
+    path: '/user',
+    name: 'Users',
+    component: Users
   },
 
 ]
