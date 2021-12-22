@@ -34,7 +34,7 @@ export default {
 
     // ___________Add new student into list______________
     addStudent(newStudent) {
-      axios.post("/students", newStudent).then((response) => {
+      axios.post("/students", newStudent).then(response => {
         this.studentdata();
         console.log(response.data);
       });

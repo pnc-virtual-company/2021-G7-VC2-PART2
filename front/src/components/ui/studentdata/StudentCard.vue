@@ -58,7 +58,7 @@ import StudentForm from "./StudentForm.vue";
 import axios from "../../../api/api.js";
 export default {
   props: ["dataUser"],
-  emits: ["deleteItem", "search-user", "updateStudent"],
+  emits: ["deleteItem", "search-user"],
   components: {
     "student-form": StudentForm,
   },
@@ -93,6 +93,8 @@ export default {
     searchUsername() {
       this.$emit("search-user", this.search);
     },
+
+    
   },
   mounted() {
     this.studentdata();
