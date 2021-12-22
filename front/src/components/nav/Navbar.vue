@@ -54,11 +54,31 @@ export default {
       sidebar: false,
       group: false,
       menuItems: [
-        { title: "User", path: "/user", icon: "mdi-account-convert" },
-        { title: "Students", path: "/studentlist", icon: "mdi-account-multiple" },
-        { title: "Permissions", path: "/permission", icon: "mdi-clipboard-check" },
-        { title: "Disciples", path: "/disciples", icon: "mdi-file-document" },
-        { title: "Log Out", path: "/logout", icon: "mdi-login" },
+        {
+          title: "User",
+          path: "/user",
+          icon: "mdi-account-convert",
+        },
+        {
+          title: "Students",
+          path: "/studentlist",
+          icon: "mdi-account-multiple",
+        },
+        {
+          title: "Permissions",
+          path: "/permission",
+          icon: "mdi-clipboard-check",
+        },
+        {
+          title: "Disciples",
+          path: "/disciples",
+          icon: "mdi-file-document",
+        },
+        {
+          title: "Log Out",
+          path: "/logout",
+          icon: "mdi-login",
+        },
       ],
     };
   },

@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
+
   {
     path: '/user',
     name: 'User',
@@ -28,7 +29,18 @@ const routes = [
     path: '/logout',
     name: 'Log Out',
     component: () => import('@/components/views/LogOut.vue')
-  }
+  },
+  //   path: '/login',
+  //   name: 'Login',
+  //   component: () => import('@/components/form/FormLogin.vue')
+  // },
+
+  {
+    path: '/navbar',
+    name: 'Navbar',
+    component: () => import('@/components/nav/Navbar.vue')
+  },
+
 ]
 
 const router = new VueRouter({
