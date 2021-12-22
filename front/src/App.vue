@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Navbar/>
+   <nav-bar></nav-bar>
     <v-main>
       <router-view/>
     </v-main>
@@ -11,7 +11,7 @@
 import Navbar from '@/components/nav/Navbar';
 export default {
   components: {
-    Navbar
+    'nav-bar': Navbar,
   },
   data(){
     return {
