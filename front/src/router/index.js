@@ -1,16 +1,34 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import User from '../components/views/User.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/user',
     name: 'User',
-    component: User
+    component: () => import('@/components/views/User.vue')
   },
-  
+  {
+    path: '/permission',
+    name: 'Permission',
+    component: () => import('@/components/views/Permission.vue')
+  },
+  {
+    path: '/disciples',
+    name: 'Disciples',
+    component: () => import('@/components/views/Disciples.vue')
+  },
+  {
+    path: '/studentlist',
+    name: 'StudentList',
+    component: () => import('@/components/views/StudentList.vue')
+  },
+  {
+    path: '/logout',
+    name: 'Log Out',
+    component: () => import('@/components/views/LogOut.vue')
+  }
 ]
 
 const router = new VueRouter({
