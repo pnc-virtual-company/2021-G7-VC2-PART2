@@ -60,7 +60,7 @@
 
         <v-card-actions class="black lighten-1">
           <v-spacer></v-spacer>
-          <v-btn b@click="dialog= false"> Cancel </v-btn>
+          <v-btn color="red darken-1" text @click="dialog= false"> Cancel </v-btn>
           <v-btn color="blue darken-1" text @click="createStudent"> Save </v-btn>
         </v-card-actions>
       </v-card>

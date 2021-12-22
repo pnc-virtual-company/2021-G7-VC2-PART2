@@ -28,11 +28,7 @@ const routes = [
     name: 'StudentList',
     component: () => import('@/components/views/StudentList.vue')
   },
-  {
-    path: '/logout',
-    name: 'Log Out',
-    component: () => import('@/components/views/LogOut.vue')
-  }
+  
 ]
 
 const router = new VueRouter({
