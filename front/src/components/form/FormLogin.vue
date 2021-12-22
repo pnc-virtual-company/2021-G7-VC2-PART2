@@ -1,40 +1,46 @@
 <template>
-  <div class="container" v-if="isLogin">
+  <div class="container">
     <div class="title">
       <h2>STUDENTS LIFE</h2>
     </div>
-    <form>
+    <form class="mx-auto">
       <div class="user-icon">
         <v-icon style="font-size: 100px; color: white"
           >mdi-account-circle</v-icon
         >
       </div>
 
-      <v-text-field
-        background-color="green lighten-5"
-        class="email rounded"
-        v-model="email"
-        :error-messages="emailErrors"
-        label="E-mail"
-        placeholder="example@gmail.com"
-        required
-        @input="$v.email.$touch()"
-        @blur="$v.email.$touch()"
-      ></v-text-field>
-
-      <v-text-field
-        v-model="password"
-        class="password rounded"
-        background-color="green lighten-5"
-        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-        :rules="[rules.required, rules.min]"
-        :type="show1 ? 'text' : 'password'"
-        name="input-10-1"
-        label="Password"
-        hint="At least 6 characters"
-        counter
-        @click:append="show1 = !show1"
-      ></v-text-field>
+      <v-row class="form ">
+          <v-col class="c_email">
+              <v-text-field
+                background-color="green lighten-5"
+                class="email rounded "
+                v-model="email"
+                :error-messages="emailErrors"
+                label="E-mail"
+                placeholder="example@gmail.com"
+                required
+                outlined
+                @input="$v.email.$touch()"
+                @blur="$v.email.$touch()"
+            ></v-text-field>
+          </v-col>
+          <v-col class="c_password">
+            <v-text-field
+            v-model="password"
+            class="password rounded"
+            background-color="green lighten-5"
+            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+            :rules="[rules.required, rules.min]"
+            :type="show1 ? 'text' : 'password'"
+            name="input-10-1"
+            label="Password"
+            outlined
+            hint="At least 6 characters"
+            @click:append="show1 = !show1"
+        ></v-text-field>
+          </v-col>
+      </v-row>
 
       <div class="login">
         <v-btn style="width: 60%" @click="login"> LOG IN </v-btn>
@@ -61,12 +67,10 @@ export default {
       email,
     },
   },
-
   data: () => ({
     email: "",
     password: "",
     show1: false,
-    isLogin: true,
     rules: {
       required: (value) => !!value || "Password is required.",
       min: (v) => v.length >= 6 || "Min 6 characters",
@@ -91,26 +95,18 @@ export default {
         email: this.email,
         password: this.password,
       };
-
-      axios
-        .post("/login", data)
-        .then((res) => {
-          if (this.email !== "" && this.password !== "") {
-            this.$emit("login");
-          }
+      if (this.email !== "" && this.password !== "") {
+        axios.post("/login", data).then((res) => {
+          this.$emit("log-in", true);
           localStorage.setItem("authToken", res.data.token);
-          this.$router.push("/user");
-          this.isLogin = false;
-          this.userInfo = true;
-        })
-        .catch((error) => {
-          console.log(error);
+          this.$router.push("/user").catch(() => {});
         });
+      }
     },
   },
 };
 </script>
-
+    
 <style scoped>
 .container {
   margin-top: 10px;
@@ -127,18 +123,7 @@ form {
 
 .login {
   text-align: center;
-  margin-top: 50px;
-}
-
-.email,
-.password {
-  width: 60%;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.email {
-  margin-top: 60px;
+  margin-top: 10px;
 }
 
 .user-icon {
@@ -158,4 +143,10 @@ form {
   margin-top: 30px;
   color: white;
 }
+.form {
+  display: grid;
+  padding: 10px;
+  margin-top:50px;
+}
+
 </style>

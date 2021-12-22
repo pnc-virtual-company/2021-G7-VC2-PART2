@@ -35,10 +35,11 @@
           text
           v-for="item in menuItems"
           :key="item.title"
-          :to="item.path"
+          :to="item.path" 
         >
           <v-icon left color="blue --text">{{ item.icon }}</v-icon>
           {{ item.title }}
+          <v-btn v-if="item.path == '/logout'" @click="logOut">Log Out</v-btn>
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
@@ -50,7 +51,6 @@ export default {
   data() {
     return {
       appTitle: "Administrator",
-      // ['Administrator', 'Social Affair Officer',, 'Student'],
       sidebar: false,
       group: false,
       menuItems: [
@@ -75,15 +75,19 @@ export default {
           icon: "mdi-file-document",
         },
         {
-          title: "Log Out",
+          title: "",
           path: "/logout",
           icon: "mdi-login",
         },
       ],
     };
   },
+  methods: {
+    logOut() {
+      localStorage.clear();
+      this.$emit("log_out");
+      this.$router.push("/login");
+    },
+  },
 };
 </script>
-
-<style>
-</style>
