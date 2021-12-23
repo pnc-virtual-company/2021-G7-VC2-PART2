@@ -7,6 +7,7 @@
     ></student-card>
   </section>
 </template>
+
 <script>
 // import StudentForm from "../ui/StudentForm.vue";
 import StudentCard from "../ui/studentdata/StudentCard.vue";
@@ -16,7 +17,7 @@ export default {
   name: "App",
   components: {
     "student-card": StudentCard,
-    
+    // "student-form": StudentForm,
   },
   data() {
     return {
@@ -38,7 +39,14 @@ export default {
         console.log(response.data);
       });
     },
-  
+    //______________ delete student in student list______________
+    deleteStudent(studentId) {
+      axios.delete("/students/" + studentId).then((response) => {
+        console.log(response.data);
+        this.studentdata();
+      });
+    },
+
     //______________ search student __________________
     searchStudent(search) {
       if (search !== "") {
