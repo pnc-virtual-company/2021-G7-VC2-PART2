@@ -1,58 +1,58 @@
 <template>
-  <div class="container">
-    <div class="title">
-      <h2>STUDENTS LIFE</h2>
-    </div>
-    <form class="mx-auto">
-      <div class="user-icon">
-        <v-icon class="mt-5 shaped" style="font-size: 100px; color: white"
-          >mdi-account-circle</v-icon
-        >
-      </div>
-
-      <v-row class="form ">
-          <v-col class="c_email">
-              <v-text-field
-                background-color="green lighten-5"
-                class="email rounded "
-                v-model="email"
-                :error-messages="emailErrors"
-                label="E-mail"
-                placeholder="example@gmail.com"
-                required
-                outlined
-                @input="$v.email.$touch()"
-                @blur="$v.email.$touch()"
+  <div class="container ">
+    <div class="text-center">
+      <form class="mx-auto">
+        <div class="user_icon">
+          <v-icon style="font-size: 100px" color="blue"
+            >mdi-account-circle</v-icon
+          >
+          <v-list-item-avatar color="grey darken-3">
+          <v-img
+            class="elevation-6"
+            alt=""
+            src="https://zenprospect-production.s3.amazonaws.com/uploads/pictures/60b386ff84a3630001b3bb0d/picture"
+          ></v-img>
+        </v-list-item-avatar>
+          <h2>STUDENTS LIFE</h2>
+        </div>
+        <v-row class="input">
+          <v-col class="c_email" cols="12" sm="7">
+            <v-text-field
+              background-color="green lighten-5"
+              class="email rounded"
+              v-model="email"
+              :error-messages="emailErrors"
+              label="E-mail"
+              placeholder="example@gmail.com"
+              required
+              outlined
+              @input="$v.email.$touch()"
+              @blur="$v.email.$touch()"
             ></v-text-field>
           </v-col>
-          <v-col class="c_password">
+          <br />
+          <v-col class="c_password" cols="12" sm="7">
             <v-text-field
-            v-model="password"
-            class="password rounded"
-            background-color="green lighten-5"
-            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-            :rules="[rules.required, rules.min]"
-            :type="show1 ? 'text' : 'password'"
-            name="input-10-1"
-            label="Password"
-            outlined
-            hint="At least 6 characters"
-            @click:append="show1 = !show1"
-        ></v-text-field>
+              v-model="password"
+              class="password rounded"
+              background-color="green lighten-5"
+              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+              :rules="[rules.required, rules.min]"
+              :type="show1 ? 'text' : 'password'"
+              name="input-10-1"
+              label="Password"
+              outlined
+              hint="At least 6 characters"
+              @click:append="show1 = !show1"
+            ></v-text-field>
           </v-col>
-      </v-row>
-
-      <div class="login">
-        <v-btn 
-        style="width: 60%" 
-        @click="login"
-        > LOG IN </v-btn>
-      </div>
-
-      <div class="para">
-        <p>The easy way to manage all students</p>
-      </div>
-    </form>
+          <v-col class="c_password" cols="12" sm="7">
+            <v-btn color="blue" dark block @click="login"> LOG IN </v-btn>
+            <span color="red">The easy way to manage all students</span>
+          </v-col>
+        </v-row>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -111,45 +111,9 @@ export default {
 </script>
     
 <style scoped>
-.container {
-  margin-top: 10px;
-}
-
-form {
-  background-color: rgb(131, 207, 236);
-  width: 40%;
-  height: 70vh;
-  margin-top: 10px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.login {
-  text-align: center;
-  margin-top: 10px;
-}
-
-.user-icon {
-  text-align: center;
-  margin-top: 60px;
-}
-
-.title {
-  justify-content: center;
+.input {
   display: flex;
-  margin-top: 30px;
-}
-
-.para {
   justify-content: center;
-  display: flex;
-  margin-top: 30px;
-  color: white;
+  margin-top: 3%;
 }
-.form {
-  display: grid;
-  padding: 10px;
-  margin-top:50px;
-}
-
 </style>
