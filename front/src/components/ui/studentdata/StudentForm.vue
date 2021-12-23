@@ -88,7 +88,7 @@ export default {
       this.picture = event.target.files[0];
     },
     createStudent() {
-      if (this.firstname !== "") {
+      if (this.first_name !== "") {
         this.dialog = false;
         let newStudent = new FormData();
         newStudent.append("first_name", this.first_name);

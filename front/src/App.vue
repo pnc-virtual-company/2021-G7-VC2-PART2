@@ -1,22 +1,30 @@
 <template>
-  <v-app>
-   <nav-bar></nav-bar>
+<v-app>
+    <Navbar v-if="isLogin"></Navbar>
+    <FormLogin @login='loginForm'></FormLogin>
     <v-main>
-      <router-view/>
+        <router-view />
     </v-main>
-  </v-app>
+</v-app>
 </template>
 
 <script>
-import Navbar from '@/components/nav/Navbar';
+import FormLogin from "./components/form/FormLogin.vue";
+import Navbar from "./components/nav/Navbar.vue";
 export default {
-  components: {
-    'nav-bar': Navbar,
-  },
-  data(){
-    return {
+    components: {
+        FormLogin,
+        Navbar
+    },
+    name: "App",
 
-    }
-  },
+    data: () => ({
+        isLogin: false,
+    }),
+    methods: {
+        loginForm() {
+            this.isLogin = true
+        }
+    },
 };
 </script>
