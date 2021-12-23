@@ -5,7 +5,7 @@
     </div>
     <form class="mx-auto">
       <div class="user-icon">
-        <v-icon style="font-size: 100px; color: white"
+        <v-icon class="mt-5 shaped" style="font-size: 100px; color: white"
           >mdi-account-circle</v-icon
         >
       </div>
@@ -43,7 +43,10 @@
       </v-row>
 
       <div class="login">
-        <v-btn style="width: 60%" @click="login"> LOG IN </v-btn>
+        <v-btn 
+        style="width: 60%" 
+        @click="login"
+        > LOG IN </v-btn>
       </div>
 
       <div class="para">
