@@ -8,7 +8,7 @@
             append-icon="mdi-magnify"
             label="Search"
             single-line
-            hide-details
+            hide-details 
             @keyup="searchUsername"
           ></v-text-field>        
         </v-card-title>

@@ -113,15 +113,5 @@ export default {
       }
     },
   }
-  // mounted(){
-  //   axios.get('/students')
-  //   .then((res)=>{
-  //     this.students=res.data;
-  //      for (let data of this.students) {
-  //             this.students.push(data.first_name);
-  //             console.log(this.students)
-  //         }
-  //   })
-  // }
 };
 </script>

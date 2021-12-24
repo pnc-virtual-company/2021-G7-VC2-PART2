@@ -7,7 +7,7 @@
         </v-btn>
       </template>
       <v-card>
-        <v-card-title  class="text-h5 blue lighten-1">
+        <v-card-title class="text-h5 blue lighten-1">
           Create Student
         </v-card-title>
         <v-card-text>
@@ -32,14 +32,23 @@
                 </v-text-field>
               </v-col>
               <v-col class="d-flex" cols="12" sm="6">
-                
-                <v-select :items="genders" v-model="gender" label="Gender" prepend-icon="mdi-gender-transgender"></v-select>
+                <v-select
+                  :items="genders"
+                  v-model="gender"
+                  label="Gender"
+                  prepend-icon="mdi-gender-transgender"
+                ></v-select>
               </v-col>
               <v-col class="d-flex" cols="12" sm="6">
-                <v-select :items="class_name" v-model="classes" label="Class" prepend-icon="mdi-school"></v-select>
+                <v-select
+                  :items="class_name"
+                  v-model="classes"
+                  label="Class"
+                  prepend-icon="mdi-school"
+                ></v-select>
               </v-col>
 
-              <v-col cols="12" sm="12" >
+              <v-col cols="12" sm="12">
                 <v-text-field
                   label="Phone"
                   type="number"
@@ -51,7 +60,6 @@
               <v-col cols="12" sm="12">
                 <input type="file" label="Profile" @change="onFileSelected" />
               </v-col>
-              
             </v-row>
           </v-container>
         </v-card-text>
@@ -60,18 +68,39 @@
 
         <v-card-actions class="black lighten-1">
           <v-spacer></v-spacer>
-          <v-btn color="red darken-1" text @click="dialog= false"> Cancel </v-btn>
-          <v-btn color="blue darken-1" text @click="createStudent"> Save </v-btn>
+          <v-btn color="red darken-1" text @click="dialog = false">
+            Cancel
+          </v-btn>
+          <v-btn color="blue darken-1" text @click="createStudent">
+            Save
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
   </div>
 </template>
 <script>
+import { validationMixin } from "vuelidate";
+import { required, maxLength, email } from "vuelidate/lib/validators";
 export default {
   emits: ["addStudent"],
   data() {
     return {
+      mixins: [validationMixin],
+      validations: {
+        first_name: { required, maxLength: maxLength(10) },
+        last_name: { required, maxLength: maxLength(10) },
+        phone: { required, maxLength: maxLength(10) },
+        gender: { required },
+        classes: { required },
+        image: { required },
+
+        checkbox: {
+          checked(val) {
+            return val;
+          },
+        },
+      },
       dialog: false,
       class_name: ["SNA", "WEB-A", "WEB-B"],
       genders: ["Male", "Female"],
@@ -82,6 +111,43 @@ export default {
       picture: "",
       gender: "",
     };
+  },
+  computed: {
+    checkboxErrors() {
+      const errors = [];
+      if (!this.$v.checkbox.$dirty) return errors;
+      !this.$v.checkbox.checked && errors.push("You must agree to continue!");
+      return errors;
+    },
+    firstNameErrors() {
+      const errors = [];
+      if (!this.$v.first_name.$dirty) return errors;
+      !this.$v.first_name.maxLength &&
+        errors.push("Name must be at most 10 characters long");
+      !this.$v.first_name.required && errors.push("First Name is required.");
+      return errors;
+    },
+    lastNameErrors() {
+      const errors = [];
+      if (!this.$v.last_name.$dirty) return errors;
+      !this.$v.last_name.maxLength &&
+        errors.push("Name must be at most 10 characters long");
+      !this.$v.last_name.required && errors.push("Last  Name is required.");
+      return errors;
+    },
+    genderErrors() {
+      const errors = [];
+      if (!this.$v.gender.$dirty) return errors;
+      !this.$v.gender.required && errors.push("Gender is required");
+      return errors;
+    },
+    genderErrors() {
+      const errors = [];
+      if (!this.$v.gender.$dirty) return errors;
+      !this.$v.gender.required && errors.push("Gender is required");
+      return errors;
+    },
+    
   },
   methods: {
     onFileSelected(event) {
