@@ -13,8 +13,9 @@
         <v-card-text>
           <v-container>
             <v-row>
-              <v-col cols="12" sm="6" >
+              <v-col cols="12" sm="6">
                 <v-text-field
+                  :rules="nameRules"
                   label="User Account"
                   type="text"
                   prepend-icon="mdi-account"
@@ -24,6 +25,7 @@
               </v-col>
               <v-col cols="12" sm="6">
                 <v-text-field
+                  :rules="passwordRules"
                   label="Password "
                   type="text"
                   prepend-icon="mdi-key-variant"
@@ -33,6 +35,7 @@
               </v-col>
               <v-col cols="12" sm="12">
                 <v-text-field
+                  :rules="emailRules"
                   label="E-mail"
                   type="email"
                   prepend-icon="mdi-email"
@@ -40,25 +43,30 @@
                 >
                 </v-text-field>
               </v-col>
+<!-- ------------------------------------------------------------------ -->
               <v-col class="d-flex" cols="12" sm="12">
                 <v-select
-                  :items=" roles"
+                  :items="roles"
                   v-model="role"
                   label="Choose Role"
                   prepend-icon="mdi-account-switch"
                 ></v-select>
               </v-col>
+<!-- ------------------------------------------------------------------ -->
+
               <v-col class="d-flex" cols="12" sm="12">
                 <v-select
-                  v-if="role ==='Student'"
-
+                  v-if="role === 'Student'"
                   :items="students"
                   v-model="student"
                   label="Choose Student"
                   prepend-icon="mdi-account-star"
+                  
                 >
                 </v-select>
               </v-col>
+<!-- ------------------------------------------------------------------ -->
+
             </v-row>
           </v-container>
         </v-card-text>
@@ -77,7 +85,7 @@
   </div>
 </template>
 <script>
-import axios from "../../../api/api.js"
+import axios from "../../../api/api.js";
 export default {
   emits: ["addUserAccount"],
   data() {
@@ -90,16 +98,28 @@ export default {
       role: "",
       email: "",
       password: null,
+      nameRules: [
+        (v) => !!v || "Name is required",
+        (v) => (v && v.length <= 15) || "Name must be less than 15 characters",
+      ],
+      passwordRules: [
+        (v) => !!v || "Password is required",
+        (v) => (v && v.length > 5) || "Password must be more than 6 characters",
+      ],
+
+      emailRules: [
+        (v) => !!v || "E-mail is required",
+        (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+      ],
     };
   },
   methods: {
-    getstudents(){
-      axios.get("/students")
-          .then((response)=>{
-            for (let data of response.data) {
-              this.students.push(data.first_name)
-            }
-          })
+    getstudents() {
+      axios.get("/students").then((response) => {
+        for (let data of response.data) {
+          this.students.push(data.first_name);
+        }
+      });
     },
     createUserAccount() {
       if (this.user_account !== "") {
@@ -108,20 +128,13 @@ export default {
         newUserAccount.append("userName", this.user_account);
         newUserAccount.append("email", this.email);
         newUserAccount.append("password", this.passowrd);
-        newUserAccount.append("role", this.role)
+        newUserAccount.append("role", this.role);
         this.$emit("addUserAccount", newUserAccount);
       }
     },
+  },
+  mounted(){
+    this.getstudents();
   }
-  // mounted(){
-  //   axios.get('/students')
-  //   .then((res)=>{
-  //     this.students=res.data;
-  //      for (let data of this.students) {
-  //             this.students.push(data.first_name);
-  //             console.log(this.students)
-  //         }
-  //   })
-  // }
 };
 </script>

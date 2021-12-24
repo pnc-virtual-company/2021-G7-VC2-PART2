@@ -25,11 +25,11 @@ const routes = [
     name: 'StudentList',
     component: () => import('@/components/views/StudentList.vue')
   },
-  {
-    path: '/logout',
-    name: 'Log Out',
-    component: () => import('@/components/views/LogOut.vue')
-  },
+  // {
+  //   path: '/logout',
+  //   name: 'Log Out',
+  //   component: () => import('@/components/views/LogOut.vue')
+  // },
   //   path: '/login',
   //   name: 'Login',
   //   component: () => import('@/components/form/FormLogin.vue')
