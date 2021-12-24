@@ -1,14 +1,10 @@
-<template>
-  <h1>I'm Logout</h1>
-</template>
-
-<script>
-export default {
-
-}
-</script>
-
-<style>
-
-</style>
-
+//  <template></template>
+//  <script>
+// export default {
+//   mounted() {
+//     localStorage.clear("authToken");
+//     this.$emit("log_out");
+//     this.$router.push("/");
+//   },
+// };
+// </script>
