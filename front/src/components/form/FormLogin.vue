@@ -3,9 +3,6 @@
     <div class="text-center">
       <form class="mx-auto">
         <div class="user_icon">
-          <!-- <v-icon style="font-size: 100px" color="blue"
-            >mdi-account-circle</v-icon
-          > -->
           <v-list-item-avatar color="grey darken-3">
           <v-img
             class="elevation-6"
@@ -100,6 +97,7 @@ export default {
       };
       if (this.email !== "" && this.password !== "") {
         axios.post("/login", data).then((res) => {
+          console.log(res.data)
           this.$emit("log-in", true);
           localStorage.setItem("authToken", res.data.token);
           this.$router.push("/user").catch(() => {});
