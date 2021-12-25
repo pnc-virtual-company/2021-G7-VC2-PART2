@@ -3,9 +3,6 @@
     <div class="text-center">
       <form class="mx-auto">
         <div class="user_icon">
-          <v-icon style="font-size: 100px" color="blue"
-            >mdi-account-circle</v-icon
-          >
           <v-list-item-avatar color="grey darken-3">
           <v-img
             class="elevation-6"
