@@ -15,5 +15,8 @@ class Student extends Model
         'phone',
         'gender'
     ];
-   
+   public function Permission()
+   {
+       return $this->hashMany(Permission::class);
+   }
 }
