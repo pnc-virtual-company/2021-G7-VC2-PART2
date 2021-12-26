@@ -70,7 +70,7 @@ export default {
           icon: "mdi-clipboard-check",
         },
         {
-          title: "Discipliesn",
+          title: "Disciplines",
           path: "/disciplines",
           icon: "mdi-file-document",
         },
