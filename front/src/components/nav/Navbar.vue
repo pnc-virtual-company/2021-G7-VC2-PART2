@@ -35,10 +35,11 @@
           text
           v-for="item in menuItems"
           :key="item.title"
-          :to="item.path"
+          :to="item.path" 
         >
           <v-icon left color="blue --text">{{ item.icon }}</v-icon>
           {{ item.title }}
+          <v-btn v-if="item.path == '/logout'" @click="logOut">Log Out</v-btn>
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
@@ -50,20 +51,43 @@ export default {
   data() {
     return {
       appTitle: "Administrator",
-      // ['Administrator', 'Social Affair Officer',, 'Student'],
       sidebar: false,
       group: false,
       menuItems: [
-        { title: "User", path: "/user", icon: "mdi-account-convert" },
-        { title: "Students", path: "/studentlist", icon: "mdi-account-multiple" },
-        { title: "Permissions", path: "/permission", icon: "mdi-clipboard-check" },
-        { title: "Disciples", path: "/disciples", icon: "mdi-file-document" },
-        { title: "Log Out", path: "/logout", icon: "mdi-login" },
+        {
+          title: "User",
+          path: "/user",
+          icon: "mdi-account-convert",
+        },
+        {
+          title: "Students",
+          path: "/studentlist",
+          icon: "mdi-account-multiple",
+        },
+        {
+          title: "Permissions",
+          path: "/permission",
+          icon: "mdi-clipboard-check",
+        },
+        {
+          title: "Disciplines",
+          path: "/disciplines",
+          icon: "mdi-file-document",
+        },
+        {
+          title: "",
+          path: "/logout",
+          icon: "mdi-login",
+        },
       ],
     };
   },
+  methods: {
+    logOut() {
+      localStorage.clear();
+      this.$emit("log_out");
+      this.$router.push("/login");
+    },
+  },
 };
 </script>
-
-<style>
-</style>
