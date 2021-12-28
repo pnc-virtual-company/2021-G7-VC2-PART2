@@ -29,6 +29,7 @@
                 class=""
                 v-for="(user, index) in dataUser"
                 :key="index"
+                :search="search"
               >
                 <td>{{ user.userName }}</td>
                 <td>{{ user.email }}</td>

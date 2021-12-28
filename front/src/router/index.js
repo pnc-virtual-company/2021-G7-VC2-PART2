@@ -1,12 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import FormLogin from '../components/form/FormLogin.vue';
-
+import ForgotPassword from '../components/forgotPassword/CreateNewUser.vue';
 
 Vue.use(VueRouter)
 
 const routes = [
-
+  {
+    path: '/forgotpassword',
+    name: 'ForgotPassword',
+    component: ForgotPassword
+  },
   {
     path: '/user',
     name: 'User',
