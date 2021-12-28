@@ -1,111 +1,35 @@
 <template>
-  <div class="team">
-    <h1 class="subheading grey--text">Team</h1>
-    <v-container class="my-5">
-      <v-layout row wrap>
-        <v-flex xs12 sm6 md4 lg3>
-          <v-card flat class="text-xs-center ma-3">
-            <v-responsive class="pt-4"> 
-               <v-avatar size="100" class="grey lighten-2">
-                   <img src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light" alt="">
-               </v-avatar>
-            </v-responsive>
-            <v-card-text>
-              <div class="subheading">name</div>
-              <div class="grey--text">role</div>
-            </v-card-text>
-            <v-card-actions>
-                <v-btn flat color="grey">
-                    <v-icon small let>message</v-icon>
-                    <span>Message</span>
-                </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-flex>
-        
-        <v-flex xs12 sm6 md4 lg3>
-          <v-card flat class="text-xs-center ma-3">
-            <v-responsive class="pt-4"> 
-               <v-avatar size="100" class="grey lighten-2">
-                   <img src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light" alt="">
-               </v-avatar>
-            </v-responsive>
-            <v-card-text>
-              <div class="subheading">name</div>
-              <div class="grey--text">role</div>
-            </v-card-text>
-            <v-card-actions>
-                <v-btn flat color="grey">
-                    <v-icon small let>message</v-icon>
-                    <span>Message</span>
-                </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-flex>
-        <v-flex xs12 sm6 md4 lg3>
-          <v-card flat class="text-xs-center ma-3">
-            <v-responsive class="pt-4"> 
-               <v-avatar size="100" class="grey lighten-2">
-                   <img src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light" alt="">
-               </v-avatar>
-            </v-responsive>
-            <v-card-text>
-              <div class="subheading">name</div>
-              <div class="grey--text">role</div>
-            </v-card-text>
-            <v-card-actions>
-                <v-btn flat color="grey">
-                    <v-icon small let>message</v-icon>
-                    <span>Message</span>
-                </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-flex>
-        <v-flex xs12 sm6 md4 lg3>
-          <v-card flat class="text-xs-center ma-3">
-            <v-responsive class="pt-4"> 
-               <v-avatar size="100" class="grey lighten-2">
-                   <img src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light" alt="">
-               </v-avatar>
-            </v-responsive>
-            <v-card-text>
-              <div class="subheading">name</div>
-              <div class="grey--text">role</div>
-            </v-card-text>
-            <v-card-actions>
-                <v-btn flat color="grey">
-                    <v-icon small let>message</v-icon>
-                    <span>Message</span>
-                </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-flex>
-        <v-flex xs12 sm6 md4 lg3>
-          <v-card flat class="text-xs-center ma-3">
-            <v-responsive class="pt-4"> 
-               <v-avatar size="100" class="grey lighten-2">
-                   <img src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light" alt="">
-               </v-avatar>
-            </v-responsive>
-            <v-card-text>
-              <div class="subheading">name</div>
-              <div class="grey--text">role</div>
-            </v-card-text>
-            <v-card-actions>
-                <v-btn flat color="grey">
-                    <v-icon small let>message</v-icon>
-                    <span>Message</span>
-                </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-flex>
-      </v-layout>
-    </v-container>
-  </div>
+  <section>
+    <permission-card :datapermission="permissions"></permission-card>
+  </section>
 </template>
 
 <script>
-export default {};
+import PermissionCard from "../ui/permissiondata/PermissionCard.vue";
+import axios from "../../api/api.js";
+export default {
+  name: "App",
+  components: {
+    "permission-card": PermissionCard,
+  },
+  data() {
+    return {
+      permissions: [],
+    };
+  },
+  methods: {
+    //_____________ get permission list________________
+    permissiondata() {
+      axios.get("/permission").then((response) => {
+        this.permissions = response.data;
+         console.log(this.permissions)
+      });
+    },
+  },
+  mounted() {
+      this.permissiondata();
+    },
+};
 </script>
 
 <style>

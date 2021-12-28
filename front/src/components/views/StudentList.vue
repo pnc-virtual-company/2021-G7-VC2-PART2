@@ -3,7 +3,6 @@
      <student-form @addStudent="addStudent" class="create"></student-form>
     <student-card
       :dataUser="students"
-      @deleteItem="deleteStudent"
       @search-user="searchStudent"
     ></student-card>
   </section>
@@ -30,6 +29,7 @@ export default {
     studentdata() {
       axios.get("/students").then((response) => {
         this.students = response.data;
+        console.log(this.students)
       });
     },
 

@@ -3,7 +3,6 @@
     <user-form @addUserAccount="addUserAccount" class="create"></user-form>
     <user-card
       :dataUser="users"
-      @deleteUser="deleteUser"
       @search-user="searchUser"
     ></user-card>
   </section>
