@@ -10,40 +10,27 @@
             single-line
             hide-details
             @keyup="searchUsername"
-          ></v-text-field>        
+          ></v-text-field>
         </v-card-title>
         <v-simple-table>
           <template v-slot:default>
             <thead class="blue lighten-3">
               <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Gender</th>
-                <th>Class</th>
-                <th>Phone</th>
+                <th>User Account</th>
+                <th>E-mail</th>
+                <th>Role</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody class="lighten-4">
-              <tr
-                class=""
-                v-for="(student ,index) in dataUser"
-                :key="index"
-              >
-                <td>{{ student.first_name }}</td>
-                <td>{{ student.last_name }}</td>
-                 <td>{{ student.gender }}</td>
-                  <td>{{ student.class }}</td>
-                <td>0{{ student.phone }}</td>
-               
+              <tr class="" v-for="(user, index) in dataUser" :key="index">
+                <td>{{ user.userName }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role }}</td>
                 <td>
                   <div class="i-con">
                     <v-icon color="blue darken-1" text>mdi-lead-pencil</v-icon>
-                    <v-icon
-                      color="red darken-1"
-                      @click="getstudentId(student.id)"
-                      >mdi-delete</v-icon
-                    >
+                    <v-icon color="red darken-1">mdi-delete</v-icon>
                   </div>
                 </td>
               </tr>
@@ -57,21 +44,16 @@
 <script>
 export default {
   props: ["dataUser"],
-  emits: ["deleteItem", "search-user", "updateStudent"],
- 
+  emits: ["search-user"],
 
   data() {
     return {
       search: "",
-      studentId: 0,
+      users: [],
+
     };
   },
   methods: {
-    // ____________get student id_____________
-    getstudentId(id) {
-      this.deleteId = id;
-      this.$emit("deleteItem", this.deleteId);
-    },
 
     searchUsername() {
       this.$emit("search-user", this.search);
@@ -83,7 +65,6 @@ export default {
 v-card-title {
   background: rgb(85, 237, 248);
 }
-
 .t-head {
   display: flex;
   justify-content: space-between;

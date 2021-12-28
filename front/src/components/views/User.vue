@@ -3,7 +3,6 @@
     <user-form @addUserAccount="addUserAccount" class="create"></user-form>
     <user-card
       :dataUser="users"
-      @deleteUser="deleteUser"
       @search-user="searchUser"
     ></user-card>
   </section>
@@ -26,14 +25,14 @@ export default {
     };
   },
   methods: {
-    //____________ get students list_______________
+    //_____________ get students list________________
     userList() {
       axios.get("/users").then((response) => {
         this.users = response.data;
       });
     },
 
-    // __________Add new student into list_____________
+    // ___________Add new student into list______________
     addUserAccount(newUserAccount) {
       axios.post("/createUser", newUserAccount).then((response) => {
         this.userList();
@@ -41,7 +40,7 @@ export default {
       });
     },
   
-    //_____________ search student _________________
+    //______________ search student __________________
     searchUser(search) {
       if (search !== "") {
         axios.get("/users" + "/search/" + search).then((response) => {

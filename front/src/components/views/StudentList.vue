@@ -1,15 +1,15 @@
 <template>
   <section>
+     <student-form @addStudent="addStudent" class="create"></student-form>
     <student-card
       :dataUser="students"
-      @deleteItem="deleteStudent"
       @search-user="searchStudent"
     ></student-card>
   </section>
 </template>
 
 <script>
-// import StudentForm from "../ui/StudentForm.vue";
+import StudentForm from "../ui/studentdata/StudentForm.vue";
 import StudentCard from "../ui/studentdata/StudentCard.vue";
 import axios from "../../api/api.js";
 
@@ -17,7 +17,7 @@ export default {
   name: "App",
   components: {
     "student-card": StudentCard,
-    // "student-form": StudentForm,
+    "student-form": StudentForm,
   },
   data() {
     return {
@@ -29,6 +29,7 @@ export default {
     studentdata() {
       axios.get("/students").then((response) => {
         this.students = response.data;
+        console.log(this.students)
       });
     },
 
@@ -66,4 +67,8 @@ export default {
 </script>
 
 <style>
+.create {
+  margin-left: 84%;
+  margin-top: 5%;
+}
 </style>
