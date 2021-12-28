@@ -18,7 +18,7 @@
                         </tr>
                     </thead>
                     <tbody class="lighten-4">
-                        <tr class="" v-for="(student, index) in dataUser" :key="index">
+                        <tr class="" v-for="(student, index) in dataStudent" :key="index">
                             <td>{{ student.first_name }}</td>
                             <td>{{ student.last_name }}</td>
                             <td>{{ student.gender }}</td>
@@ -47,7 +47,7 @@
 import axios from "../../../api/api.js";
 import Updatestudent from "./UpdateStudent.vue";
 export default {
-    props: ["dataUser"],
+    props: ["dataStudent"],
     emits: ["deleteItem", "search-user", "update-student"],
     components: {
         "update-student": Updatestudent,

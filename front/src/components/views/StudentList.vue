@@ -2,7 +2,7 @@
   <section>
      <student-form @addStudent="addStudent" class="create"></student-form>
     <student-card
-      :dataUser="students"
+      :dataStudent="students"
       @deleteItem="deleteStudent"
       @search-user="searchStudent"
       @update-student="studentdata"
