@@ -9,10 +9,8 @@
             label="Search"
             single-line
             hide-details
-            @keyup="searchUsername"
-          ></v-text-field>
-          <v-spacer></v-spacer>
-          <student-form @addStudent="addStudent"></student-form>
+            @keyup="searchStudentName"
+          ></v-text-field>        
         </v-card-title>
         <v-simple-table>
           <template v-slot:default>
@@ -28,7 +26,7 @@
             <tbody class="lighten-4">
               <tr
                 class=""
-                v-for="student in dataUser"
+                v-for="student in dataStudent"
                 :key="student.first_name"
               >
                 <td>{{ student.first_name }}</td>
@@ -54,15 +52,10 @@
   </v-container>
 </template>
 <script>
-import StudentForm from "./StudentForm.vue";
 import axios from "../../../api/api.js";
 export default {
-  props: ["dataUser"],
+  props: ["dataStudent"],
   emits: ["deleteItem", "search-user", "updateStudent"],
-  components: {
-    "student-form": StudentForm,
-  },
-
   data() {
     return {
       search: "",
@@ -90,7 +83,7 @@ export default {
       this.$emit("deleteItem", this.deleteId);
     },
 
-    searchUsername() {
+    searchStudentName() {
       this.$emit("search-user", this.search);
     },
   },

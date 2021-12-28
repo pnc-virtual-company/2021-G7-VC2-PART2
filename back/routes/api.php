@@ -11,6 +11,7 @@ use App\Http\Controllers\StudentController;
 Route::post('/login',[UserController::class,'login']);
 Route::post('/createUser',[UserController::class,'createUser']);
 Route::get('/users',[UserController::class,'getUsers']);
+Route::get('/users/search/{userName}', [UserController::class, 'search']);
 Route::put('/users/{id}',[UserController::class,'updateUser']);
 Route::delete('/users/{id}',[UserController::class,'destroyUser']);
 Route::group(['middleware'=>['auth:sanctum']],function(){
