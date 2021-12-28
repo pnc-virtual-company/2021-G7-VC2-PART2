@@ -30,6 +30,7 @@ export default {
     studentdata() {
       axios.get("/students").then((response) => {
         this.students = response.data;
+        console.log(this.students)
       });
     },
     // ___________Add new student into list______________

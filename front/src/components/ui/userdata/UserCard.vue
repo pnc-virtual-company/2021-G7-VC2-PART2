@@ -11,13 +11,11 @@
             hide-details
             @keyup="searchStudent"
           ></v-text-field>
-         
         </v-card-title>
         <v-simple-table>
           <template v-slot:default>
             <thead class="blue lighten-3">
               <tr>
-                
                 <th>User Account</th>
                 <th>E-mail</th>
                 <th>Role</th>
