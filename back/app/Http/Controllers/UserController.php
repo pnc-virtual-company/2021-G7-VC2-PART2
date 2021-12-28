@@ -126,4 +126,8 @@ class UserController extends Controller
             return response()->json(['message' => 'User cannot delete'], 404);
         }
     }
+    public function search($userName)
+    {
+        return user::where('userName', 'like', '%' . $userName . '%')->get();
+    }
 }

@@ -26,14 +26,14 @@ export default {
     };
   },
   methods: {
-    //_____________ get students list________________
+    //_____________ get user list________________
     userList() {
       axios.get("/users").then((response) => {
         this.users = response.data;
       });
     },
 
-    // ___________Add new student into list______________
+    // ___________Add new user into list______________
     addUserAccount(newUserAccount) {
       axios.post("/createUser", newUserAccount).then((response) => {
         this.userList();
@@ -41,7 +41,7 @@ export default {
       });
     },
   
-    //______________ search student __________________
+    //______________ search user __________________
     searchUser(search) {
       if (search !== "") {
         axios.get("/users" + "/search/" + search).then((response) => {
@@ -60,7 +60,7 @@ export default {
 
 <style>
 .create {
-  margin-left: 78%;
+  margin-left: 87%;
   margin-top: 5%;
 }
 </style>
