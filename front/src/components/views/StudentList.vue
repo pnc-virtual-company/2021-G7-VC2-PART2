@@ -1,23 +1,24 @@
 <template>
   <section>
+     <student-form @addStudent="addStudent" class="create"></student-form>
     <student-card
       :dataUser="students"
       @deleteItem="deleteStudent"
       @search-user="searchStudent"
+      @update-student="studentdata"
     ></student-card>
   </section>
 </template>
 
 <script>
-// import StudentForm from "../ui/StudentForm.vue";
+import StudentForm from "../ui/studentdata/StudentForm.vue";
 import StudentCard from "../ui/studentdata/StudentCard.vue";
 import axios from "../../api/api.js";
-
 export default {
   name: "App",
   components: {
     "student-card": StudentCard,
-    // "student-form": StudentForm,
+    "student-form": StudentForm,
   },
   data() {
     return {
@@ -31,10 +32,9 @@ export default {
         this.students = response.data;
       });
     },
-
     // ___________Add new student into list______________
     addStudent(newStudent) {
-      axios.post("/students", newStudent).then(response => {
+      axios.post("/students", newStudent).then((response) => {
         this.studentdata();
         console.log(response.data);
       });
@@ -46,7 +46,6 @@ export default {
         this.studentdata();
       });
     },
-
     //______________ search student __________________
     searchStudent(search) {
       if (search !== "") {
@@ -66,4 +65,8 @@ export default {
 </script>
 
 <style>
+.create {
+  margin-left: 84%;
+  margin-top: 5%;
+}
 </style>
