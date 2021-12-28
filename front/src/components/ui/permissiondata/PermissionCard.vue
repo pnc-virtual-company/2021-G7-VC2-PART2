@@ -1,10 +1,25 @@
 <template>
-  <div class="permission">
-    <v-card 
-    class="mx-auto card" 
-    max-width="900" 
-    v-for="(permission, index) in datapermission"
-    :key="index">
+  <v-container>
+    <template>
+      <v-card>
+        <v-simple-table> </v-simple-table>
+        <div class="permission">
+    <v-card-title>
+      <v-text-field
+        v-model="search"
+        append-icon="mdi-magnify"
+        label="Search"
+        single-line
+        hide-details
+        @keyup="searchPermission"
+      ></v-text-field>
+    </v-card-title>
+    <v-card color="grey lighten-4"
+      class="mx-auto card"
+      max-width="900"
+      v-for="(permission, index) in datapermission"
+      :key="index"
+    >
       <v-row>
         <v-col cols="12" sm="2" class="logo">
           <v-icon black size="60px"> mdi-link-variant </v-icon>
@@ -18,15 +33,15 @@
           </v-avatar>
         </v-col>
         <v-col cols="12" sm="3" class="text-center data">
-          <h3> {{permission.student_name}} </h3>
+          <h3>{{ permission.student_name }}</h3>
           <span>WEB-A</span>
         </v-col>
         <v-col cols="12" sm="3" class="date">
           <v-chip class="ma-2" color="orange lighten-1">
-            start date: {{permission.start_date}} </v-chip
+            start date: {{ permission.start_date }} </v-chip
           ><br />
           <v-chip class="ma-2" color="orange lighten-1">
-            end date: {{permission.end_date}}
+            end date: {{ permission.end_date }}
           </v-chip>
         </v-col>
         <v-col cols="12" sm="2">
@@ -40,10 +55,24 @@
       </v-row>
     </v-card>
   </div>
+      </v-card>
+    </template>
+  </v-container>
 </template>
 <script>
 export default {
   props: ["datapermission"],
+  emits: ["search-permission"],
+  data() {
+    return {
+      search: "",
+    };
+  },
+  methods: {
+    searchPermission() {
+      this.$emit("search-permission", this.search);
+    },
+  },
 };
 </script>
 <style scoped>
