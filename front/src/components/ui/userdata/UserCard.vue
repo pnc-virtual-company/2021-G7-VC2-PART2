@@ -60,7 +60,7 @@ export default {
   data() {
     return {
       search: "",
-      users: [],
+      userId: 0,
       deleteId: 0,
     };
   },

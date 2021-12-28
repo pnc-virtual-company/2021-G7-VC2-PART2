@@ -124,8 +124,9 @@ export default {
         let newUserAccount = new FormData();
         newUserAccount.append("userName", this.user_account);
         newUserAccount.append("email", this.email);
-        newUserAccount.append("password", this.passowrd);
+        newUserAccount.append("password", this.password);
         newUserAccount.append("role", this.role);
+
         this.$emit("addUserAccount", newUserAccount);
       }
     },
