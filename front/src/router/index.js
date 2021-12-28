@@ -27,9 +27,9 @@ const routes = [
     component: () => import('@/components/views/Permission.vue')
   },
   {
-    path: '/disciples',
-    name: 'Disciples',
-    component: () => import('@/components/views/Disciples.vue')
+    path: '/disciplines',
+    name: 'Disciplines',
+    component: () => import('@/components/views/Disciplines.vue')
   },
   {
     path: '/',

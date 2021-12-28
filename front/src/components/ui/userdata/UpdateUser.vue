@@ -1,12 +1,7 @@
 <template>
-  <div class="text">
-    <v-dialog v-model="dialog" max-width="500px">
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn color="dark blue-2" dark v-bind="attrs" v-on="on">
-          +Add User
-        </v-btn>
-      </template>
-      <v-card>
+    <v-container>
+        <template>
+           <v-card>
         <v-card-title class="text-h5 blue lighten-1">
           Create User Account
         </v-card-title>
@@ -19,7 +14,7 @@
                   label="User Account"
                   type="text"
                   prepend-icon="mdi-account"
-                  v-model="user_account"
+                  v-model="this.user_account"
                 >
                 </v-text-field>
               </v-col>
@@ -28,7 +23,7 @@
                   :rules="passwordRules"
                    label="Password"
                   prepend-icon="mdi-key-variant"
-                  v-model="password"
+                  v-model="this.password"
                   :type="show1 ? 'text' : 'password'"
                   :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                   @click:append="show1 = !show1"
@@ -41,14 +36,14 @@
                   label="E-mail"
                   type="email"
                   prepend-icon="mdi-email"
-                  v-model="email"
+                  v-model="this.email"
                 >
                 </v-text-field>
               </v-col>
               <v-col class="d-flex" cols="12" sm="12">
                 <v-select
                   :items="roles"
-                  v-model="role"
+                  v-model="this.role"
                   label="Choose Role"
                   prepend-icon="mdi-account-switch"
                 ></v-select>
@@ -57,7 +52,7 @@
                 <v-select
                   v-if="role === 'Student'"
                   :items="students"
-                  v-model="student"
+                  v-model="this.student"
                   label="Choose Student"
                   prepend-icon="mdi-account-star"
                 >
@@ -69,21 +64,22 @@
         <v-divider></v-divider>
         <v-card-actions class="black lighten-1">
           <v-spacer></v-spacer>
-          <v-btn color="red darken-1" text @click="dialog = false">
+          <v-btn @click="cancel"  color="red darken-1" text >
             Cancel
           </v-btn>
-          <v-btn color="blue darken-1" text @click="createUserAccount">
-            Save
+          <v-btn @click="Update"  color="blue darken-1" text >
+            Update
           </v-btn>
         </v-card-actions>
       </v-card>
-    </v-dialog>
-  </div>
+        </template>
+    </v-container>
 </template>
+
 <script>
-import axios from "../../../api/api.js";
 export default {
-  emits: ["addUserAccount"],
+  props: ["userInfo"],
+  emits: ["update", "cancel"],
   data() {
     return {
       dialog: false,
@@ -111,29 +107,30 @@ export default {
     };
   },
   methods: {
-    getstudents() {
-      axios.get("/students").then((response) => {
-        for (let data of response.data) {
-          let fullName = data.first_name + " " + data.last_name;
-          this.students.push(fullName);
-        }
-      });
-    },
-    createUserAccount() {
-      if (this.user_account !== "") {
-        this.dialog = false;
-        let newUserAccount = new FormData();
-        newUserAccount.append("userName", this.user_account);
-        newUserAccount.append("email", this.email);
-        newUserAccount.append("password", this.password);
-        newUserAccount.append("role", this.role);
+    Update() {
+      let user = {
+        // student: this.student,
+        userName: this.user_account,
+        role: this.role,
+        email: this.password,
 
-        this.$emit("addUserAccount", newUserAccount);
-      }
+      };
+     
+      this.$emit("update", this.userInfo.id, user, true);
+      
     },
+    cancel(){
+        this.$emit('cancel', false);
+      }
   },
   mounted() {
-    this.getstudents();
+    // this.student= this.userInfo.student;
+    this.user_account= this.userInfo.userName;
+    this.role = this.userInfo.role;
+    this.email = this.userInfo.email;
+    this.password = this.userInfo.password;
+    // console.log(this.email)
+    
   },
 };
 </script>
