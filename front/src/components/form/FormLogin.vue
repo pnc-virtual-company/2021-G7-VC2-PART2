@@ -101,6 +101,8 @@ export default {
       if (this.email !== "" && this.password !== "") {
         axios.post("/login", data).then((res) => {
           this.$emit("log-in", true);
+          localStorage.setItem('user', JSON.stringify(res.data.user));
+          localStorage.setItem("userRole", res.data.user.role);
           localStorage.setItem("authToken", res.data.token);
           this.$router.push("/user").catch(() => {});
         });

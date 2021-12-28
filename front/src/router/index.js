@@ -15,7 +15,8 @@ const routes = [
   {
     path: '/studentlist',
     name: 'Student',
-    component: () => import('@/components/views/StudentList.vue')
+    component: () => import('@/components/views/StudentList.vue'),
+    meta:'forAdmin',
   },
   {
     path: '/permission',
@@ -43,7 +44,30 @@ const routes = [
     component: FormLogin
   },
  
-]
+];
+// let authenticationGuard = (to,from,next)=>{
+//   let needLogin = to.meta.needLogin;
+//   if(needLogin){
+//     let isLoggedIn=localStorage.getItem("userRole") !==null;
+//     if(!isLoggedIn){
+//       next("/user");
+//     }else{
+//       let needAdmin = to.meta.needAdmin;
+//       if(needAdmin){
+//         let isAdmin= localStorage.getItem("userRole") == "student";
+//         if(isAdmin){
+//           next();
+//         }else{
+//           next("/")
+//         }
+//       }else{
+//         next();
+//       }
+//     }
+//   }else{
+//     next();
+//   }
+// }
 
 const router = new VueRouter({
   mode: 'history',
@@ -51,4 +75,5 @@ const router = new VueRouter({
   routes
 })
 
+// router.beforeEach(authenticationGuard);
 export default router

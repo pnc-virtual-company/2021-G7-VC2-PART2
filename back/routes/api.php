@@ -6,7 +6,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\StudentController;
 
 
-
 // user
 Route::post('/login',[UserController::class,'login']);
 Route::post('/createUser',[UserController::class,'createUser']);
@@ -18,6 +17,7 @@ Route::group(['middleware'=>['auth:sanctum']],function(){
     Route::get('/users/{id}',[UserController::class,'getUser']);
     
     Route::post('/logout',[UserController::class,'logout']);
+
 });
 
 Route::get('students', [StudentController::class, 'index']);
