@@ -4,6 +4,7 @@
     <user-card
       :dataUser="users"
       @search-user="searchUser"
+      @deleteUser="deleteUser"
     ></user-card>
   </section>
 </template>
