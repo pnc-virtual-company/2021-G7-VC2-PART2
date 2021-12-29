@@ -35,6 +35,7 @@ export default {
       axios.post("/permission/" + newPermission).then((response) => {
         this.permissiondata();
         console.log(response.data)
+        console.log(newPermission)
       });
     },
     searchPermission(search) {

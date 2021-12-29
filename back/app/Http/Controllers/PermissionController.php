@@ -85,6 +85,7 @@ class PermissionController extends Controller
             return response()->json(['message'=> 'ID Not Found'], 200);
         }
     }
+    
     public function search($student_name)
     {
         return Permission::where('student_name', 'like', '%' . $student_name . '%')->get();

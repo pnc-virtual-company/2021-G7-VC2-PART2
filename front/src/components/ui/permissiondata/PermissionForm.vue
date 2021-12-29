@@ -37,6 +37,7 @@
                 <v-textarea
                   background-color="grey lighten-4"
                   color=""
+                  v-model="description"
                   label="Description"
                 ></v-textarea>
               </v-col>
@@ -63,6 +64,7 @@ export default {
       startDate: null,
       endDate: null,
       reason: null,
+      description: null,
       num: 1,
     };
   },
@@ -84,7 +86,7 @@ export default {
         newPermission.append("end_date", this.endDate);
         newPermission.append("leave_type", this.reason);
         newPermission.append("student_id", this.num);
-
+        newPermission.append("description", this.description);
         this.$emit("addPermission", newPermission);
       }
     },

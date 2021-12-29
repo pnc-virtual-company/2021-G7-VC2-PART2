@@ -59,7 +59,7 @@ export default {
 
 <style>
 .create {
-  margin-left: 86%;
+  margin-left: 84%;
   margin-top: 5%;
 }
 </style>
