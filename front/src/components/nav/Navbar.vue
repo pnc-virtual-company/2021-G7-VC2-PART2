@@ -4,10 +4,15 @@
       <span class="hidden-sm-and-up">
         <v-app-bar-nav-icon @click="sidebar = !sidebar"> </v-app-bar-nav-icon>
       </span>
-      <v-toolbar-title> {{role}} </v-toolbar-title>
+      <v-toolbar-title class="d-flex">
+          <v-list-item-avatar color="grey darken-3">
+              <v-img class="elevation-6" alt="" src="https://zenprospect-production.s3.amazonaws.com/uploads/pictures/60b386ff84a3630001b3bb0d/picture"></v-img>
+          </v-list-item-avatar>
+          <v-toolbar-title class="text-uppercase mt-4"> {{appTitle.userName}}</v-toolbar-title>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-xs-only">
-        <v-btn active-class="grey-5 white--text" text>
+        <v-btn active-class="grey-5 white--text" text v-if="appTitle.role === 'admin'">
           <v-icon left class="blue--text">mdi-home</v-icon>
           <router-link to="/user" tag="span" style="cursor: pointer">
             User
@@ -47,10 +52,9 @@
 export default {
   data() {
     return {
-      appTitle: "Administrator",
+      appTitle: JSON.parse(localStorage.getItem("user")),
       sidebar: false,
       group: false,
-      role: ""
     };
   },
   methods: {
@@ -62,9 +66,9 @@ export default {
      
     },
   },
-  mounted() {
-    this.role = localStorage.getItem("role")
-  },
+  
+  
+
 };
 </script>
 <style>

@@ -28,13 +28,13 @@ export default {
     },
   },
   mounted() {
-    let userId = localStorage.getItem("userId");
-    if (userId !== null) {
+    let user = JSON.parse(localStorage.getItem("user"));
+    if (user.id !== null) {
       this.isLogin = true;
       if (this.$router.history.current.path == "/user") {
         this.$router.push("/user").catch(() => {});
       }
-    }else if (userId == null) {
+    }else if (user.id == null) {
       this.isLogin = false
     }
   },

@@ -2,7 +2,7 @@
 <div class="text">
     <v-dialog v-model="dialog" max-width="500px">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn color="dark blue-2" dark v-bind="attrs" v-on="on">
+        <v-btn color="orange lighten-1" dark v-bind="attrs" v-on="on">
           +Add Student
         </v-btn>
       </template>
