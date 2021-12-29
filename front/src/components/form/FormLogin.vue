@@ -22,6 +22,7 @@
               label="E-mail"
               v-model="email"
               :error-messages="emailErrors"
+              @input="$v.email.$touch()"
               @blur="$v.email.$touch()"
             ></v-text-field>
           </v-col>
@@ -72,15 +73,17 @@ export default {
       required,
     },
   },
-  data: () => ({
-    email: "",
-    password: "",
-    show1: false,
-    rules: {
-      required: (value) => !!value || "Password is required.",
-      min: (v) => v.length >= 6 || "Min 6 characters",
-    },
-  }),
+  data() {
+    return {
+      email: "",
+      password: "",
+      show1: false,
+      rules: {
+        required: (value) => !!value || "Password is required.",
+        min: (v) => v.length >= 6 || "Min 6 characters",
+      },
+    }
+  },
 
   computed: {
     emailErrors() {
@@ -105,11 +108,10 @@ export default {
         email: this.email,
         password: this.password,
       };
-      if (this.email !== "" && this.password.length !== "") {
+      if (this.email !== "" && this.password !== "") {
         axios.post("/login", data).then((res) => {
           this.$emit("log-in", true);
-          localStorage.setItem("userId", res.data.user.id);
-          localStorage.setItem("role", res.data.user.role);
+          localStorage.setItem("userLogin", JSON.stringify(res.data.user));
           this.$router.push("/user").catch(() => {});
         });
       }
