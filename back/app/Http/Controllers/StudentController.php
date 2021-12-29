@@ -66,24 +66,12 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'class' => 'required',
-            'phone' => 'required' | 'min:9 || max:10',
-            'gender' => 'required',
-            'picture' => 'nullable|image|mimes:jpg,jpeg,png,gif,jfif|max:1999'
-        ]);
         $student = Student::findOrFail($id);
-        $student->first_name = $request->first_name;
-        $student->last_name = $request->last_name;
-        $student->class = $request->class;
-        $student->phone = $request->phone;
-        $student->gender = $request->gender;
-        $student->picture = $request->file('picture')->store('public/images');
+        $student->update($request->all());
+
         $student->save();
 
-        return response()->json(['message' => 'Sutdent updated successfully'], 200);
+        return response()->json(['message' => 'Sutdent updated successfully', 'student' => $student], 200);
     }
 
     /**

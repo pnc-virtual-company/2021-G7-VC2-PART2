@@ -1,6 +1,6 @@
-<template>
-  <v-container>
-    <template>
+<template >
+  <v-container >
+    <template >
       <v-card>
         <v-card-title>
           <v-text-field
@@ -9,15 +9,13 @@
             label="Search"
             single-line
             hide-details
-            @keyup="searchUsername"
+            @keyup="searchStudent"
           ></v-text-field>
-         
         </v-card-title>
         <v-simple-table>
           <template v-slot:default>
             <thead class="blue lighten-3">
               <tr>
-                
                 <th>User Account</th>
                 <th>E-mail</th>
                 <th>Role</th>
@@ -29,21 +27,30 @@
                 class=""
                 v-for="(user, index) in dataUser"
                 :key="index"
+                :search="search"
               >
                 <td>{{ user.userName }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.role }}</td>
                 <td>
                   <div class="i-con">
-                    <v-icon color="blue darken-1" text>mdi-lead-pencil</v-icon>
+                    <v-icon color="blue darken-1" text  @click="getUserInfo(user)">mdi-lead-pencil</v-icon>
                     <v-icon
                       color="red darken-1"
                       @click="getUserId(user.id)"
+                      v-if="user.role != 'admin'"
                       >mdi-delete</v-icon
                     >
                   </div>
                 </td>
               </tr>
+              <update-user
+                v-if="showForm"
+                :userInfo="userData"
+                @cancel="Cencel"
+                @update="UpdateUser"
+              >
+              </update-user>
             </tbody>
           </template>
         </v-simple-table>
@@ -52,27 +59,55 @@
   </v-container>
 </template>
 <script>
-
+import axios from "../../../api/api.js";
+import UpdateUser from "./UpdateUser.vue";
 export default {
   props: ["dataUser"],
-  emits: ["deleteUser", "search-user"],
+  emits: ["deleteUser", "search-user", "update-user"],
+  components: {
+    "update-user": UpdateUser,
+  },
   
   data() {
     return {
       search: "",
-      users: [],
+      userId: 0,
       deleteId: 0,
+      userData: [],
+      showForm: false,
+      
     };
   },
   methods: {
-    // ____________get student id_____________
+    // ___________get student id____________
     getUserId(id) {
       this.deleteId = id;
       this.$emit("deleteUser", this.deleteId);
+      console.log(id);
     },
 
-    searchUsername() {
+    searchStudent() {
       this.$emit("search-user", this.search);
+    },
+
+    getUserInfo(user) {
+      this.showForm = true;
+      this.usertData = user;
+      console.log(this.usertData);
+    },
+
+    Cencel(hidden) {
+      this.showForm = hidden;
+    },
+
+    UpdateUser(id, user, hidden) {
+     
+      axios.put("/users/" + id, user).then((res) => {
+        console.log(res.data);
+        this.$emit("update-user", res.data);
+        this.showForm = hidden;
+       
+      });
     },
   },
 };

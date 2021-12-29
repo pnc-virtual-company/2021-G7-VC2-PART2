@@ -1,5 +1,5 @@
 <template>
-  <h1>I'm Disciples</h1>
+  <h1>I'm Coming soon!</h1>
 </template>
 
 <script>

@@ -3,8 +3,8 @@
     <user-form @addUserAccount="addUserAccount" class="create"></user-form>
     <user-card
       :dataUser="users"
-      @deleteUser="deleteUser"
       @search-user="searchUser"
+      @deleteUser="deleteUser"
     ></user-card>
   </section>
 </template>
@@ -26,14 +26,14 @@ export default {
     };
   },
   methods: {
-    //_____________ get students list________________
+    //____________ get students list_______________
     userList() {
       axios.get("/users").then((response) => {
         this.users = response.data;
       });
     },
 
-    // ___________Add new student into list______________
+    // __________Add new student into list_____________
     addUserAccount(newUserAccount) {
       axios.post("/createUser", newUserAccount).then((response) => {
         this.userList();
@@ -41,7 +41,7 @@ export default {
       });
     },
   
-    //______________ search student __________________
+    //_____________ search student _________________
     searchUser(search) {
       if (search !== "") {
         axios.get("/users" + "/search/" + search).then((response) => {
@@ -51,8 +51,14 @@ export default {
         this.userList();
       }
     },
+    deleteUser(userId){
+      axios.delete("/users/" + userId).then((response)=> {
+        console.log(response.data)
+        this.userList();
+      })
+    }
   },
-   mounted() {
+  mounted() {
     this.userList();
   },
 };
