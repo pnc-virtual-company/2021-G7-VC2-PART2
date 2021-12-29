@@ -9,8 +9,8 @@
             label="Search"
             single-line
             hide-details
-            @keyup="searchStudentName"
-          ></v-text-field>        
+            @keyup="searchUsername"
+          ></v-text-field>
         </v-card-title>
         <v-simple-table>
           <template v-slot:default>
@@ -18,24 +18,29 @@
               <tr>
                 <th>First Name</th>
                 <th>Last Name</th>
-                <th>Phone</th>
                 <th>Gender</th>
+                <th>Class</th>
+                <th>Phone</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody class="lighten-4">
-              <tr
-                class=""
-                v-for="student in dataStudent"
-                :key="student.first_name"
-              >
+              <tr class="" v-for="(student, index) in dataUser" :key="index">
                 <td>{{ student.first_name }}</td>
                 <td>{{ student.last_name }}</td>
-                <td>0{{ student.phone }}</td>
                 <td>{{ student.gender }}</td>
+                <td>{{ student.class }}</td>
+                <td>0{{ student.phone }}</td>
+
                 <td>
+                  
                   <div class="i-con">
-                    <v-icon color="blue darken-1" text>mdi-lead-pencil</v-icon>
+                    <v-icon
+                      @click="getStudentInfo(student)"
+                      color="blue darken-1"
+                      text
+                      >mdi-lead-pencil</v-icon
+                    >
                     <v-icon
                       color="red darken-1"
                       @click="getstudentId(student.id)"
@@ -44,6 +49,13 @@
                   </div>
                 </td>
               </tr>
+              <update-student
+                v-if="showForm"
+                :studentInfo="studentData"
+                @cancel="Cencel"
+                @update="Updatestudent"
+              >
+              </update-student>
             </tbody>
           </template>
         </v-simple-table>
@@ -53,46 +65,52 @@
 </template>
 <script>
 import axios from "../../../api/api.js";
+import Updatestudent from "./UpdateStudent.vue";
 export default {
-  props: ["dataStudent"],
-  emits: ["deleteItem", "search-user", "updateStudent"],
+  props: ["dataUser"],
+  emits: ["deleteItem", "search-user", "update-student"],
+  components: {
+    "update-student": Updatestudent,
+  },
   data() {
     return {
       search: "",
-      students: [],
-      deleteId: 0,
+      studentId: 0,
+      studentData: [],
+      showForm: false,
     };
   },
   methods: {
-    //_____________ get students list________________
-    studentdata() {
-      axios.get("/students").then((response) => {
-        this.students = response.data;
-      });
-    },
-    // ___________Add new student into list______________
-    addStudent(newStudent) {
-      axios.post("/students", newStudent).then((response) => {
-        this.studentdata();
-        console.log(response.data);
-      });
-    },
     // ____________get student id_____________
     getstudentId(id) {
       this.deleteId = id;
       this.$emit("deleteItem", this.deleteId);
     },
-
-    searchStudentName() {
+    searchUsername() {
       this.$emit("search-user", this.search);
     },
-  },
-  mounted() {
-    this.studentdata();
+
+    getStudentInfo(student) {
+      this.showForm = true;
+      this.studentData = student;
+      console.log(this.studentData);
+    },
+    Cencel(hidden) {
+      this.showForm = hidden;
+    },
+    Updatestudent(id, student, hidden) {
+     
+      axios.put("/students/" + id, student).then((res) => {
+        console.log(res.data);
+        this.$emit("update-student", res.data);
+        this.showForm = hidden;
+       
+      });
+    },
   },
 };
 </script>
-<style scoped>
+<style >
 v-card-title {
   background: rgb(85, 237, 248);
 }
