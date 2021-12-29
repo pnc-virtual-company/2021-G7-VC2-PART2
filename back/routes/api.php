@@ -9,15 +9,17 @@ use App\Http\Controllers\PermissionController;
 
 
 // user
-Route::post('/login',[UserController::class,'login']);
-Route::post('/createUser',[UserController::class,'createUser']);
-Route::get('/users',[UserController::class,'getUsers']);
+Route::post('/login', [UserController::class, 'login']);
+Route::post('/createUser', [UserController::class, 'createUser']);
+Route::get('/users', [UserController::class, 'getUsers']);
+Route::get('/users/search/{userName}', [UserController::class, 'search']);
+Route::put('/users/{id}', [UserController::class, 'updateUser']);
+Route::delete('/users/{id}', [UserController::class, 'destroyUser']);
+Route::group(['middleware' => ['auth:sanctum']], function () {
 
-Route::group(['middleware'=>['auth:sanctum']],function(){
-    Route::put('/users/{id}',[UserController::class,'updateUser']);
-    Route::delete('/users/{id}',[UserController::class,'destroyUser']);
-    Route::get('/users/{id}',[UserController::class,'getUser']);
-    Route::post('/logout',[UserController::class,'logout']);
+    Route::get('/users/{id}', [UserController::class, 'getUser']);
+
+    Route::post('/logout', [UserController::class, 'logout']);
 });
 
 Route::get('students', [StudentController::class, 'index']);
