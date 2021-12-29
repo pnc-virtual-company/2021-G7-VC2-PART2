@@ -28,8 +28,8 @@ Route::delete('students/{id}', [StudentController::class, 'destroy']);
 Route::get('students/search/{first_name}', [StudentController::class, 'search']);
 
 
-Route::get('permission', [PermissionController::class, 'getAllPermission']);
-Route::post('permission', [PermissionController::class, 'createPermission']);
-Route::put('permission/{id}', [PermissionController::class, 'updatePermission']);
-Route::delete('permission/{id}', [PermissionController::class, 'deletePermission']);
-Route::get('permission/search/{student_name}', [PermissionController::class, 'search']);
+Route::get('permissions', [PermissionController::class, 'getAllPermission']);
+Route::post('permissions', [PermissionController::class, 'createPermission']);
+Route::put('permissions/{id}', [PermissionController::class, 'updatePermission']);
+Route::delete('permissions/{id}', [PermissionController::class, 'deletePermission']);
+Route::get('permissions/search/{student_name}', [PermissionController::class, 'search']);
