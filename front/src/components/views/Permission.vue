@@ -7,7 +7,6 @@
     ></permission-card>
   </section>
 </template>
-
 <script>
 import PermissionCard from "../ui/permissiondata/PermissionCard.vue";
 import PermissionForm from "../ui/permissiondata/PermissionForm.vue";
@@ -25,12 +24,12 @@ export default {
   },
   methods: {
     //_____________ get permission list________________
-    permissiondata() {
-      axios.get("/permission").then((response) => {
-        this.permissions = response.data;
-        console.log(this.permissions);
-      });
-    },
+    // permissiondata() {
+    //   axios.get("/permission").then((response) => {
+    //     this.permissions = response.data;
+    //     console.log(this.permissions);
+    //   });
+    // },
     addPermission(newPermission) {
       axios.post("/permission/" + newPermission).then((response) => {
         this.permissiondata();
