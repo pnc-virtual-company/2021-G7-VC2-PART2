@@ -5,6 +5,7 @@
       :dataUser="users"
       @deleteUser="deleteUser"
       @search-user="searchUser"
+      @update-user="userList"
     ></user-card>
   </section>
 </template>

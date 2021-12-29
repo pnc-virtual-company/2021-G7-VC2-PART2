@@ -14,7 +14,7 @@
                   label="User Account"
                   type="text"
                   prepend-icon="mdi-account"
-                  v-model="userName"
+                  v-model="user_account"
                 >
                 </v-text-field>
               </v-col>
@@ -53,7 +53,7 @@
                   v-if="role === 'Student'"
                   :items="students"
                   v-model="student"
-                  label="Choose Student"
+  
                   prepend-icon="mdi-account-star"
                 >
                 </v-select>
@@ -82,16 +82,15 @@ export default {
   emits: ["update", "cancel"],
   data() {
     return {
-
       dialog: false,
       show1: false,
       roles: ["Socail Affair Officer", "Student"],
       students: [],
       student: "",
-      userName: "",
+      user_account: "",
       role: "",
       email: "",
-      password: null,
+      password: 0,
       nameRules: [
         (v) => !!v || "Name is required",
         (v) => (v && v.length <= 15) || "Name must be less than 15 characters",
@@ -105,24 +104,22 @@ export default {
         (v) => !!v || "E-mail is required",
         (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
       ],
-      
     };
   },
   methods: {
+
     Update() {
-      // this.userName=this.userInfo.user_account;
-      // this.role=this.userInfo.role;
-      // this.email=this.userInfo.email;
-      // this.password=this.userInfo.password;
       let user = {
-        userName: this.userName,
+   
+        userName: this.user_account,
+        password: this.password,
         email: this.email,
         role: this.role,
-        password: this.password,
 
       };
      
       this.$emit("update", this.userInfo.id, user, false);
+      console.log(user);
       
     },
     cancel(){
@@ -130,12 +127,11 @@ export default {
       }
   },
   mounted() {
-    this.userName= this.userInfo.user_account;
-    console.log(this.userName)
-    this.role = this.userInfo.role;
-    this.email = this.userInfo.email;
+    
+    this.user_account= this.userInfo.userName;
     this.password = this.userInfo.password;
-    console.log(this.email)
+    this.email = this.userInfo.email;
+    this.role = this.userInfo.role;
     
   },
 };

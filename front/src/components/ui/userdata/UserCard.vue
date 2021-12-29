@@ -30,9 +30,11 @@
                 v-for="(user, index) in dataUser"
                 :key="index"
               >
-                <td>{{ user.userName }}</td>
+                <td>{{ user.userName}}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.role }}</td>
+                <!-- <td>{{ user.password}}</td> -->
+                
                 <td>
                   <div class="i-con">
                     <v-icon color="blue darken-1" text  @click="getUserInfo(user)">mdi-lead-pencil</v-icon>
@@ -73,7 +75,6 @@ export default {
     return {
       search: "",
       userId: 0,
-      deleteId: 0,
       userData: [],
       showForm: false,
     };
@@ -92,8 +93,8 @@ export default {
 
     getUserInfo(user) {
       this.showForm = true;
-      this.usertData = user;
-      console.log(this.usertData);
+      this.userData = user;
+      console.log(this.userData);
     },
 
     Cencel(hidden) {
@@ -103,7 +104,7 @@ export default {
     UpdateUser(id, user, hidden) {
      
       axios.put("/users/" + id, user).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.$emit("update-user", res.data);
         this.showForm = hidden;
        
