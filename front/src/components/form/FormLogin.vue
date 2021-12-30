@@ -1,58 +1,57 @@
 <template>
-  <div class="container ">
-    <div class="text-center">
-      <form class="mx-auto">
-        <div class="user_icon">
-          <!-- <v-icon style="font-size: 100px" color="blue"
-            >mdi-account-circle</v-icon
-          > -->
-          <v-list-item-avatar color="grey darken-3">
+  <div class="text-center login">
+    <form class="mx-auto form" style="width: 30%">
+      <div class="user_icon">
+        <v-avatar color="grey darken-3" size="100">
           <v-img
             class="elevation-6"
             alt=""
             src="https://zenprospect-production.s3.amazonaws.com/uploads/pictures/60b386ff84a3630001b3bb0d/picture"
           ></v-img>
-        </v-list-item-avatar>
-          <h2>STUDENTS LIFE</h2>
-        </div>
-        <v-row class="input">
-          <v-col class="c_email" cols="12" sm="7">
+        </v-avatar>
+        <h2>STUDENTS LIFE</h2>
+      </div>
+      <div class="log">
+        <div></div>
+        <v-row class="input pa-0 ma-0">
+          <v-col class="c_email mb-0" cols="12" sm="12">
             <v-text-field
+              outlined
+              dense
               background-color="green lighten-5"
-              class="email rounded"
+              label="E-mail"
               v-model="email"
               :error-messages="emailErrors"
-              label="E-mail"
-              placeholder="example@gmail.com"
-              required
-              outlined
-              @input="$v.email.$touch()"
               @blur="$v.email.$touch()"
             ></v-text-field>
           </v-col>
           <br />
-          <v-col class="c_password" cols="12" sm="7">
+          <v-col class="c_password pt-0 mt-0" cols="12" sm="12">
             <v-text-field
+              outlined
+              dense
               v-model="password"
-              class="password rounded"
+              class="password pa-0 ma-0"
+              label="Password"
+              hint="At least 6 characters"
               background-color="green lighten-5"
               :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-              :rules="[rules.required, rules.min]"
+              :rules="[rules.required, rules.min, rules.max]"
               :type="show1 ? 'text' : 'password'"
-              name="input-10-1"
-              label="Password"
-              outlined
-              hint="At least 6 characters"
+              :error-messages="passwordErrors"
               @click:append="show1 = !show1"
             ></v-text-field>
           </v-col>
-          <v-col class="c_password" cols="12" sm="7">
+          <v-col>
+            <router-link to="/forgotpassword" class="">Forgot password !</router-link>
+          </v-col>
+          <v-col class="c_password pt-0 mt-0" cols="12" sm="12">
             <v-btn color="blue" dark block @click="login"> LOG IN </v-btn>
-            <span color="red">The easy way to manage all students</span>
+            <span>The easy way to manage all students</span>
           </v-col>
         </v-row>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -69,6 +68,9 @@ export default {
       required,
       email,
     },
+    password: {
+      required,
+    },
   },
   data: () => ({
     email: "",
@@ -77,7 +79,6 @@ export default {
     rules: {
       required: (value) => !!value || "Password is required.",
       min: (v) => v.length >= 6 || "Min 6 characters",
-      emailMatch: () => `The email and password you entered don't match`,
     },
   }),
 
@@ -89,6 +90,12 @@ export default {
       !this.$v.email.required && errors.push("E-mail is required");
       return errors;
     },
+    passwordErrors() {
+      const errors = [];
+      if (!this.$v.password.$dirty) return errors;
+      !this.$v.password.required && errors.push("Password is required");
+      return errors;
+    },
   },
 
   methods: {
@@ -98,24 +105,38 @@ export default {
         email: this.email,
         password: this.password,
       };
-      if (this.email !== "" && this.password !== "") {
+      if (this.email !== "" && this.password.length !== "") {
         axios.post("/login", data).then((res) => {
           this.$emit("log-in", true);
-          localStorage.setItem('user', JSON.stringify(res.data.user));
-          localStorage.setItem("userRole", res.data.user.role);
-          localStorage.setItem("authToken", res.data.token);
-          this.$router.push("/user").catch(() => {});
+          localStorage.setItem('user',JSON.stringify(res.data.user));
+          //if role is admin go to user page, otherwise student page
+          let roles = JSON.parse(localStorage.getItem("user"))
+          console.log(roles.role)
+          if(roles.role === "admin"){
+            this.$router.push("/user")
+          }else{
+            this.$router.push("/studentList")
+          }
+          
         });
       }
     },
   },
+
+  
 };
 </script>
     
 <style scoped>
-.input {
+.log {
   display: flex;
-  justify-content: center;
-  margin-top: 3%;
+  justify-content: space-around;
+}
+.login {
+  margin-top: 60px;
+}
+@import url("https://fonts.googleapis.com/css2?family=Pushster&family=Raleway:wght@300&display=swap");
+h2 {
+  font-family: "Pushster", cursive;
 }
 </style>

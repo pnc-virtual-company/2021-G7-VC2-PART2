@@ -35,6 +35,7 @@ class UserController extends Controller
             'role'=>'required'
         ]);
         $user = new User();
+        $user->student_id=$request->student_id;
         $user->userName=$request->userName;
         $user->email=$request->email;
         $user->password=bcrypt($request->password);
@@ -100,6 +101,7 @@ class UserController extends Controller
     {
         //
         $user=User::findOrFail($id);
+        $user->student_id=$request->student_id;
         $user->userName=$request->userName;
         $user->email=$request->email;
         $user->password=$request->password;
@@ -125,5 +127,9 @@ class UserController extends Controller
         } else {
             return response()->json(['message' => 'User cannot delete'], 404);
         }
+    }
+    public function search($userName)
+    {
+        return user::where('userName', 'like', '%' . $userName . '%')->get();
     }
 }
