@@ -59,6 +59,42 @@
         </v-simple-table>
       </v-card>
     </template>
+    <div class="text-center">
+        <v-dialog
+          v-model="dialog"
+          width="500"
+          height="700"
+        >
+        <v-card>
+            <v-card-title class="text-h5 blue lighten-2 ">
+              Delete student
+            </v-card-title>
+            <h3 class="ma">
+            
+            Do you want to delete this student</h3>
+            <v-divider></v-divider>
+
+            <v-card-actions class="blue lighten-2">
+              <v-spacer></v-spacer>
+              <v-btn
+              @click="dialog = false"
+                class="green darken-4 white--text"
+              text
+              >
+                Cancel
+              </v-btn>
+              <v-btn
+                class="red white--text"
+                text
+                @click="deleteUser"
+                
+              >
+                Ok
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </div>
   </v-container>
 </template>
 <script>
@@ -77,15 +113,25 @@ export default {
       userId: 0,
       userData: [],
       showForm: false,
+      deleteId:0,
+      dialog: false
     };
   },
   methods: {
     // ___________get student id____________
+    // getUserId(id) {
+    //   this.deleteId = id;
+    //   this.$emit("deleteUser", this.deleteId);
+    //   console.log(id);
+    // },
     getUserId(id) {
-      this.deleteId = id;
-      this.$emit("deleteUser", this.deleteId);
-      console.log(id);
+        this.dialog = true;
+        this.deleteId = id;
     },
+    deleteUser(){
+            this.$emit('deleteUser', this.deleteId);
+            this.dialog = false;
+        },
     searchStudent() {
       this.$emit("search-user", this.search);
     },

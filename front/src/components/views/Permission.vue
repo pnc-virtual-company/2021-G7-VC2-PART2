@@ -43,6 +43,7 @@ export default {
         this.permissiondata();
       });
     },
+    
     searchPermission(search) {
       if (search !== "") {
         axios.get("/permission" + "/search/" + search).then((response) => {

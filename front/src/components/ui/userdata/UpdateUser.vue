@@ -18,18 +18,7 @@
                 >
                 </v-text-field>
               </v-col>
-              <v-col cols="12" sm="6">
-                <v-text-field
-                  :rules="passwordRules"
-                   label="Password"
-                  prepend-icon="mdi-key-variant"
-                  v-model="password"
-                  :type="show1 ? 'text' : 'password'"
-                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                  @click:append="show1 = !show1"
-                >
-                </v-text-field>
-              </v-col>
+
               <v-col cols="12" sm="12">
                 <v-text-field
                   :rules="emailRules"
