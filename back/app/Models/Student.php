@@ -19,4 +19,8 @@ class Student extends Model
    {
        return $this->hashMany(Permission::class);
    }
+   public function Discipline()
+   {
+       return $this->hashMany(Discipline::class, 'id');
+   }
 }
