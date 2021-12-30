@@ -7,7 +7,7 @@
             </v-card-title>
             <v-simple-table>
                 <template v-slot:default>
-                    <thead class="blue lighten-2">
+                    <thead class="blue lighten-3">
                         <tr>
                             <th>First Name</th>
                             <th>Last Name</th>
@@ -28,7 +28,7 @@
                             <td>
 
                                 <div class="i-con">
-                                    <v-icon @click="getStudentInfo(student)" color="blue darken-1" text >mdi-lead-pencil</v-icon>
+                                    <v-icon @click="getStudentInfo(student)" color="blue darken-1" text>mdi-lead-pencil</v-icon>
                                     <v-icon color="red darken-1" @click="getstudentId(student.id)">mdi-delete</v-icon>
                                 </div>
                             </td>
@@ -40,6 +40,30 @@
             </v-simple-table>
         </v-card>
     </template>
+
+    <div class="text-center">
+      <v-dialog
+        v-model="dialog"
+        transition="dialog-top-transition"
+        max-width="500"
+      >
+        <v-card>
+          <v-card-text>
+            <div class="text-h5 pa-5">Do you want to delete this student?</div>
+          </v-card-text>
+          <hr />
+          <v-card-actions class="justify-end">
+            <v-spacer></v-spacer>
+            <v-btn @click="dialog = false" class="blue white--text" text>
+              Cancel
+            </v-btn>
+            <v-btn class="red white--text" text @click="deleteStudent">
+              Ok
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </div>
 </v-container>
 </template>
 
@@ -48,7 +72,7 @@ import axios from "../../../api/api.js";
 import Updatestudent from "./UpdateStudent.vue";
 export default {
     props: ["dataStudent"],
-    emits: ["search-user", "update-student"],
+    emits: ["deleteItem", "search-user", "update-student"],
     components: {
         "update-student": Updatestudent,
     },
@@ -58,13 +82,20 @@ export default {
             studentId: 0,
             studentData: [],
             showForm: false,
+            dialog: false,
+            deleteId: 0
         };
     },
     methods: {
-        // ____________get student id_____________
+        // ___________get student id____________
+
         getstudentId(id) {
+            this.dialog = true;
             this.deleteId = id;
-            this.$emit("deleteItem", this.deleteId);
+        },
+        deleteStudent() {
+            this.$emit('deleteItem', this.deleteId);
+            this.dialog = false;
         },
         searchUsername() {
             this.$emit("search-user", this.search);
@@ -91,8 +122,10 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style>
+v-card-title {
+    background: rgb(85, 237, 248);
+}
 
 .t-head {
     display: flex;
