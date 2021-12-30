@@ -7,7 +7,7 @@
             </v-card-title>
             <v-simple-table>
                 <template v-slot:default>
-                    <thead class="blue lighten-3">
+                    <thead class="blue lighten-2">
                         <tr>
                             <th>First Name</th>
                             <th>Last Name</th>
@@ -28,7 +28,7 @@
                             <td>
 
                                 <div class="i-con">
-                                    <v-icon @click="getStudentInfo(student)" color="blue darken-1" text>mdi-lead-pencil</v-icon>
+                                    <v-icon @click="getStudentInfo(student)" color="blue darken-1" text >mdi-lead-pencil</v-icon>
                                     <v-icon color="red darken-1" @click="getstudentId(student.id)">mdi-delete</v-icon>
                                 </div>
                             </td>

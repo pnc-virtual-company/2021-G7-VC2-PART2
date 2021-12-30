@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav >
     <v-toolbar class="orange lighten-1">
       <span class="hidden-sm-and-up">
         <v-app-bar-nav-icon @click="sidebar = !sidebar"> </v-app-bar-nav-icon>
@@ -74,5 +74,7 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Pushster&family=Raleway:wght@300&display=swap');
 nav {
-font-family: 'Pushster', cursive;}
+font-family: 'Pushster', cursive};
+
+
 </style>

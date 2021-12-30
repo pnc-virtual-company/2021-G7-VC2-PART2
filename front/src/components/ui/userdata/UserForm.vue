@@ -3,7 +3,7 @@
     <v-dialog v-model="dialog" max-width="500px">
       <template v-slot:activator="{ on, attrs }">
         <v-btn color="orange lighten-1" dark v-bind="attrs" v-on="on" >
-          +Add User
+          +User
         </v-btn>
       </template>
       <v-card>

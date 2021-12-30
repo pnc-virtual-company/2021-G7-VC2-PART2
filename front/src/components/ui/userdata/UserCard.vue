@@ -14,7 +14,7 @@
         </v-card-title>
         <v-simple-table>
           <template v-slot:default>
-            <thead class="blue lighten-3">
+            <thead class="blue lighten-2">
               <tr>
                 <th>User Account</th>
                 <th>E-mail</th>
