@@ -62,7 +62,7 @@
       >
         <v-card>
           <v-card-text>
-            <div class="text-h5 pa-5">Do you want to delete this student?</div>
+            <div class="text-h5 pa-5">Do you want to delete this permission?</div>
           </v-card-text>
           <hr />
           <v-card-actions class="justify-end">

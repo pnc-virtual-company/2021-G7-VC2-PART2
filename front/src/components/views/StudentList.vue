@@ -1,6 +1,6 @@
 <template>
   <section>
-     <student-form @addStudent="addStudent" class="student_btn"></student-form>
+     <student-form @addStudent="addStudent" class="create"></student-form>
     <student-card
       :dataStudent="students"
       @deleteItem="deleteStudent"
@@ -26,28 +26,28 @@ export default {
     };
   },
   methods: {
-    //_____________ get students list________________
+    //____________ get students list_______________
     studentdata() {
       axios.get("/students").then((response) => {
         this.students = response.data;
         console.log(this.students)
       });
     },
-    // ___________Add new student into list______________
+    // __________Add new student into list_____________
     addStudent(newStudent) {
       axios.post("/students", newStudent).then((response) => {
         this.studentdata();
         console.log(response.data);
       });
     },
-    //______________ delete student in student list______________
+    //_____________ delete student in student list_____________
     deleteStudent(studentId) {
       axios.delete("/students/" + studentId).then((response) => {
         console.log(response.data);
         this.studentdata();
       });
     },
-    //______________ search student __________________
+    //_____________ search student _________________
     searchStudent(search) {
       if (search !== "") {
         axios.get("/students" + "/search/" + search).then((response) => {
@@ -66,7 +66,7 @@ export default {
 </script>
 
 <style>
-.student_btn {
+.create {
   margin-left: 87%;
   margin-top: 5%;
 }
