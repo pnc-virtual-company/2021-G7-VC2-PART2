@@ -99,14 +99,12 @@ class UserController extends Controller
     public function updateUser(Request $request, $id)
     {
         //
-        $user=User::findOrFail($id);
-        $user->userName=$request->userName;
-        $user->email=$request->email;
-        $user->password=$request->password;
-        $user->role=$request->role;
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+
         $user->save();
 
-        return response()->json(['message' => 'User Update Successfully!'], 200);
+        return response()->json(['message' => 'Sutdent updated successfully', 'user' => $user], 200);
       
     }
 

@@ -24,9 +24,7 @@
                             <td>{{ student.gender }}</td>
                             <td>{{ student.class }}</td>
                             <td>0{{ student.phone }}</td>
-
                             <td>
-
                                 <div class="i-con">
                                     <v-icon @click="getStudentInfo(student)" color="blue darken-1" text>mdi-lead-pencil</v-icon>
                                     <v-icon color="red darken-1" @click="getstudentId(student.id)">mdi-delete</v-icon>
@@ -40,6 +38,42 @@
             </v-simple-table>
         </v-card>
     </template>
+    <div class="text-center">
+        <v-dialog
+          v-model="dialog"
+          width="500"
+          height="700"
+        >
+        <v-card>
+            <v-card-title class="text-h5 blue lighten-2 ">
+              Delete student
+            </v-card-title>
+            <h3 class="ma">
+            
+            Do you want to delete this student</h3>
+            <v-divider></v-divider>
+
+            <v-card-actions class="blue lighten-2">
+              <v-spacer></v-spacer>
+              <v-btn
+              @click="dialog = false"
+                class="green darken-4 white--text"
+              text
+              >
+                Cancel
+              </v-btn>
+              <v-btn
+                class="red white--text"
+                text
+                @click="deleteStudent"
+                
+              >
+                Ok
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </div>
 </v-container>
 </template>
 
@@ -58,14 +92,22 @@ export default {
             studentId: 0,
             studentData: [],
             showForm: false,
+             dialog:false,
+             deleteId:0
         };
     },
     methods: {
         // ____________get student id_____________
         getstudentId(id) {
+            this.dialog = true;
             this.deleteId = id;
-            this.$emit("deleteItem", this.deleteId);
         },
+
+        deleteStudent(){
+            this.$emit('deleteItem', this.deleteId);
+            this.dialog = false;
+        },
+
         searchUsername() {
             this.$emit("search-user", this.search);
         },

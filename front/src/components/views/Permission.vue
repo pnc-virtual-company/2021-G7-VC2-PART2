@@ -3,6 +3,7 @@
     <permission-form @addPermission="addPermission" class="create"></permission-form>
     <permission-card
       :datapermission="permissions"
+      @deletePermission="deletePermission"
       @search-permission="searchPermission"
     ></permission-card>
   </section>
@@ -11,6 +12,7 @@
 import PermissionCard from "../ui/permissiondata/PermissionCard.vue";
 import PermissionForm from "../ui/permissiondata/PermissionForm.vue";
 import axios from "../../api/api.js";
+let url = "http://localhost:8000/api"
 export default {
   name: "App",
   components: {
@@ -23,17 +25,22 @@ export default {
     };
   },
   methods: {
-    //_____________ get permission list________________
-    // permissiondata() {
-    //   axios.get("/permission").then((response) => {
-    //     this.permissions = response.data;
-    //     console.log(this.permissions);
-    //   });
-    // },
+    permissiondata(){
+      axios.get(url + '/permission').then(res=>{
+        this.permissions = res.data;
+      })
+    },
     addPermission(newPermission) {
       axios.post("/permission/" + newPermission).then((response) => {
         this.permissiondata();
         console.log(response.data)
+      });
+    },
+
+    deletePermission(permissionId) {
+      axios.delete(url + '/permission/' + permissionId ).then((response) => {
+        console.log(response.data);
+        this.permissiondata();
       });
     },
     searchPermission(search) {

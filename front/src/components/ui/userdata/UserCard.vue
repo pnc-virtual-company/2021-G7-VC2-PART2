@@ -1,6 +1,6 @@
-<template >
-  <v-container >
-    <template >
+<template>
+  <v-container>
+    <template>
       <v-card>
         <v-card-title>
           <v-text-field
@@ -11,11 +11,13 @@
             hide-details
             @keyup="searchStudent"
           ></v-text-field>
+         
         </v-card-title>
         <v-simple-table>
           <template v-slot:default>
             <thead class="blue lighten-3">
               <tr>
+                
                 <th>User Account</th>
                 <th>E-mail</th>
                 <th>Role</th>
@@ -27,11 +29,12 @@
                 class=""
                 v-for="(user, index) in dataUser"
                 :key="index"
-                :search="search"
               >
-                <td>{{ user.userName }}</td>
+                <td>{{ user.userName}}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.role }}</td>
+                <!-- <td>{{ user.password}}</td> -->
+                
                 <td>
                   <div class="i-con">
                     <v-icon color="blue darken-1" text  @click="getUserInfo(user)">mdi-lead-pencil</v-icon>
@@ -72,10 +75,8 @@ export default {
     return {
       search: "",
       userId: 0,
-      deleteId: 0,
       userData: [],
       showForm: false,
-      
     };
   },
   methods: {
@@ -85,25 +86,21 @@ export default {
       this.$emit("deleteUser", this.deleteId);
       console.log(id);
     },
-
     searchStudent() {
       this.$emit("search-user", this.search);
     },
-
     getUserInfo(user) {
       this.showForm = true;
-      this.usertData = user;
-      console.log(this.usertData);
+      this.userData = user;
+      console.log(this.userData);
     },
-
     Cencel(hidden) {
       this.showForm = hidden;
     },
-
     UpdateUser(id, user, hidden) {
      
       axios.put("/users/" + id, user).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.$emit("update-user", res.data);
         this.showForm = hidden;
        
