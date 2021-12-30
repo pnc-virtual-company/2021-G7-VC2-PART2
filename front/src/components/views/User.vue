@@ -1,6 +1,6 @@
 <template>
   <section>
-    <user-form @addUserAccount="addUserAccount" class="create"></user-form>
+    <user-form @addUserAccount="addUserAccount" class="user_btn"></user-form>
     <user-card
       :dataUser="users"
       @search-user="searchUser"
@@ -65,7 +65,7 @@ export default {
 </script>
 
 <style>
-.create {
+.user_btn {
   margin-left: 89%;
   margin-top: 5%;
 }

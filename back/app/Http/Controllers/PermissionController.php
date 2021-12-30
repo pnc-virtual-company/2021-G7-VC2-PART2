@@ -25,8 +25,7 @@ class PermissionController extends Controller
     public function createPermission(Request $request)
     {
         $request-> validate([
-            'start_date' => 'required',
-            'end_date'   => 'required',
+
             'description'=> 'required|min:5',
         ]);
 
@@ -50,8 +49,7 @@ class PermissionController extends Controller
     public function updatePermission(Request $request, $id)
     {
         $request-> validate([
-            'start_date' => 'required',
-            'end_date'   => 'required',
+            
             'description'=> 'required|min:5',
         ]);
 

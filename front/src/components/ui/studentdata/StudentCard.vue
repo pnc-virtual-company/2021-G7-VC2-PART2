@@ -48,7 +48,7 @@ import axios from "../../../api/api.js";
 import Updatestudent from "./UpdateStudent.vue";
 export default {
     props: ["dataStudent"],
-    emits: ["deleteItem", "search-user", "update-student"],
+    emits: ["search-user", "update-student"],
     components: {
         "update-student": Updatestudent,
     },
@@ -91,10 +91,8 @@ export default {
 };
 </script>
 
-<style>
-v-card-title {
-    background: rgb(85, 237, 248);
-}
+<style scoped>
+
 
 .t-head {
     display: flex;
