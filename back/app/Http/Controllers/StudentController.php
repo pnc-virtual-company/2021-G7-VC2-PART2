@@ -33,14 +33,14 @@ class StudentController extends Controller
             'gender' => 'required',
             'picture' => 'nullable|image|mimes:jpg,jpeg,png,gif,jfif|max:1999'
         ]);
-       
+        $request->file('picture')->store('public/images');
         $student = new Student();
         $student->first_name = $request->first_name;
         $student->last_name = $request->last_name;
         $student->class = $request->class;
         $student->phone = $request->phone;
         $student->gender = $request->gender;
-        $student->picture = $request->file('picture')->store('public/images');
+        $student->picture = $request->file('picture')->hashName();
         $student->save();
 
         return response()->json(['message' => 'Sutdent created successfully', 'data' => $student ], 201);

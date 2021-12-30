@@ -2,12 +2,12 @@
   <div class="text">
     <v-dialog v-model="dialog" max-width="500px">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn color="orange lighten-1" dark v-bind="attrs" v-on="on" >
-          +Add User
+        <v-btn color="orange lighten-1" class="black--text" dark v-bind="attrs" v-on="on">
+          +User
         </v-btn>
       </template>
       <v-card>
-        <v-card-title class="text-h5 blue lighten-1">
+        <v-card-title class="orange lighten-1 text-h5">
           Create User Account
         </v-card-title>
         <v-card-text>
@@ -26,7 +26,7 @@
               <v-col cols="12" sm="6">
                 <v-text-field
                   :rules="passwordRules"
-                   label="Password"
+                  label="Password"
                   prepend-icon="mdi-key-variant"
                   v-model="password"
                   :type="show1 ? 'text' : 'password'"
@@ -53,15 +53,24 @@
                   prepend-icon="mdi-account-switch"
                 ></v-select>
               </v-col>
-              <v-col class="d-flex" cols="12" sm="12">
-                <v-select
-                  v-if="role === 'Student'"
-                  :items="students"
-                  v-model="student"
-                  label="Choose Student"
-                  prepend-icon="mdi-account-star"
+              <v-col class="d-flex" cols="12" sm="12" v-if ="role ==='Student'">
+                <label for="student" class="country mb-0">Choose student</label>
+                <select
+                
+                  name="student"
+                  id="student"
+                  class="select_student"
+                  v-model="id"
                 >
-                </v-select>
+                  <option
+                    v-for="categorys of students"
+                    :key="categorys.id"
+                    :value="categorys.id"
+                  >
+                    {{ categorys.first_name }}
+                    {{ categorys.last_name }}
+                  </option>
+                </select>
               </v-col>
             </v-row>
           </v-container>
@@ -80,18 +89,18 @@
     </v-dialog>
   </div>
 </template>
+
 <script>
 import axios from "../../../api/api.js";
 export default {
   emits: ["addUserAccount"],
   data() {
     return {
-      
       dialog: false,
       show1: false,
       roles: ["Socail Affair Officer", "Student"],
       students: [],
-      student: "",
+      id: null,
       user_account: "",
       role: "",
       email: "",
@@ -112,12 +121,9 @@ export default {
     };
   },
   methods: {
-    getstudents() {
+    studentdata() {
       axios.get("/students").then((response) => {
-        for (let data of response.data) {
-          let fullName = data.first_name + " " + data.last_name;
-          this.students.push(fullName);
-        }
+        this.students = response.data;
       });
     },
     createUserAccount() {
@@ -125,6 +131,7 @@ export default {
         this.dialog = false;
         let newUserAccount = new FormData();
         newUserAccount.append("userName", this.user_account);
+        newUserAccount.append("student_id", this.id);
         newUserAccount.append("email", this.email);
         newUserAccount.append("password", this.password);
         newUserAccount.append("role", this.role);
@@ -134,7 +141,18 @@ export default {
     },
   },
   mounted() {
-    this.getstudents();
+    this.studentdata();
   },
 };
 </script>
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Pushster&family=Raleway:wght@300&display=swap");
+
+.select_student {
+  width: 300px;
+  height: 40px;
+  border-bottom: 1px solid grey;
+  padding: 10px;
+}
+</style>

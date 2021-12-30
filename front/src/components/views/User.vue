@@ -1,10 +1,11 @@
 <template>
   <section>
-    <user-form @addUserAccount="addUserAccount" class="create"></user-form>
+    <user-form @addUserAccount="addUserAccount" class="user_btn"></user-form>
     <user-card
       :dataUser="users"
-      @search-user="searchUser"
       @deleteUser="deleteUser"
+      @search-user="searchUser"
+      @update-user="userList"
     ></user-card>
   </section>
 </template>
@@ -26,14 +27,14 @@ export default {
     };
   },
   methods: {
-    //____________ get students list_______________
+    //___________ get students list______________
     userList() {
       axios.get("/users").then((response) => {
         this.users = response.data;
       });
     },
 
-    // __________Add new student into list_____________
+    // _________Add new student into list____________
     addUserAccount(newUserAccount) {
       axios.post("/createUser", newUserAccount).then((response) => {
         this.userList();
@@ -41,7 +42,7 @@ export default {
       });
     },
   
-    //_____________ search student _________________
+    //____________ search student ________________
     searchUser(search) {
       if (search !== "") {
         axios.get("/users" + "/search/" + search).then((response) => {
@@ -65,8 +66,8 @@ export default {
 </script>
 
 <style>
-.create {
-  margin-left: 86%;
+.user_btn {
+  margin-left: 87%;
   margin-top: 5%;
 }
 </style>
