@@ -3,47 +3,58 @@
     <v-dialog v-model="dialog" max-width="500px">
       <template v-slot:activator="{ on, attrs }">
         <v-btn color="orange lighten-1" dark v-bind="attrs" v-on="on">
-          +Add Permissions
+          +Permission
         </v-btn>
       </template>
       <v-card>
         <div class="text-center">
-          <v-card-title class="text-h5"> NEW PERMISSION </v-card-title>
+          <v-card-title class="text-h5 blue lighten-1">
+            NEW PERMISSION
+          </v-card-title>
         </div>
         <v-card-text>
           <v-container>
             <v-row>
+              <label for="student" class="country mb-0">Choose student</label
+              ><br />
               <v-col class="d-flex" cols="12" sm="12" md="12">
-                <v-select
-                  :items="students"
-                  v-model="student"
-                  label="Choose Student"
-                ></v-select>
+                <select name="student" id="student" class="select_student" v-model="id">
+                  <option
+                    v-for="categorys of students"
+                    :key="categorys.id"
+                    :value="categorys.id"
+                  >
+                    {{ categorys.first_name }}
+                    {{ categorys.last_name }}
+                  </option>
+                </select>
               </v-col>
-              <v-col cols="12" sm="12" md="12">
+              <v-col cols="12" sm="12" md="6">
                 <v-text-field type="date" v-model="startDate"> </v-text-field>
               </v-col>
-              <v-col cols="12" sm="12" md="12">
+              <v-col cols="12" sm="12" md="6">
                 <v-text-field type="date" v-model="endDate"> </v-text-field>
               </v-col>
               <v-col class="d-flex" cols="12" sm="12">
                 <v-select
-                  :items="permission_Type"
                   v-model="reason"
+                  :items="permissionType"
                   label="Choose leave type"
+                  required
                 ></v-select>
               </v-col>
-              <v-col cols="12" sm="12">
+              <v-col cols="12" md="12">
                 <v-textarea
-                  background-color="grey lighten-4"
-                  color=""
-                  label="Description"
+                  solo
+                  name="input-7-4"
+                  v-model="description"
+                  label="Description..."
                 ></v-textarea>
               </v-col>
             </v-row>
           </v-container>
         </v-card-text>
-        <v-btn color="blue darken-1" text @click="createPermission">
+        <v-btn color="grey darken-1 " block @click="createPermission">
           Create
         </v-btn>
       </v-card>
@@ -58,35 +69,38 @@ export default {
     return {
       dialog: false,
       students: [],
-      permission_Type: ["KK", "OO", "PP", "JJ"],
-      student: null,
+      permissionType: ["KK", "OO", "PP", "JJ"],
+      id: null,
       startDate: null,
       endDate: null,
       reason: null,
-      num: 1,
+      description: null,
     };
   },
   methods: {
     studentdata() {
       axios.get("/students").then((response) => {
-        for (let data of response.data) {
-          let fullName = data.first_name + "  " + data.last_name;
-          this.students.push(fullName);
-        }
+        this.students = response.data;
       });
     },
     createPermission() {
-      if (this.student !== "") {
+      if (this.student_id !== "") {
         this.dialog = false;
         let newPermission = new FormData();
-        newPermission.append("student_name", this.student);
+        newPermission.append("student_id", this.id);
         newPermission.append("start_date", this.startDate);
         newPermission.append("end_date", this.endDate);
         newPermission.append("leave_type", this.reason);
-        newPermission.append("student_id", this.num);
-
+        newPermission.append("description", this.description);
         this.$emit("addPermission", newPermission);
+        console.log(this.id);
       }
+      this.permission_Type = null;
+      this.student_id = null;
+      this.startDate = null;
+      this.endDate = null;
+      this.reason = null;
+      this.description = null;
     },
   },
   mounted() {
@@ -94,3 +108,12 @@ export default {
   },
 };
 </script>
+<style scoped>
+.select_student {
+  width: 410px;
+  height: 40px;
+  border-bottom: 1px solid grey;
+  padding: 10px;
+  
+}
+</style>

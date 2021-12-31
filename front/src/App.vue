@@ -28,6 +28,7 @@ export default {
     },
   },
   mounted() {
+    
     let user = JSON.parse(localStorage.getItem("user"));
     if (user.id !== null) {
       this.isLogin = true;
@@ -41,5 +42,5 @@ export default {
 };
 </script>
 <style >
-  
+
 </style>

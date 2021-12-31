@@ -38,42 +38,30 @@
             </v-simple-table>
         </v-card>
     </template>
-    <div class="text-center">
-        <v-dialog
-          v-model="dialog"
-          width="500"
-          height="700"
-        >
-        <v-card>
-            <v-card-title class="text-h5 blue lighten-2 ">
-              Delete student
-            </v-card-title>
-            <h3 class="ma">
-            
-            Do you want to delete this student</h3>
-            <v-divider></v-divider>
 
-            <v-card-actions class="blue lighten-2">
-              <v-spacer></v-spacer>
-              <v-btn
-              @click="dialog = false"
-                class="green darken-4 white--text"
-              text
-              >
-                Cancel
-              </v-btn>
-              <v-btn
-                class="red white--text"
-                text
-                @click="deleteStudent"
-                
-              >
-                Ok
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-      </div>
+    <div class="text-center">
+      <v-dialog
+        v-model="dialog"
+        transition="dialog-top-transition"
+        max-width="500"
+      >
+        <v-card>
+          <v-card-text>
+            <div class="text-h5 pa-5">Do you want to delete this student?</div>
+          </v-card-text>
+          <hr />
+          <v-card-actions class="justify-end">
+            <v-spacer></v-spacer>
+            <v-btn @click="dialog = false" class="blue white--text" text>
+              Cancel
+            </v-btn>
+            <v-btn class="red white--text" text @click="deleteStudent">
+              Ok
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </div>
 </v-container>
 </template>
 
@@ -92,18 +80,18 @@ export default {
             studentId: 0,
             studentData: [],
             showForm: false,
-             dialog:false,
-             deleteId:0
+            dialog: false,
+            deleteId: 0
         };
     },
     methods: {
-        // ____________get student id_____________
+        // ___________get student id____________
+
         getstudentId(id) {
             this.dialog = true;
             this.deleteId = id;
         },
-
-        deleteStudent(){
+        deleteStudent() {
             this.$emit('deleteItem', this.deleteId);
             this.dialog = false;
         },

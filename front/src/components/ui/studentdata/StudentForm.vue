@@ -3,7 +3,7 @@
     <v-dialog v-model="dialog" max-width="500px">
       <template v-slot:activator="{ on, attrs }">
         <v-btn color="orange lighten-1" dark v-bind="attrs" v-on="on">
-          +Add Student
+          +Student
         </v-btn>
       </template>
       <v-card>
@@ -200,6 +200,12 @@ export default {
         newStudent.append("picture", this.picture);
         this.$emit("addStudent", newStudent);
       }
+      this.first_name = null
+        this.last_name = null
+        this.classes = null
+        this.gender = null
+        this.phone  = null
+        this.picture= null
     },
      submit () {
         this.$v.$touch()

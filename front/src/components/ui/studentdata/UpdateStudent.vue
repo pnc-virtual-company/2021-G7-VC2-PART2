@@ -1,6 +1,7 @@
 <template>
-<div>
-    <v-card>
+<div class="text">
+    <v-dialog v-model="dialog" max-width="500px">
+        <v-card>
         <v-card-title class="text-h5 blue lighten-1">
             update Student
         </v-card-title>
@@ -36,6 +37,7 @@
             <v-btn @click="Update" color="blue darken-1" text> Save </v-btn>
         </v-card-actions>
     </v-card>
+    </v-dialog>
 </div>
 </template>
 
