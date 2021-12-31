@@ -49,14 +49,22 @@
                 ></v-select>
               </v-col>
               <v-col class="d-flex" cols="12" sm="12">
-                <v-select
-                  v-if="role === 'Student'"
-                  :items="students"
-                  v-model="student"
-  
-                  prepend-icon="mdi-account-star"
+                <label for="student" class="country mb-0">Choose student</label>
+                <select
+                  name="student"
+                  id="student"
+                  class="select_student"
+                  v-model="id"
                 >
-                </v-select>
+                  <option
+                    v-for="categorys of students"
+                    :key="categorys.id"
+                    :value="categorys.id"
+                  >
+                    {{ categorys.first_name }}
+                    {{ categorys.last_name }}
+                  </option>
+                </select>
               </v-col>
             </v-row>
           </v-container>
@@ -77,6 +85,7 @@
 </template>
 
 <script>
+import axios from "../../../api/api.js";
 export default {
   props: ["userInfo"],
   emits: ["update", "cancel"],
@@ -86,11 +95,11 @@ export default {
       show1: false,
       roles: ["Socail Affair Officer", "Student"],
       students: [],
-      student: "",
+      id: null,
       user_account: "",
       role: "",
       email: "",
-      password: 0,
+      password: null,
       nameRules: [
         (v) => !!v || "Name is required",
         (v) => (v && v.length <= 15) || "Name must be less than 15 characters",
@@ -107,11 +116,16 @@ export default {
     };
   },
   methods: {
+    studentdata() {
+      axios.get("/students").then((response) => {
+        this.students = response.data;
+      });
+    },
 
     Update() {
       let user = {
-   
         userName: this.user_account,
+        student_id: this.id,
         password: this.password,
         email: this.email,
         role: this.role,
@@ -132,6 +146,8 @@ export default {
     this.password = this.userInfo.password;
     this.email = this.userInfo.email;
     this.role = this.userInfo.role;
+  
+    this.studentdata();
     
   },
 };
