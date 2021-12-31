@@ -118,10 +118,6 @@ export default {
         this.$emit('deleteUser', this.deleteId);
         this.dialog = false;
     },
-    deleteUser(){
-            this.$emit('deleteUser', this.deleteId);
-            this.dialog = false;
-        },
     searchStudent() {
       this.$emit("search-user", this.search);
     },
