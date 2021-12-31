@@ -5,7 +5,7 @@
       <div class="navResponsiv">
         <v-btn active-class="grey-5 white--text" text v-if="appTitle.role === 'admin'">
           <v-icon left class="blue--text">mdi-home</v-icon>
-          <router-link to="/user" tag="span" style="cursor: pointer">
+          <router-link to="/userNav" tag="span" style="cursor: pointer">
             User
           </router-link>
         </v-btn>
@@ -50,7 +50,7 @@
       <v-toolbar-items class="hidden-xs-only">
         <v-btn active-class="grey-5 white--text" text v-if="appTitle.role === 'admin'">
           <v-icon left class="blue--text">mdi-home</v-icon>
-          <router-link to="/user" tag="span" style="cursor: pointer">
+          <router-link to="/userNav" tag="span" style="cursor: pointer">
             User
           </router-link>
         </v-btn>
@@ -88,7 +88,7 @@
 export default {
   data() {
     return {
-      appTitle: JSON.parse(localStorage.getItem("user")),
+      appTitle: JSON.parse(localStorage.getItem("userLogin")),
       sidebar: false,
       group: false,
     };

@@ -16,7 +16,7 @@ export default {
   name: "App",
 
   data: () => ({
-    // isLogin: false,
+    isLogin: false,
   }),
   methods: {
     showMeu(loginn) {
@@ -28,13 +28,13 @@ export default {
     },
   },
   mounted() {
-    let user = JSON.parse(localStorage.getItem("user"));
-    if (user.id !== null) {
+    let userLogin = JSON.parse(localStorage.getItem("userLogin"));
+    if (userLogin !== null) {
       this.isLogin = true;
       if (this.$router.history.current.path == "/user") {
         this.$router.push("/user").catch(() => {});
       }
-    }else if (user.id == null) {
+    }else if (userLogin == null) {
       this.isLogin = false
     }
   },

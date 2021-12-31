@@ -12,7 +12,7 @@ const routes = [
     component: ForgotPassword
   },
   {
-    path: '/user',
+    path: '/userNav',
     name: 'User',
     component: () => import('@/components/views/User.vue')
   },

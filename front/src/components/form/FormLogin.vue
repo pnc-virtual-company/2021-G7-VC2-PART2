@@ -38,7 +38,7 @@
               hint="At least 6 characters"
               background-color="green lighten-5"
               :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-              :rules="[rules.required, rules.min, rules.max]"
+              :rules="[rules.required, rules.min]"
               :type="show1 ? 'text' : 'password'"
               :error-messages="passwordErrors"
               @click:append="show1 = !show1"
@@ -110,12 +110,11 @@ export default {
       if (this.email !== "" && this.password.length !== "") {
         axios.post("/login", data).then((res) => {
           this.$emit("log-in", true);
-          localStorage.setItem('user',JSON.stringify(res.data.user));
+          localStorage.setItem('userLogin',JSON.stringify(res.data.user));
           //if role is admin go to user page, otherwise student page
-          let roles = JSON.parse(localStorage.getItem("user"))
-          console.log(roles.role)
+          let roles = JSON.parse(localStorage.getItem("userLogin"))
           if(roles.role === "admin"){
-            this.$router.push("/user")
+            this.$router.push("/userNav")
           }else{
             this.$router.push("/studentList")
           }
