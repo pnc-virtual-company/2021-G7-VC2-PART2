@@ -86,7 +86,6 @@ export default {
   emits: ["addUserAccount"],
   data() {
     return {
-      
       dialog: false,
       show1: false,
       roles: ["Socail Affair Officer", "Student"],
@@ -104,7 +103,6 @@ export default {
         (v) => !!v || "Password is required",
         (v) => (v && v.length > 5) || "Password must be more than 6 characters",
       ],
-
       emailRules: [
         (v) => !!v || "E-mail is required",
         (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
@@ -115,8 +113,7 @@ export default {
     getstudents() {
       axios.get("/students").then((response) => {
         for (let data of response.data) {
-          let fullName = data.first_name + " " + data.last_name;
-          this.students.push(fullName);
+          this.students.push(data.first_name);
         }
       });
     },
@@ -128,7 +125,6 @@ export default {
         newUserAccount.append("email", this.email);
         newUserAccount.append("password", this.password);
         newUserAccount.append("role", this.role);
-
         this.$emit("addUserAccount", newUserAccount);
       }
     },

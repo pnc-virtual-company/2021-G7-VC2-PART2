@@ -24,9 +24,7 @@
                             <td>{{ student.gender }}</td>
                             <td>{{ student.class }}</td>
                             <td>0{{ student.phone }}</td>
-
                             <td>
-
                                 <div class="i-con">
                                     <v-icon @click="getStudentInfo(student)" color="blue darken-1" text>mdi-lead-pencil</v-icon>
                                     <v-icon color="red darken-1" @click="getstudentId(student.id)">mdi-delete</v-icon>
@@ -97,6 +95,7 @@ export default {
             this.$emit('deleteItem', this.deleteId);
             this.dialog = false;
         },
+
         searchUsername() {
             this.$emit("search-user", this.search);
         },

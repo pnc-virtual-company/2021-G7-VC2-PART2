@@ -3,8 +3,9 @@
     <user-form @addUserAccount="addUserAccount" class="user_btn"></user-form>
     <user-card
       :dataUser="users"
-      @search-user="searchUser"
       @deleteUser="deleteUser"
+      @search-user="searchUser"
+      @update-user="userList"
     ></user-card>
   </section>
 </template>
@@ -13,7 +14,6 @@
 import UsertForm from "../ui/userdata/UserForm.vue";
 import UserCard from "../ui/userdata/UserCard.vue";
 import axios from "../../api/api.js";
-
 export default {
   name: "App",
   components: {
@@ -32,7 +32,6 @@ export default {
         this.users = response.data;
       });
     },
-
     // __________Add new student into list_____________
     addUserAccount(newUserAccount) {
       axios.post("/createUser", newUserAccount).then((response) => {

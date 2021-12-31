@@ -82,7 +82,7 @@
 <script>
 export default {
   props: ["datapermission"],
-  emits: ["search-permission"],
+  emits: ["deletePermission", "search-permission"],
   data() {
     return {
       search: "",
