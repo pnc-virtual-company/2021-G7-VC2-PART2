@@ -1,10 +1,11 @@
 <template>
   <section>
-    <student-form @addStudent="addStudent" class="create"></student-form>
+     <student-form @addStudent="addStudent" class="create"></student-form>
     <student-card
-      :dataStudent="students"
+      :dataUser="students"
       @deleteItem="deleteStudent"
       @search-user="searchStudent"
+      @update-student="studentdata"
     ></student-card>
   </section>
 </template>
@@ -13,7 +14,6 @@
 import StudentForm from "../ui/studentdata/StudentForm.vue";
 import StudentCard from "../ui/studentdata/StudentCard.vue";
 import axios from "../../api/api.js";
-
 export default {
   name: "App",
   components: {
@@ -32,7 +32,6 @@ export default {
         this.students = response.data;
       });
     },
-
     // ___________Add new student into list______________
     addStudent(newStudent) {
       axios.post("/students", newStudent).then((response) => {
@@ -47,7 +46,6 @@ export default {
         this.studentdata();
       });
     },
-
     //______________ search student __________________
     searchStudent(search) {
       if (search !== "") {
