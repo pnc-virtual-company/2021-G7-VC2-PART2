@@ -8,42 +8,42 @@
         <v-card-text>
           <v-container>
             <v-row>
-              <v-col cols="12" sm="6">
+              <v-col cols="12" sm="12">
                 <v-text-field
                   :rules="nameRules"
                   label="User Account"
                   type="text"
                   prepend-icon="mdi-account"
-                  v-model="this.user_account"
+                  v-model="user_account"
                 >
                 </v-text-field>
               </v-col>
-              <v-col cols="12" sm="6">
+              <!-- <v-col cols="12" sm="6">
                 <v-text-field
                   :rules="passwordRules"
                    label="Password"
                   prepend-icon="mdi-key-variant"
-                  v-model="this.password"
+                  v-model="password"
                   :type="show1 ? 'text' : 'password'"
                   :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                   @click:append="show1 = !show1"
                 >
                 </v-text-field>
-              </v-col>
+              </v-col> -->
               <v-col cols="12" sm="12">
                 <v-text-field
                   :rules="emailRules"
                   label="E-mail"
                   type="email"
                   prepend-icon="mdi-email"
-                  v-model="this.email"
+                  v-model="email"
                 >
                 </v-text-field>
               </v-col>
               <v-col class="d-flex" cols="12" sm="12">
                 <v-select
                   :items="roles"
-                  v-model="this.role"
+                  v-model="role"
                   label="Choose Role"
                   prepend-icon="mdi-account-switch"
                 ></v-select>
@@ -52,8 +52,8 @@
                 <v-select
                   v-if="role === 'Student'"
                   :items="students"
-                  v-model="this.student"
-                  label="Choose Student"
+                  v-model="student"
+  
                   prepend-icon="mdi-account-star"
                 >
                 </v-select>
@@ -90,7 +90,7 @@ export default {
       user_account: "",
       role: "",
       email: "",
-      password: null,
+      password: 0,
       nameRules: [
         (v) => !!v || "Name is required",
         (v) => (v && v.length <= 15) || "Name must be less than 15 characters",
@@ -107,16 +107,19 @@ export default {
     };
   },
   methods: {
+
     Update() {
       let user = {
-        // student: this.student,
+   
         userName: this.user_account,
+        password: this.password,
+        email: this.email,
         role: this.role,
-        email: this.password,
 
       };
      
-      this.$emit("update", this.userInfo.id, user, true);
+      this.$emit("update", this.userInfo.id, user, false);
+      console.log(user);
       
     },
     cancel(){
@@ -124,12 +127,11 @@ export default {
       }
   },
   mounted() {
-    // this.student= this.userInfo.student;
+    
     this.user_account= this.userInfo.userName;
-    this.role = this.userInfo.role;
-    this.email = this.userInfo.email;
     this.password = this.userInfo.password;
-    // console.log(this.email)
+    this.email = this.userInfo.email;
+    this.role = this.userInfo.role;
     
   },
 };
