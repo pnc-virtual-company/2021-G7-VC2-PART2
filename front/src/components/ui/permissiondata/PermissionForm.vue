@@ -2,13 +2,13 @@
   <div class="text">
     <v-dialog v-model="dialog" max-width="500px">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn color="orange lighten-1" dark v-bind="attrs" v-on="on">
+        <v-btn color="orange lighten-1 " class="black--text" dark v-bind="attrs" v-on="on">
           +Permission
         </v-btn>
       </template>
       <v-card>
         <div class="text-center">
-          <v-card-title class="text-h5 blue lighten-1">
+          <v-card-title class="text-h5 orange lighten-1">
             NEW PERMISSION
           </v-card-title>
         </div>
@@ -18,7 +18,13 @@
               <label for="student" class="country mb-0">Choose student</label
               ><br />
               <v-col class="d-flex" cols="12" sm="12" md="12">
-                <select name="student" id="student" class="select_student" v-model="id">
+                <label for="student" class="country mb-0">Choose student</label>
+                <select
+                  name="student"
+                  id="student"
+                  class="select_student"
+                  v-model="id"
+                >
                   <option
                     v-for="categorys of students"
                     :key="categorys.id"
@@ -54,13 +60,16 @@
             </v-row>
           </v-container>
         </v-card-text>
-        <v-btn color="grey darken-1 " block @click="createPermission">
-          Create
-        </v-btn>
+        <v-card-actions class="black lighten-1">
+          <v-btn color="blue darken-1 " text block @click="createPermission">
+            Create
+          </v-btn>
+        </v-card-actions>
       </v-card>
     </v-dialog>
   </div>
 </template>
+
 <script>
 import axios from "../../../api/api.js";
 export default {
@@ -69,7 +78,7 @@ export default {
     return {
       dialog: false,
       students: [],
-      permissionType: ["KK", "OO", "PP", "JJ"],
+      permissionType: ["Sick", "Urgent Case", "Accendent"],
       id: null,
       startDate: null,
       endDate: null,
@@ -108,12 +117,15 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .select_student {
-  width: 410px;
+  width: 300px;
   height: 40px;
   border-bottom: 1px solid grey;
   padding: 10px;
-  
 }
+
+@import url("https://fonts.googleapis.com/css2?family=Pushster&family=Raleway:wght@300&display=swap");
+
 </style>

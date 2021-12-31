@@ -36,6 +36,7 @@ class UserController extends Controller
         ]);
         $user = new User();
         $user->userName=$request->userName;
+        $user->student_id = $request->student_id;
         $user->email=$request->email;
         $user->password=bcrypt($request->password);
         $user->role=$request->role;
@@ -99,9 +100,18 @@ class UserController extends Controller
     public function updateUser(Request $request, $id)
     {
         //
+<<<<<<< HEAD
         $user = User::findOrFail($id);
         $user->update($request->all());
 
+=======
+        $user=User::findOrFail($id);
+        $user->userName=$request->userName;
+        $user->student_id = $request->student_id;
+        $user->email=$request->email;
+        $user->password=bcrypt($request->password);
+        $user->role=$request->role;
+>>>>>>> 4925808fc05ca8ed6d6cd4a9d07442a833e0898e
         $user->save();
 
         return response()->json(['message' => 'Sutdent updated successfully', 'user' => $user], 200);

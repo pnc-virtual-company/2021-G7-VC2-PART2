@@ -1,6 +1,6 @@
 <template>
   <section>
-     <student-form @addStudent="addStudent" class="create"></student-form>
+     <student-form @addStudent="addStudent" class="student_btn"></student-form>
     <student-card
       :dataStudent="students"
       @deleteItem="deleteStudent"
@@ -66,8 +66,8 @@ export default {
 </script>
 
 <style>
-.create {
-  margin-left: 87%;
+.student_btn {
+  margin-left: 84%;
   margin-top: 5%;
 }
 </style>

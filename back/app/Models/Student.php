@@ -15,8 +15,16 @@ class Student extends Model
         'phone',
         'gender'
     ];
+<<<<<<< HEAD
    public function permissions()
+=======
+    public function permissions()
+>>>>>>> 4925808fc05ca8ed6d6cd4a9d07442a833e0898e
    {
        return $this->hasMany(Permission::class, 'id');
    }
+   public function user() {
+       return $this->belongsTo(User::class);
+   }
+   
 }

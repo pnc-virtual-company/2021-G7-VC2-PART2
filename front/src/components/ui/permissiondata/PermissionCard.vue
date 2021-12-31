@@ -29,10 +29,10 @@
               <span class="num">5 days</span>
             </v-col>
             <v-col cols="12" sm="3" class="date">
-              <v-chip class="ma-2" color="yellow darken-4">
+              <v-chip class="ma-2 " color="yellow darken-4">
                 Start date: {{ permission.start_date }} </v-chip
               ><br />
-              <v-chip class="ma-2" color="yellow darken-4">
+              <v-chip class="ma-2 " color="yellow darken-4">
                 End date: {{ permission.end_date }}
               </v-chip>
             </v-col>
@@ -127,5 +127,12 @@ export default {
 }
 .num {
   color: grey;
+}
+.v-chip{
+  font-weight: bold;
+}
+@import url("https://fonts.googleapis.com/css2?family=Pushster&family=Raleway:wght@300&display=swap");
+h3 {
+  font-family: "Times New Roman", cursive;
 }
 </style>

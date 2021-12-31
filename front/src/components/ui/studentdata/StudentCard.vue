@@ -85,11 +85,15 @@ export default {
         };
     },
     methods: {
-        // ___________get student id____________
+        // ____________get student id_____________
 
         getstudentId(id) {
             this.dialog = true;
             this.deleteId = id;
+        },
+        deleteStudent() {
+            this.$emit('deleteItem', this.deleteId);
+            this.dialog = false;
         },
         deleteStudent() {
             this.$emit('deleteItem', this.deleteId);

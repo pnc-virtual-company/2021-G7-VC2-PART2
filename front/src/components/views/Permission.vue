@@ -25,7 +25,7 @@ export default {
     };
   },
   methods: {
-    //_____________ get permission list________________
+    //____________ get permission list_______________
     permissiondata() {
       axios.get("/permission").then((response) => {
         this.permissions = response.data;      
@@ -40,7 +40,7 @@ export default {
       });
     },
     deletePermission(permissionId) {
-      axios.delete(url + '/permission/' + permissionId ).then((response) => {
+      axios.delete('/permission/' + permissionId ).then((response) => {
         console.log(response.data);
         this.permissiondata();
       });
@@ -64,7 +64,7 @@ export default {
 
 <style>
 .permission_btn {
-  margin-left: 75%;
+  margin-left: 73%;
   margin-top: 5%;
 }
 </style>
