@@ -48,8 +48,8 @@
                   prepend-icon="mdi-account-switch"
                 ></v-select>
               </v-col>
-              <v-col class="d-flex" cols="12" sm="12">
-                <label for="student" class="country mb-0">Choose student</label>
+              <v-col class="d-flex" cols="12" sm="12"  v-if="role==='Student'">
+                <label for="student" class="mb-0">Choose student</label>
                 <select
                   name="student"
                   id="student"
