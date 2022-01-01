@@ -1,6 +1,6 @@
-<template >
-  <v-container >
-    <template >
+<template>
+  <v-container>
+    <template>
       <v-card>
         <v-card-title>
           <v-text-field
@@ -11,11 +11,13 @@
             hide-details
             @keyup="searchStudent"
           ></v-text-field>
+         
         </v-card-title>
         <v-simple-table>
           <template v-slot:default>
             <thead class="blue lighten-3">
               <tr>
+                
                 <th>User Account</th>
                 <th>E-mail</th>
                 <th>Role</th>
@@ -27,11 +29,13 @@
                 class=""
                 v-for="(user, index) in dataUser"
                 :key="index"
-                :search="search"
+                
               >
-                <td>{{ user.userName }}</td>
+                <td>{{ user.userName}}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.role }}</td>
+                <!-- <td>{{ user.password}}</td> -->
+                
                 <td>
                   <div class="i-con">
                     <v-icon color="blue darken-1" text  @click="getUserInfo(user)">mdi-lead-pencil</v-icon>
@@ -56,6 +60,31 @@
         </v-simple-table>
       </v-card>
     </template>
+
+    <div class="text-center">
+      <v-dialog
+        v-model="dialog"
+        transition="dialog-top-transition"
+        max-width="500"
+      >
+        <v-card>
+          <v-card-text>
+            <div class="text-h5 pa-5">Do you want to delete this user?</div>
+          </v-card-text>
+          <hr />
+          <v-card-actions class="justify-end">
+            <v-spacer></v-spacer>
+            <v-btn @click="dialog = false" class="blue white--text" text>
+              Cancel
+            </v-btn>
+            <v-btn class="red white--text" text @click="deleteUser">
+              Ok
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </div>
+
   </v-container>
 </template>
 <script>
@@ -72,18 +101,22 @@ export default {
     return {
       search: "",
       userId: 0,
-      deleteId: 0,
       userData: [],
       showForm: false,
-      
+      isHiddin: false,
+      dialog: false,
+      deleteId: 0
     };
   },
   methods: {
-    // ___________get student id____________
+    // __________get student id___________
     getUserId(id) {
-      this.deleteId = id;
-      this.$emit("deleteUser", this.deleteId);
-      console.log(id);
+        this.dialog = true;
+        this.deleteId = id;
+    },
+    deleteUser() {
+        this.$emit('deleteUser', this.deleteId);
+        this.dialog = false;
     },
 
     searchStudent() {
@@ -92,8 +125,8 @@ export default {
 
     getUserInfo(user) {
       this.showForm = true;
-      this.usertData = user;
-      console.log(this.usertData);
+      this.userData = user;
+      console.log(this.userData);
     },
 
     Cencel(hidden) {
@@ -103,7 +136,7 @@ export default {
     UpdateUser(id, user, hidden) {
      
       axios.put("/users/" + id, user).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.$emit("update-user", res.data);
         this.showForm = hidden;
        

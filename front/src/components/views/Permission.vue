@@ -1,8 +1,9 @@
 <template>
   <section>
-    <permission-form @addPermission="addPermission" class="create"></permission-form>
+    <permission-form @addPermission="addPermission" class="permission_btn"></permission-form>
     <permission-card
       :datapermission="permissions"
+      @deletePermission="deletePermission"
       @search-permission="searchPermission"
     ></permission-card>
   </section>
@@ -24,17 +25,24 @@ export default {
     };
   },
   methods: {
-    //_____________ get permission list________________
+    //____________ get permission list_______________
     permissiondata() {
       axios.get("/permission").then((response) => {
-        this.permissions = response.data;
+        this.permissions = response.data;      
         console.log(this.permissions);
       });
     },
     addPermission(newPermission) {
-      axios.post("/permission/" + newPermission).then((response) => {
+      axios.post("/permission" , newPermission).then((response) => {
         this.permissiondata();
         console.log(response.data)
+        console.log(newPermission)
+      });
+    },
+    deletePermission(permissionId) {
+      axios.delete('/permission/' + permissionId ).then((response) => {
+        console.log(response.data);
+        this.permissiondata();
       });
     },
     searchPermission(search) {
@@ -54,8 +62,8 @@ export default {
 </script>
 
 <style>
-.create {
-  margin-left: 82%;
+.permission_btn {
+  margin-left: 73%;
   margin-top: 5%;
 }
 </style>

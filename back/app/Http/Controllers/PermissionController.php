@@ -12,7 +12,7 @@ class PermissionController extends Controller
      */
     public function getAllPermission()
     {
-        return Permission::latest()->get();
+        return Permission::with("students")->get();
     }
 
     /**
@@ -24,15 +24,12 @@ class PermissionController extends Controller
     public function createPermission(Request $request)
     {
         $request-> validate([
-            'student_name'=>'required|string|min:2',
-            'start_date' => 'required',
-            'end_date'   => 'required',
+
             'description'=> 'required|min:5',
         ]);
 
         $permission = new Permission();
         $permission->student_id = $request->student_id;
-        $permission->student_name = $request->student_name;
         $permission->start_date = $request->start_date;
         $permission->end_date = $request->end_date;
         $permission->leave_type = $request->leave_type;
@@ -51,15 +48,12 @@ class PermissionController extends Controller
     public function updatePermission(Request $request, $id)
     {
         $request-> validate([
-            'student_name'=>'required|string|min:2',
-            'start_date' => 'required',
-            'end_date'   => 'required',
+            
             'description'=> 'required|min:5',
         ]);
 
         $permission = Permission::findOrFail($id);
         $permission->student_id = $request->student_id;
-        $permission->student_name = $request->student_name;
         $permission->start_date = $request->start_date;
         $permission->end_date = $request->end_date;
         $permission->leave_type = $request->leave_type;
@@ -84,6 +78,7 @@ class PermissionController extends Controller
             return response()->json(['message'=> 'ID Not Found'], 200);
         }
     }
+
     public function search($student_name)
     {
         return Permission::where('student_name', 'like', '%' . $student_name . '%')->get();

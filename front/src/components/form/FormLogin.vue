@@ -9,7 +9,7 @@
             src="https://zenprospect-production.s3.amazonaws.com/uploads/pictures/60b386ff84a3630001b3bb0d/picture"
           ></v-img>
         </v-avatar>
-        <h2>STUDENTS LIFE</h2>
+        <h2 >STUDENTS LIFE</h2>
       </div>
       <div class="log">
         <div></div>
@@ -22,7 +22,9 @@
               label="E-mail"
               v-model="email"
               :error-messages="emailErrors"
+              @input="$v.email.$touch()"
               @blur="$v.email.$touch()"
+
             ></v-text-field>
           </v-col>
           <br />
