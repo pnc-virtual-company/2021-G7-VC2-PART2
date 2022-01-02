@@ -37,6 +37,7 @@ class UserController extends Controller
         $user = new User();
         $user->student_id=$request->student_id;
         $user->userName=$request->userName;
+        $user->student_id = $request->student_id;
         $user->email=$request->email;
         $user->password=bcrypt($request->password);
         $user->role=$request->role;
@@ -103,8 +104,9 @@ class UserController extends Controller
         $user=User::findOrFail($id);
         $user->student_id=$request->student_id;
         $user->userName=$request->userName;
+        $user->student_id = $request->student_id;
         $user->email=$request->email;
-        $user->password=$request->password;
+        $user->password=bcrypt($request->password);
         $user->role=$request->role;
         $user->save();
 

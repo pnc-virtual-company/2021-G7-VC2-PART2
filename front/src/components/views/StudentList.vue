@@ -1,12 +1,13 @@
 <template>
   <section>
-     <student-form @addStudent="addStudent" class="create"></student-form>
+     <student-form @addStudent="addStudent" class="student_btn"></student-form>
     <student-card
       :dataStudent="students"
       @deleteItem="deleteStudent"
       @search-user="searchStudent"
       @update-student="studentdata"
     ></student-card>
+
   </section>
 </template>
 
@@ -18,11 +19,13 @@ export default {
   name: "App",
   components: {
     "student-card": StudentCard,
-    "student-form": StudentForm,
+    "student-form": StudentForm
+
   },
   data() {
     return {
       students: [],
+      userAccount:JSON.parse(localStorage.getItem('user')),
     };
   },
   methods: {
@@ -30,7 +33,6 @@ export default {
     studentdata() {
       axios.get("/students").then((response) => {
         this.students = response.data;
-        console.log(this.students)
       });
     },
     // ___________Add new student into list______________
@@ -66,7 +68,7 @@ export default {
 </script>
 
 <style>
-.create {
+.student_btn {
   margin-left: 84%;
   margin-top: 5%;
 }

@@ -16,7 +16,7 @@ export default {
   name: "App",
 
   data: () => ({
-    isLogin: false,
+    // isLogin: false,
   }),
   methods: {
     showMeu(loginn) {

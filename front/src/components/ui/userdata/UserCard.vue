@@ -29,10 +29,12 @@
                 class=""
                 v-for="(user, index) in dataUser"
                 :key="index"
+                
               >
                 <td>{{ user.userName}}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.role }}</td>
+                <!-- <td>{{ user.password}}</td> -->
                 
                 <td>
                   <div class="i-con">
@@ -58,6 +60,31 @@
         </v-simple-table>
       </v-card>
     </template>
+
+    <div class="text-center">
+      <v-dialog
+        v-model="dialog"
+        transition="dialog-top-transition"
+        max-width="500"
+      >
+        <v-card>
+          <v-card-text>
+            <div class="text-h5 pa-5">Do you want to delete this user?</div>
+          </v-card-text>
+          <hr />
+          <v-card-actions class="justify-end">
+            <v-spacer></v-spacer>
+            <v-btn @click="dialog = false" class="blue white--text" text>
+              Cancel
+            </v-btn>
+            <v-btn class="red white--text" text @click="deleteUser">
+              Ok
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </div>
+
   </v-container>
 </template>
 <script>
@@ -76,14 +103,20 @@ export default {
       userId: 0,
       userData: [],
       showForm: false,
+      isHiddin: false,
+      dialog: false,
+      deleteId: 0
     };
   },
   methods: {
     // __________get student id___________
     getUserId(id) {
-      this.deleteId = id;
-      this.$emit("deleteUser", this.deleteId);
-      console.log(id);
+        this.dialog = true;
+        this.deleteId = id;
+    },
+    deleteUser() {
+        this.$emit('deleteUser', this.deleteId);
+        this.dialog = false;
     },
     searchStudent() {
       this.$emit("search-user", this.search);
