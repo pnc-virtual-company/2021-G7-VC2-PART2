@@ -67,7 +67,7 @@ export default {
 
 <style>
 .user_btn {
-  margin-left: 87%;
+  margin-left: 89%;
   margin-top: 5%;
 }
 </style>

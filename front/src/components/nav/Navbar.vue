@@ -68,7 +68,7 @@
         </v-btn>
         <v-btn active-class="grey-5 white--text" text>
           <v-icon left class="blue--text">mdi-file-document</v-icon>
-          <router-link to="/disciples" tag="span" style="cursor: pointer">
+          <router-link to="/disciplines" tag="span" style="cursor: pointer">
             Discipline
           </router-link>
         </v-btn>

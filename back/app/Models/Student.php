@@ -19,8 +19,13 @@ class Student extends Model
    {
        return $this->hasMany(Permission::class, 'id');
    }
+
+   public function discipline()
+   {
+       return $this->hasMany(Discipline::class, 'id');
+   }
    public function user() {
        return $this->belongsTo(User::class);
    }
-   
+
 }

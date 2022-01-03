@@ -61,9 +61,9 @@ export default {
 };
 </script>
 
-<style>
+<style >
 .permission_btn {
-  margin-left: 73%;
+  margin-left: 75%;
   margin-top: 5%;
 }
 </style>

@@ -9,7 +9,7 @@ class Discipline extends Model
 {
     use HasFactory;
     protected $fillable = ['discipline_type', 'date_time', 'explaination'];
-    public function Permission(){
+    public function student(){
         return $this->belongsTo(Student::class, 'student_id');
     }
 

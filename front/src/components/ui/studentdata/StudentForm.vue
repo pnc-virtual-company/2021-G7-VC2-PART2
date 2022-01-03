@@ -175,6 +175,13 @@ export default {
                 newStudent.append("picture", this.picture);
                 this.$emit("addStudent", newStudent);
             }
+    
+            this.first_name = ''
+            this.last_name = ''
+            this.classes = null
+            this.gender = null
+            this.phone = null
+            this.picture = null
         },
         submit() {
             this.$v.$touch()

@@ -17,7 +17,7 @@
             <v-divider vertical class="ma-3" color="white"></v-divider>
             <v-col cols="12" sm="2">
               <v-avatar class="ma-3" size="120" tile>
-                <v-img src="https://sdmny.hunter.cuny.edu/wp-content/uploads/2017/04/male-headshot-placeholder.jpg"></v-img>
+                <v-img :src=" url + permission.students.picture "></v-img>
               </v-avatar>
             </v-col>
             <v-col cols="12" sm="3" class="text-center data">
@@ -26,7 +26,7 @@
                 {{ permission.students.last_name }}
               </h3>
               <span>WEB-A</span><br />
-              <span class="num">5 days</span>
+              <span class="num"> {{permission.leave_type}} </span>
             </v-col>
             <v-col cols="12" sm="3" class="date">
               <v-chip class="ma-2 " color="yellow darken-4">
