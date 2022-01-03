@@ -1,5 +1,6 @@
 <template>
-  <nav>
+  <div class="navbar">
+    <nav>
     <v-navigation-drawer v-model="sidebar" app absolute left temporary>
       <!-- 1 -->
       <div class="navResponsiv">
@@ -91,6 +92,7 @@
       </v-toolbar-items>
     </v-toolbar>
   </nav>
+  </div>
 </template>
 
 <script>
@@ -118,5 +120,13 @@ nav {
 font-family: 'Pushster', cursive;}
 .navResponsiv {
   display: grid;
+}
+</style>
+<style scoped>
+.navbar {
+  position: fixed;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
 }
 </style>

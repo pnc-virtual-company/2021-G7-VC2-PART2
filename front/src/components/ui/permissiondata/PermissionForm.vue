@@ -2,7 +2,7 @@
   <div class="text">
     <v-dialog v-model="dialog" max-width="500px">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn color="orange lighten-1 " class="black--text" dark v-bind="attrs" v-on="on">
+        <v-btn color="orange lighten-1 " class="black--text btnAddPermission" dark v-bind="attrs" v-on="on" >
           +Permission
         </v-btn>
       </template>
@@ -124,6 +124,11 @@ export default {
   height: 40px;
   border-bottom: 1px solid grey;
   padding: 10px;
+}
+.btnAddPermission {
+  position: fixed;
+  margin-top: 20px;
+  margin-left: 23px;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Pushster&family=Raleway:wght@300&display=swap");

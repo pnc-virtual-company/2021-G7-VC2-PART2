@@ -1,10 +1,22 @@
 <template>
   <section>
-    <permission-form @addPermission="addPermission" class="permission_btn"></permission-form>
+    <permission-form 
+    @addPermission="addPermission" 
+    class="permission_btn"
+    ></permission-form>
+      <v-text-field 
+      class="search" 
+      v-model="search" 
+      append-icon="mdi-magnify" 
+      label="Search" 
+      single-line hide-details placeholder="Search first name, Lastname and Class" 
+      outlined 
+      dense
+      ></v-text-field>
     <permission-card
       :datapermission="permissions"
       @deletePermission="deletePermission"
-      @search-permission="searchPermission"
+     
     ></permission-card>
   </section>
 </template>
@@ -12,7 +24,6 @@
 import PermissionCard from "../ui/permissiondata/PermissionCard.vue";
 import PermissionForm from "../ui/permissiondata/PermissionForm.vue";
 import axios from "../../api/api.js";
-let url = "http://localhost:8000/api"
 export default {
   name: "App",
   components: {
@@ -22,6 +33,7 @@ export default {
   data() {
     return {
       permissions: [],
+      search:"",
     };
   },
   methods: {
@@ -45,16 +57,23 @@ export default {
         this.permissiondata();
       });
     },
-    
-    searchPermission(search) {
-      if (search !== "") {
-        axios.get("/permission" + "/search/" + search).then((response) => {
-          this.permissions = response.data;
-        });
-      } else {
+     // search first name, last name and class
+    searchPermission(value) {
+      if(value !== "") {
+        this.permissions = this.permissions.filter(
+          (permission) => (permission.students.first_name.toLowerCase().includes(value.toLowerCase()) ||
+          (permission.students.last_name.toLowerCase().includes(value.toLowerCase()) || 
+          (permission.students.class.toLowerCase().includes(value.toLowerCase())))))
+          console.log(this.permissions);
+      }else{
         this.permissiondata();
       }
     },
+  },
+  watch:{
+    search:function(){
+      this.searchPermission(this.search);
+    }
   },
   mounted() {
     this.permissiondata();
@@ -62,9 +81,15 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .permission_btn {
   margin-left: 73%;
   margin-top: 5%;
+}
+.search {
+  width: 30%;
+  margin-top: 20px;
+  margin-left: 14.4%;
+  position: fixed;
 }
 </style>
