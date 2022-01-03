@@ -5,6 +5,7 @@
       @addDiscipline="addDiscipline"
     ></discipline-form>
     <discipline-card :datadiscipline="disciplines"></discipline-card>
+    
   </section>
 </template>
 
@@ -16,32 +17,32 @@ export default {
   name: "App",
   components: {
     "discipline-card": DisciplineCard,
-    "discipline-form": DisciplineForm
+    "discipline-form": DisciplineForm,
   },
   data() {
     return {
       disciplines: [],
-    }
+    };
   },
-  methods:{
+  methods: {
     disciplinedata() {
-    axios.get("/discipline").then((response)=> {
-      this.disciplines = response.data;
-      console.log(response.data);
-    })
-  },
-  addDiscipline(newDiscipline) {
-      axios.post("/discipline", newDiscipline).then((response)=>{
+      axios.get("/discipline").then((response) => {
+        this.disciplines = response.data;
+        console.log(response.data);
+      });
+    },
+    addDiscipline(newDiscipline) {
+      axios.post("/discipline", newDiscipline).then((response) => {
         this.disciplinedata();
-        console.log(response.data)
-      })
+        console.log(response.data);
+      });
+    },
+    
   },
   mounted() {
-    this.disciplinedata();
-  },
-  }
-
-}
+      this.disciplinedata();
+    },
+};
 </script>
 
 <style>

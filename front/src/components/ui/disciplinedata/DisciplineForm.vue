@@ -24,12 +24,12 @@
                   v-model="id"
                 >
                   <option
-                    v-for="categorys of students"
-                    :key="categorys.id"
-                    :value="categorys.id"
+                    v-for="(student, index) of students"
+                    :key="index"
+                    :value="student.id"
                   >
-                    {{ categorys.first_name }}
-                    {{ categorys.last_name }}
+                    {{ student.first_name }}
+                    {{ student.last_name }}
                   </option>
                 </select>
               </v-col>
@@ -88,7 +88,7 @@ export default {
       });
     },
     createDiscipline() {
-      if (this.student_id !== "") {
+      if (this.date !=="" && this.type !=="" && this.explaination !== "") {
         this.dialog = false;
         let newDiscipline = new FormData();
         newDiscipline.append("student_id", this.id);
