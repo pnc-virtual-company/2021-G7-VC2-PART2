@@ -14,7 +14,7 @@ class DisciplineController extends Controller
      */
     public function getAllDiscipline()
     {
-        return Discipline::latest()->get();
+        return Discipline::with("students")->get();
     }
 
     /**
