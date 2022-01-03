@@ -1,7 +1,20 @@
 <template>
   <v-container>
     <template>
-      <v-simple-table> </v-simple-table>
+          <v-simple-table>
+      <v-card-title class="search">
+        <v-text-field
+     
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+          @keyup="searchPermission"
+        ></v-text-field>
+      </v-card-title>
+    </v-simple-table>
+
       <div class="permission">
         <v-card
           color="grey lighten-4"
@@ -29,10 +42,10 @@
               <span class="num">5 days</span>
             </v-col>
             <v-col cols="12" sm="3" class="date">
-              <v-chip class="ma-2" color="yellow darken-4">
+              <v-chip class="ma-2 " color="yellow darken-4">
                 Start date: {{ permission.start_date }} </v-chip
               ><br />
-              <v-chip class="ma-2" color="yellow darken-4">
+              <v-chip class="ma-2 " color="yellow darken-4">
                 End date: {{ permission.end_date }}
               </v-chip>
             </v-col>
@@ -82,7 +95,7 @@
 <script>
 export default {
   props: ["datapermission"],
-  emits: ["deletePermission", "search-permission"],
+  emits: ["search-permission"],
   data() {
     return {
       search: "",
@@ -127,5 +140,12 @@ export default {
 }
 .num {
   color: grey;
+}
+.v-chip{
+  font-weight: bold;
+}
+@import url("https://fonts.googleapis.com/css2?family=Pushster&family=Raleway:wght@300&display=swap");
+h3 {
+  font-family: "Times New Roman", cursive;
 }
 </style>

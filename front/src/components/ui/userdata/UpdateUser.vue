@@ -18,7 +18,7 @@
                 >
                 </v-text-field>
               </v-col>
-
+ 
               <v-col cols="12" sm="12">
                 <v-text-field
                   :rules="emailRules"
