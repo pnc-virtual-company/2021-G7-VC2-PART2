@@ -28,10 +28,10 @@
               <span class="num">5 days</span>
             </v-col>
             <v-col cols="12" sm="3" class="date">
-              <v-chip class="ma-2" color="yellow darken-4">
+              <v-chip class="ma-2 " color="yellow darken-4">
                 Start date: {{ permission.start_date }} </v-chip
               ><br />
-              <v-chip class="ma-2" color="yellow darken-4">
+              <v-chip class="ma-2 " color="yellow darken-4">
                 End date: {{ permission.end_date }}
               </v-chip>
             </v-col>

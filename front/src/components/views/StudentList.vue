@@ -26,28 +26,28 @@ export default {
     };
   },
   methods: {
-    //____________ get students list_______________
+    //_____________ get students list________________
     studentdata() {
       axios.get("/students").then((response) => {
         this.students = response.data;
         console.log(this.students)
       });
     },
-    // __________Add new student into list_____________
+    // ___________Add new student into list______________
     addStudent(newStudent) {
       axios.post("/students", newStudent).then((response) => {
         this.studentdata();
         console.log(response.data);
       });
     },
-    //_____________ delete student in student list_____________
+    //______________ delete student in student list______________
     deleteStudent(studentId) {
       axios.delete("/students/" + studentId).then((response) => {
         console.log(response.data);
         this.studentdata();
       });
     },
-    //_____________ search student _________________
+    //______________ search student __________________
     searchStudent(search) {
       if (search !== "") {
         axios.get("/students" + "/search/" + search).then((response) => {
