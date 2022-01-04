@@ -1,7 +1,7 @@
 <template>
   <div>
      <v-dialog v-model="dialog" max-width="500px">
-    <v-card>
+        <v-card>
       <div class="text-center">
         <v-card-title class="text-h5 orange lighten-1">
           Update Discipline
@@ -117,7 +117,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .select_student {
   width: 300px;
   height: 40px;
