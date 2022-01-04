@@ -26,39 +26,112 @@
              
             </v-col>
             <v-col cols="12" sm="3" class="date">
-              <v-chip class="ma-2" color="yellow darken-4">2021-01-12</v-chip
+              <v-chip class="ma-2" color="yellow darken-4">{{discipline.date_time}}</v-chip
               >
              
             </v-col>
             <v-col cols="12" sm="2">
               <div class="i_con">
-                <v-icon color="blue darken-1" text size="30px">
+                <v-icon color="blue darken-1" text size="30px" @click="getdisciplineInfo(discipline)">
                   mdi-lead-pencil</v-icon
                 >
                 <v-icon
                   color="red darken-1"
                   text
                   size="30px"
-                  @click="getPermissionId(permission.id)"
+                 @click="getDisciplineId(discipline.id)"
                   >mdi-delete</v-icon
                 >
               </div>
             </v-col>
           </v-row>
         </v-card>
+        <update-discipline
+                v-if="showForm"
+                :disciplineInfo="disciplineData"
+                @cancel="Cencel"
+                @update="UpdateDiscipline"
+              >
+        </update-discipline>
       </div>
     </template>
+    <div class="text-center">
+      <v-dialog
+        v-model="dialog"
+        transition="dialog-top-transition"
+        max-width="500"
+      >
+        <v-card>
+          <v-card-text>
+            <div class="text-h5 pa-5">Do you want to delete this discipline?</div>
+          </v-card-text>
+          <hr />
+          <v-card-actions class="justify-end">
+            <v-spacer></v-spacer>
+            <v-btn @click="dialog = false" class="blue white--text" text>
+              Cancel
+            </v-btn>
+            <v-btn class="red white--text" text @click="deleteDiscipline">
+              Ok
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </div>
   </v-container>
 </template>
 <script>
+import axios from "../../../api/api.js";
+import UpdateDiscipline from "./UpdateDiscipline.vue";
 export default {
   props: ["datadiscipline"],
+  emits: ["update-discipline"],
+  components: {
+    "update-discipline": UpdateDiscipline,
+  },
  
   data() {
     return {
-       url: "http://127.0.0.1:8000/storage/images/",
+      url: "http://127.0.0.1:8000/storage/images/",
+      search: "",
+      disciplineId: 0,
+      disciplineData: [],
+      showForm: false,
+      isHiddin: false,
+      dialog: false,
+      deleteId: 0
     };
     
+  },
+  methods: {
+    getDisciplineId(id) {
+        this.dialog = true;
+        this.deleteId = id;
+    },
+
+    getdisciplineInfo(discipline) {
+      this.showForm = true;
+      this.disciplineData = discipline;
+      console.log(this.disciplineData);
+    },
+
+    Cencel(hidden) {
+      this.showForm = hidden;
+    },
+
+    UpdateDiscipline(id, discipline, hidden) {
+     
+      axios.put("/discipline/" + id, discipline).then((res) => {
+        // console.log(res.data);
+        this.$emit("update-discipline", res.data);
+        this.showForm = hidden;
+       
+      });
+    },
+    deleteDiscipline(){
+      this.$emit('deleteDiscipline', this.deleteId);
+      this.dialog= false;
+    },
   },
 };
 </script>

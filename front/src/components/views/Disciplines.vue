@@ -4,7 +4,11 @@
       class="permission_btn"
       @addDiscipline="addDiscipline"
     ></discipline-form>
-    <discipline-card :datadiscipline="disciplines"></discipline-card>
+    <discipline-card 
+    :datadiscipline="disciplines"
+     @deleteDiscipline = "deleteDiscipline"
+     @update-discipline="disciplinedata"
+    ></discipline-card>
     
   </section>
 </template>
@@ -37,6 +41,13 @@ export default {
         console.log(response.data);
       });
     },
+
+    deleteDiscipline(disciplineId){
+      axios.delete("/discipline/" + disciplineId).then((response)=>{
+        console.log(response.data);
+        this.disciplinedata();
+      })
+    }
     
   },
   mounted() {

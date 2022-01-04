@@ -4,7 +4,7 @@
     <permission-card
       :datapermission="permissions"
       @deletePermission="deletePermission"
-      @search-permission="searchPermission"
+      @update-permission="permissiondata"
     ></permission-card>
   </section>
 </template>
@@ -44,15 +44,6 @@ export default {
         console.log(response.data);
         this.permissiondata();
       });
-    },
-    searchPermission(search) {
-      if (search !== "") {
-        axios.get("/permission" + "/search/" + search).then((response) => {
-          this.permissions = response.data;
-        });
-      } else {
-        this.permissiondata();
-      }
     },
   },
   mounted() {

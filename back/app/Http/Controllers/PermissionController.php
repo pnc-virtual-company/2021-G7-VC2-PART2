@@ -53,12 +53,10 @@ class PermissionController extends Controller
         ]);
 
         $permission = Permission::findOrFail($id);
-        $permission->student_id = $request->student_id;
-        $permission->start_date = $request->start_date;
-        $permission->end_date = $request->end_date;
-        $permission->leave_type = $request->leave_type;
-        $permission->description = $request->description;
+        $permission->update($request->all());
+
         $permission->save();
+
 
         return response()->json(['message' => 'Permission updated successfully', 'permission' => $permission], 200);
     }

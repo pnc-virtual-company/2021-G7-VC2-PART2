@@ -101,14 +101,12 @@ class UserController extends Controller
     {
         //
         $user=User::findOrFail($id);
-        $user->userName=$request->userName;
-        $user->student_id = $request->student_id;
-        $user->email=$request->email;
-        $user->password=bcrypt($request->password);
-        $user->role=$request->role;
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+
         $user->save();
 
-        return response()->json(['message' => 'User Update Successfully!'], 200);
+        return response()->json(['message' => 'Sutdent updated successfully', 'student' => $user], 200);
       
     }
 

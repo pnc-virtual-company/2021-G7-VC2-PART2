@@ -17,7 +17,7 @@
             <v-divider vertical class="ma-3" color="white"></v-divider>
             <v-col cols="12" sm="2">
               <v-avatar class="ma-3" size="120" tile>
-                <v-img :src=" url + permission.students.picture "></v-img>
+                <v-img :src="url + permission.students.picture"></v-img>
               </v-avatar>
             </v-col>
             <v-col cols="12" sm="3" class="text-center data">
@@ -26,7 +26,7 @@
                 {{ permission.students.last_name }}
               </h3>
               <span>WEB-A</span><br />
-              <span class="num"> {{permission.leave_type}} </span>
+              <span class="num">5 days</span>
             </v-col>
             <v-col cols="12" sm="3" class="date">
               <v-chip class="ma-2 " color="yellow darken-4">
@@ -38,7 +38,7 @@
             </v-col>
             <v-col cols="12" sm="2">
               <div class="i_con">
-                <v-icon color="blue darken-1" text size="30px">
+                <v-icon color="blue darken-1" text size="30px" @click="gitPermissionInfo(permission)">
                   mdi-lead-pencil</v-icon
                 >
                 <v-icon
@@ -52,6 +52,13 @@
             </v-col>
           </v-row>
         </v-card>
+        <update-permission
+                v-if="showForm"
+                :permissionInfo="permissionData"
+                @cancel="Cencel"
+                @update="UpdatePermission"
+              >
+        </update-permission>
       </div>
     </template>
     <div class="text-center">
@@ -80,15 +87,23 @@
   </v-container>
 </template>
 <script>
+
+import axios from "../../../api/api.js";
+import UpdatePermission from "./UpdatePermission.vue";
 export default {
   props: ["datapermission"],
-  emits: ["search-permission"],
+  emits: ["update-permission"],
+  components: {
+    "update-permission": UpdatePermission,
+  },
   data() {
     return {
-      search: "",
       permissionId: 0,
       dialog: false,
       url: "http://127.0.0.1:8000/storage/images/",
+      permissionData: [],
+      showForm: false,
+      isHiddin: false,
     };
   },
   methods: {
@@ -101,8 +116,25 @@ export default {
       this.$emit("deletePermission", this.permissionId);
       this.dialog = false;
     },
-    searchPermission() {
-      this.$emit("search-permission", this.search);
+
+    gitPermissionInfo(permission) {
+      this.showForm = true;
+      this.permissionData = permission;
+      console.log(this.permissionData);
+    },
+
+    Cencel(hidden) {
+      this.showForm = hidden;
+    },
+
+    UpdatePermission(id, permission, hidden) {
+     
+      axios.put("/permission/" + id, permission).then((res) => {
+        // console.log(res.data);
+        this.$emit("update-permission", res.data);
+        this.showForm = hidden;
+       
+      });
     },
   },
 };
