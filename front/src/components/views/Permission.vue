@@ -16,6 +16,7 @@
     <permission-card
       :datapermission="permissions"
       @deletePermission="deletePermission"
+      @edit-permission="permissiondata"
      
     ></permission-card>
   </section>
