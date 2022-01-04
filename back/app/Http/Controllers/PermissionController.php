@@ -13,7 +13,7 @@ class PermissionController extends Controller
      */
     public function getAllPermission()
     {
-        return Permission::with("students")->get();
+        return Permission::with("students")->latest()->get();
     }
 
     /**

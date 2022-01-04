@@ -67,7 +67,6 @@ export default {
             };
 
             this.$emit("update", this.studentInfo.id, student, false);
-            console.log(student)
         },
         cancel() {
             this.$emit('cancel', false);

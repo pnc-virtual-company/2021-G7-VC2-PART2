@@ -36,9 +36,8 @@ export default {
 
     // _________Add new student into list____________
     addUserAccount(newUserAccount) {
-      axios.post("/createUser", newUserAccount).then((response) => {
+      axios.post("/createUser", newUserAccount).then(() => {
         this.userList();
-        console.log(response.data);
       });
     },
   
@@ -53,8 +52,7 @@ export default {
       }
     },
     deleteUser(userId){
-      axios.delete("/users/" + userId).then((response)=> {
-        console.log(response.data)
+      axios.delete("/users/" + userId).then(()=> {
         this.userList();
       })
     }

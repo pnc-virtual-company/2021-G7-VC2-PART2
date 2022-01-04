@@ -1,11 +1,6 @@
 <template>
 <v-container>
     <template>
-        <v-simple-table>
-            <v-card-title class="search">
-                <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details @keyup="searchPermission"></v-text-field>
-            </v-card-title>
-        </v-simple-table>
         <div class="permission">
             <v-card color="grey lighten-4" class="mx-auto card" max-width="2000" v-for="(permission, index) in datapermission" :key="index">
                 <v-row>
@@ -23,7 +18,7 @@
                             {{ permission.students.first_name }}
                             {{ permission.students.last_name }}
                         </h3>
-                        <span>WEB-A</span><br />
+                        <span>{{ permission.students.class }}</span><br />
                         <span class="num">5 days</span>
                     </v-col>
                     <v-col cols="12" sm="3" class="date">
@@ -70,9 +65,7 @@
 <script>
 
 export default {
-
     props: ["datapermission"],
-    emits: ["search-permission"],
     data() {
         return {
             search: "",
@@ -94,11 +87,8 @@ export default {
             this.$emit("deletePermission", this.permissionId);
             this.dialog = false;
         },
-        searchPermission() {
-            this.$emit("search-permission", this.search);
-        },
     },
-};
+}
 </script>
 
 <style scoped>

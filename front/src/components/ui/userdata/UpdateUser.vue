@@ -119,7 +119,6 @@ export default {
       };
      
       this.$emit("update", this.userInfo.id, user, false);
-      console.log(user);
       
     },
     cancel(){

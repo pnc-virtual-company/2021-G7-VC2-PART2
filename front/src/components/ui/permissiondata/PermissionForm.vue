@@ -82,7 +82,6 @@ export default {
                 newPermission.append("leave_type", this.reason);
                 newPermission.append("description", this.description);
                 this.$emit("addPermission", newPermission);
-                console.log(this.id);
             }
             this.permission_Type = null;
             this.student_id = null;

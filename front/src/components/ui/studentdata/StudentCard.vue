@@ -2,9 +2,9 @@
 <v-container>
     <template>
         <v-card>
-            <v-card-title>
+            <!-- <v-card-title>
                 <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details @keyup="searchUsername"></v-text-field>
-            </v-card-title>
+            </v-card-title> -->
             <v-simple-table>
                 <template v-slot:default>
                     <thead class="blue lighten-3">
@@ -107,25 +107,22 @@ export default {
         searchUsername() {
             this.$emit("search-user", this.search);
         },
-
         getStudentInfo(student) {
             this.showForm = true;
             this.studentData = student;
-            console.log(this.studentData);
         },
         Cencel(hidden) {
             this.showForm = hidden;
         },
         Updatestudent(id, student, hidden) {
-
             axios.put("/students/" + id, student).then((res) => {
-                console.log(res.data);
                 this.$emit("update-student", res.data);
                 this.showForm = hidden;
 
             });
         },
     },
+    
 };
 </script>
 
