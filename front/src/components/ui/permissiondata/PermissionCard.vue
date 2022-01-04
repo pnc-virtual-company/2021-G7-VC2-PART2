@@ -46,7 +46,77 @@
                   size="30px"
                   @click="getPermissionId(permission.id)"
                   >mdi-delete</v-icon
-                >
+                ><br /><br />
+                <v-col cols="auto">
+                  <v-dialog transition="dialog-top-transition" max-width="550">
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn
+                        color="white"
+                        class="blue--text"
+                        v-bind="attrs"
+                        v-on="on"
+                      >
+                         More<v-icon>mdi-chevron-down</v-icon>
+                      </v-btn>
+                    </template>
+                    <template v-slot:default="dialog">
+                      <v-card>
+                        <v-toolbar color="blue lighten-4"  darkclass="text-h4 pa-7">
+                          <v-list-item-avatar color="grey darken-3" size="50">
+                            <v-img
+                              class="elevation-6"
+                              alt=""
+                              
+                              :src="url + permission.students.picture"
+                            > </v-img>
+                          </v-list-item-avatar>
+                          <div class="text-h4 title p-5">{{ permission.leave_type }} </div>
+                        </v-toolbar><br>
+                        <v-card-text>
+                          <div class="font-weight-bold ml-8 mb-2 text-h5">{{permission.start_date}}/ {{permission.end_date}}</div>
+                          <v-timeline align-top dense>
+                            <v-timeline-item small color="orange">
+                              <div>
+                                <div class="font-weight-normal text-h6">
+                                   Student name: <strong>{{ permission.students.first_name }} {{ permission.students.last_name }}</strong> 
+                                </div>
+                              </div>
+                            </v-timeline-item>
+                            <v-timeline-item small >
+                              <div>
+                                <div class="font-weight-normal text-h6">
+                                  Gender: <strong> {{ permission.students.gender }} </strong> 
+                                </div>
+                                
+                              </div>
+                            </v-timeline-item>
+                            <v-timeline-item small color="orange">
+                              <div>
+                                <div class="font-weight-normal text-h6">
+                                  Batch: <strong> {{ permission.students.class }} </strong> 
+                                </div>
+                                
+                              </div>
+                            </v-timeline-item>
+                            <v-timeline-item small >
+                              <div>
+                                <div class="font-weight-normal text-h6">
+                                  Reason: {{ permission.description }} 
+                                </div>
+                              </div>
+                            </v-timeline-item>
+                          </v-timeline>
+                        </v-card-text>
+
+                        <v-card-actions class="justify-end">
+                          <v-btn color="blue" text @click="dialog.value = false"
+                            >Close</v-btn
+                          >
+                        </v-card-actions>
+                      </v-card>
+                    </template>
+                  </v-dialog>
+                </v-col>
               </div>
             </v-col>
           </v-row>
@@ -123,7 +193,7 @@ export default {
 }
 
 .logo {
-  margin-top: 4%;
+  margin-top: 5%;
 }
 
 .card {
@@ -140,6 +210,10 @@ export default {
 .permission {
   margin-top: 80px;
 }
+.title {
+  text-transform: uppercase;
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Pushster&family=Raleway:wght@300&display=swap");
 h3 {
   font-family: "Times New Roman", cursive;

@@ -2,7 +2,13 @@
   <div class="text">
     <v-dialog v-model="dialog" max-width="500px">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn color="orange lighten-1 " class="black--text btnAddPermission" dark v-bind="attrs" v-on="on" >
+        <v-btn
+          color="orange lighten-1 "
+          class="black--text btnAddPermission"
+          dark
+          v-bind="attrs"
+          v-on="on"
+        >
           +Permission
         </v-btn>
       </template>
@@ -15,8 +21,7 @@
         <v-card-text>
           <v-container>
             <v-row>
-              <label for="student" class="country mb-0">Choose student</label
-              ><br />
+              <br />
               <v-col class="d-flex" cols="12" sm="12" md="12">
                 <label for="student" class="country mb-0">Choose student</label>
                 <select
@@ -24,6 +29,9 @@
                   id="student"
                   class="select_student"
                   v-model="id"
+                  :error-messages="studentErrors"
+                  @input="$v.id.$touch()"
+                  @blur="$v.id.$touch()"
                 >
                   <option
                     v-for="categorys of students"
@@ -36,17 +44,33 @@
                 </select>
               </v-col>
               <v-col cols="12" sm="12" md="6">
-                <v-text-field type="date" v-model="startDate"> </v-text-field>
+                <v-text-field
+                  type="date"
+                  v-model="startDate"
+                  :error-messages="startDateErrors"
+                  @input="$v.startDate.$touch()"
+                  @blur="$v.startDate.$touch()"
+                >
+                </v-text-field>
               </v-col>
               <v-col cols="12" sm="12" md="6">
-                <v-text-field type="date" v-model="endDate"> </v-text-field>
+                <v-text-field
+                  type="date"
+                  v-model="endDate"
+                  :error-messages="endDateErrors"
+                  @input="$v.endDate.$touch()"
+                  @blur="$v.endDate.$touch()"
+                >
+                </v-text-field>
               </v-col>
               <v-col class="d-flex" cols="12" sm="12">
                 <v-select
                   v-model="reason"
                   :items="permissionType"
                   label="Choose leave type"
-                  required
+                  :error-messages="typeErrors"
+                  @input="$v.reason.$touch()"
+                  @blur="$v.reason.$touch()"
                 ></v-select>
               </v-col>
               <v-col cols="12" md="12">
@@ -55,6 +79,9 @@
                   name="input-7-4"
                   v-model="description"
                   label="Description..."
+                  :error-messages="explainationErrors"
+                  @input="$v.description.$touch()"
+                  @blur="$v.description.$touch()"
                 ></v-textarea>
               </v-col>
             </v-row>
@@ -62,7 +89,7 @@
         </v-card-text>
         <v-card-actions class="black lighten-1">
           <v-btn color="blue darken-1 " text block @click="createPermission">
-            Create
+            Create now
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -71,9 +98,34 @@
 </template>
 
 <script>
+import { validationMixin } from "vuelidate";
+import { required } from "vuelidate/lib/validators";
 import axios from "../../../api/api.js";
 export default {
   emits: ["addPermission"],
+  mixins: [validationMixin],
+  validations: {
+    student_id: {
+      required,
+    },
+    reason: {
+      required,
+    },
+    startDate: {
+      required,
+    },
+    endDate: {
+      required,
+    },
+    description: {
+      required,
+    },
+    checkbox: {
+      checked(val) {
+        return val;
+      },
+    },
+  },
   data() {
     return {
       dialog: false,
@@ -85,6 +137,44 @@ export default {
       reason: null,
       description: null,
     };
+  },
+  computed: {
+    checkboxErrors() {
+      const errors = [];
+      if (!this.$v.checkbox.$dirty) return errors;
+      !this.$v.checkbox.checked && errors.push("You must agree to continue!");
+      return errors;
+    },
+    studentErrors() {
+      const errors = [];
+      if (!this.$v.student_id.$dirty) return errors;
+      !this.$v.student_id.required && errors.push("Student is required");
+      return errors;
+    },
+    typeErrors() {
+      const errors = [];
+      if (!this.$v.reason.$dirty) return errors;
+      !this.$v.reason.required && errors.push("Discipline is required");
+      return errors;
+    },
+    endDateErrors() {
+      const errors = [];
+      if (!this.$v.endDate.$dirty) return errors;
+      !this.$v.endDate.required && errors.push("Date is required");
+      return errors;
+    },
+    startDateErrors() {
+      const errors = [];
+      if (!this.$v.startDate.$dirty) return errors;
+      !this.$v.startDate.required && errors.push("Date is required");
+      return errors;
+    },
+    explainationErrors() {
+      const errors = [];
+      if (!this.$v.description.$dirty) return errors;
+      !this.$v.description.required && errors.push("Description is required");
+      return errors;
+    },
   },
   methods: {
     studentdata() {
@@ -104,6 +194,18 @@ export default {
         this.$emit("addPermission", newPermission);
         console.log(this.id);
       }
+      this.permission_Type = null;
+      this.student_id = null;
+      this.startDate = null;
+      this.endDate = null;
+      this.reason = null;
+      this.description = null;
+    },
+    submit() {
+      this.$v.$touch();
+    },
+    clear() {
+      this.$v.$reset();
       this.permission_Type = null;
       this.student_id = null;
       this.startDate = null;
@@ -132,5 +234,4 @@ export default {
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Pushster&family=Raleway:wght@300&display=swap");
-
 </style>
