@@ -113,7 +113,6 @@ export default {
           localStorage.setItem('user',JSON.stringify(res.data.user));
           //if role is admin go to user page, otherwise student page
           let roles = JSON.parse(localStorage.getItem("user"))
-          console.log(roles.role)
           if(roles.role === "admin"){
             this.$router.push("/user")
           }else{
