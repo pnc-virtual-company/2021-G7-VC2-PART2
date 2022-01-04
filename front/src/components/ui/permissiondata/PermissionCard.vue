@@ -103,7 +103,7 @@ export default {
       url: "http://127.0.0.1:8000/storage/images/",
       permissionData: [],
       showForm: false,
-      isHiddin: false,
+     
     };
   },
   methods: {
@@ -119,10 +119,10 @@ export default {
 
     gitPermissionInfo(permission) {
       this.showForm = true;
-      this.permissionData = permission;
+      this.permissionData = permission
       console.log(this.permissionData);
     },
-
+    
     Cencel(hidden) {
       this.showForm = hidden;
     },

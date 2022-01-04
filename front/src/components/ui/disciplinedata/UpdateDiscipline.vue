@@ -1,5 +1,6 @@
 <template>
-  <div class="container">
+  <div>
+     <v-dialog v-model="dialog" max-width="500px">
     <v-card>
       <div class="text-center">
         <v-card-title class="text-h5 orange lighten-1">
@@ -28,7 +29,6 @@
                 </option>
               </select>
             </v-col>
-            <!-- edit discipline dialog -->
             <v-col cols="12" sm="12" md="12">
               <v-text-field type="date" v-model="date"> </v-text-field>
             </v-col>
@@ -61,6 +61,7 @@
         <v-btn @click="Update" color="blue darken-1" text> Update </v-btn>
       </v-card-actions>
     </v-card>
+     </v-dialog>
   </div>
 </template>
 
@@ -71,7 +72,7 @@ export default {
   emits: ["update", "cancel"],
   data() {
     return {
-      dialog: false,
+      dialog: true,
       students: [],
       disciplineType: [
         "Misconduct",
@@ -123,11 +124,5 @@ export default {
   border-bottom: 1px solid grey;
   padding: 10px;
 }
-.container {
-  padding: 30px;
-  width: 83%;
-  
-}
-
 @import url("https://fonts.googleapis.com/css2?family=Pushster&family=Raleway:wght@300&display=swap");
 </style>

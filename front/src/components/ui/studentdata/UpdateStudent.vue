@@ -1,5 +1,6 @@
 <template>
 <div>
+    <v-dialog v-model="dialog" max-width="500px">
     <v-card>
         <v-card-title  class="orange lighten-1 text-h5">
             Update Student
@@ -35,6 +36,7 @@
             <v-btn @click="Update" color="blue darken-1" text> Save </v-btn>
         </v-card-actions>
     </v-card>
+    </v-dialog>
 </div>
 </template>
 
@@ -44,7 +46,7 @@ export default {
     emits: ["update", "cancel"],
     data() {
         return {
-            dialog: false,
+            dialog: true,
             first_name: "",
             last_name: "",
             phone: "",
