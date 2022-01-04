@@ -2,7 +2,7 @@
   <v-container>
     <template>
       <v-simple-table> </v-simple-table>
-      <div class="permission">
+      <div class="discipline">
         <v-card
           color="grey lighten-4"
           class="mx-auto card"
@@ -13,7 +13,7 @@
           <v-row>
             <v-col cols="12" sm="3" class="logo">
               <v-icon color="orange" size="60px"> mdi-alert </v-icon><br />
-              <strong> {{ discipline.discipline_type }} </strong>
+              <strong class="title"> {{ discipline.discipline_type }} </strong>
             </v-col>
 
             <v-col cols="12" sm="2">
@@ -24,13 +24,12 @@
             <v-col cols="12" sm="3" class="text-center data">
               <h3>
                 {{ discipline.students.first_name }}
-
                 {{ discipline.students.last_name }}
               </h3>
               <span>  {{ discipline.students.class }}</span><br />
             </v-col>
             <v-col cols="12" sm="2" class="date">
-              <v-chip class="ma-2" color="orange darken-2"> January 3, 2022</v-chip>
+              <v-chip class="ma-2" color="orange darken-2"> {{discipline.date_time}}</v-chip>
             </v-col>
 
             <v-col cols="12" sm="2">
@@ -69,7 +68,7 @@
                           <div class="text-h4 title">{{ discipline.discipline_type }} </div>
                         </v-toolbar><br>
                         <v-card-text>
-                          <div class="font-weight-bold ml-8 mb-2 text-h5">January 03, 2022</div>
+                          <div class="font-weight-bold ml-8 mb-2 text-h5">{{discipline.date_time}}</div>
                           <v-timeline align-top dense>
                             <v-timeline-item small color="orange">
                               <div>
@@ -162,9 +161,9 @@ export default {
   text-transform: uppercase;
 }
 
-strong {
+/* strong {
   text-transform: uppercase;
-}
+} */
 @import url("https://fonts.googleapis.com/css2?family=Pushster&family=Raleway:wght@300&display=swap");
 h3 {
   font-family: "Times New Roman", cursive;
