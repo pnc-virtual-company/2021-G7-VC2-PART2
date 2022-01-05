@@ -16,13 +16,10 @@
               <v-icon color="orange" size="50px"> mdi-alert </v-icon><br />
               <strong class="title"> {{ discipline.discipline_type }} </strong>
             </v-col>
-
+            <!-- image -->
             <v-col cols="12" sm="2">
               <v-avatar size="100" tile>
-                <!-- <v-img :src="url + discipline.students.picture"></v-img> -->
-                <v-img
-                  src="https://i.pinimg.com/736x/2d/06/d0/2d06d0861bcfb437c8d072b0fc06a648.jpg"
-                ></v-img>
+                <v-img :src="url + discipline.students.picture"></v-img>
               </v-avatar>
             </v-col>
             <v-col cols="12" sm="3" class="text-center data mt-4">
@@ -212,7 +209,6 @@ export default {
     getdisciplineInfo(discipline) {
       this.showForm = true;
       this.disciplineData = discipline;
-      console.log(this.disciplineData);
     },
 
     Cencel(hidden) {
@@ -221,7 +217,6 @@ export default {
 
     UpdateDiscipline(id, discipline, hidden) {
       axios.put("/discipline/" + id, discipline).then((res) => {
-        // console.log(res.data);
         this.$emit("update-discipline", res.data);
         this.showForm = hidden;
       });
@@ -229,7 +224,6 @@ export default {
     deleteDiscipline() {
       this.$emit("deleteDiscipline", this.deleteId);
       this.dialog = false;
-      console.log("hi");
     },
   },
 };

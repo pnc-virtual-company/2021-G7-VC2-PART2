@@ -12,6 +12,7 @@
   </section>
 </template>
 
+
 <script>
 import StudentForm from "../ui/studentdata/StudentForm.vue";
 import StudentCard from "../ui/studentdata/StudentCard.vue";

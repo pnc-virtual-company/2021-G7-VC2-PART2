@@ -143,7 +143,6 @@ export default {
                 newDiscipline.append("explaination", this.explaination);
 
                 this.$emit("addDiscipline", newDiscipline);
-                console.log(this.id);
             }
             this.type = null;
             this.student_id = null;

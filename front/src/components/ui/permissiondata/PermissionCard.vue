@@ -15,12 +15,10 @@
               <v-icon black size="60px"> mdi-link-variant </v-icon>
             </v-col>
             <v-divider vertical class="ma-3" color="white"></v-divider>
+            <!-- image -->
             <v-col cols="12" sm="2">
               <v-avatar class="ma-3" size="90" tile>
-                <!-- <v-img :src=" url + student.picture "></v-img> -->
-                <v-img
-                  src="https://sdmny.hunter.cuny.edu/wp-content/uploads/2017/04/male-headshot-placeholder.jpg"
-                ></v-img>
+                <v-img :src=" url + permission.students.picture "></v-img>
               </v-avatar>
             </v-col>
             <v-col cols="12" sm="3" class="text-center data mt-4">
@@ -231,7 +229,6 @@ export default {
     gitPermissionInfo(permission) {
       this.showForm = true;
       this.permissionData = permission;
-      console.log(this.permissionData);
     },
 
     Cencel(hidden) {
@@ -240,7 +237,6 @@ export default {
 
     UpdatePermission(id, permission, hidden) {
       axios.put("/permission/" + id, permission).then((res) => {
-        // console.log(res.data);
         this.$emit("update-permission", res.data);
         this.showForm = hidden;
       });

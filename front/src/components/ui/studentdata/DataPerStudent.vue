@@ -4,8 +4,7 @@
         <v-row>
             <v-col cols="12" sm="3">
                 <v-avatar class="" size="100" tile>
-                    <!-- <v-img :src=" url + student.picture "></v-img> -->
-                    <v-img src="https://i.pinimg.com/736x/2d/06/d0/2d06d0861bcfb437c8d072b0fc06a648.jpg"></v-img>
+                    <v-img :src=" url + student.picture "></v-img>
                 </v-avatar>
             </v-col>
             <v-col cols="12" sm="3">

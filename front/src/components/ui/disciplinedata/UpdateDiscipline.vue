@@ -101,7 +101,6 @@ export default {
         explaination: this.explaination,
       };
       this.$emit("update", this.disciplineInfo.id, discipline, false);
-      console.log(discipline);
     },
     cancel() {
       this.$emit("cancel", false);

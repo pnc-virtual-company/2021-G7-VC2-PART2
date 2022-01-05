@@ -43,8 +43,7 @@ export default {
             });
         },
         deleteDiscipline(disciplineId){
-        axios.delete("/discipline/" + disciplineId).then((response)=>{
-        console.log(response.data);
+        axios.delete("/discipline/" + disciplineId).then(()=>{
         this.disciplinedata();
       }) 
     },

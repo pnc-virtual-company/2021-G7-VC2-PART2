@@ -101,7 +101,6 @@ export default {
           description: this.description
       };
       this.$emit("update", this.permissionInfo.id, permission, false);
-      console.log(permission);
     },
     cancel() {
       this.$emit("cancel", false);
@@ -114,7 +113,6 @@ export default {
     this.reason = this.permissionInfo.leave_type;
     this.description = this.permissionInfo.description;
     this.studentdata();
-    console.log(this.studentdata())
   },
 };
 </script>
