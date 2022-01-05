@@ -115,7 +115,6 @@ export default {
                 console.log(res.data);
                 this.$emit("update-student", res.data);
                 this.showForm = hidden;
-
             });
         },
     },

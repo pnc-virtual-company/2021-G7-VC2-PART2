@@ -1,5 +1,6 @@
 <template>
 <div>
+    <v-dialog v-model="dialog" max-width="500px">
     <v-card>
         <v-card-title  class="orange lighten-1 text-h5">
             Update Student
@@ -21,7 +22,6 @@
                     <v-col class="d-flex" cols="12" sm="6">
                         <v-select :items="class_name" v-model="classes" label="Class" prepend-icon="mdi-school"></v-select>
                     </v-col>
-
                     <v-col cols="12" sm="12">
                         <v-text-field label="Phone" type="number" prepend-icon="mdi-cellphone" v-model="phone">
                         </v-text-field>
@@ -36,6 +36,7 @@
             <v-btn @click="Update" color="blue darken-1" text> Save </v-btn>
         </v-card-actions>
     </v-card>
+    </v-dialog>
 </div>
 </template>
 
@@ -45,7 +46,7 @@ export default {
     emits: ["update", "cancel"],
     data() {
         return {
-            dialog: false,
+            dialog: true,
             first_name: "",
             last_name: "",
             phone: "",

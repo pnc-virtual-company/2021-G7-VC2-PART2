@@ -66,13 +66,11 @@ class DisciplineController extends Controller
             'explaination' => 'required',
         ]);
         $discipline = Discipline::findOrFail($id);
-        $discipline->student_id = $request->student_id;
-        $discipline->discipline_type = $request->discipline_type;
-        $discipline->date_time = $request->date_time;
-        $discipline->explaination = $request->explaination;
+        $discipline->update($request->all());
+
         $discipline->save();
 
-        return response()->json(['message' => 'Discipline updated successfully', 'data' => $discipline], 201);
+        return response()->json(['message' => 'discipline updated successfully', 'student' => $discipline], 200);
     }
 
     /**

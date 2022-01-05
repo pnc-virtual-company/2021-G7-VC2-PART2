@@ -27,14 +27,14 @@ export default {
     };
   },
   methods: {
-    //___________ get students list______________
+    //__________ get students list_____________
     userList() {
       axios.get("/users").then((response) => {
         this.users = response.data;
       });
     },
 
-    // _________Add new student into list____________
+    // ________Add new student into list___________
     addUserAccount(newUserAccount) {
       axios.post("/createUser", newUserAccount).then((response) => {
         this.userList();
@@ -42,7 +42,7 @@ export default {
       });
     },
   
-    //____________ search student ________________
+    //___________ search student _______________
     searchUser(search) {
       if (search !== "") {
         axios.get("/users" + "/search/" + search).then((response) => {

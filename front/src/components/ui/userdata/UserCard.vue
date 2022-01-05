@@ -109,10 +109,11 @@ export default {
     };
   },
   methods: {
-    // __________get student id___________
+    // _________get student id__________
     getUserId(id) {
         this.dialog = true;
         this.deleteId = id;
+        
     },
     deleteUser() {
         this.$emit('deleteUser', this.deleteId);

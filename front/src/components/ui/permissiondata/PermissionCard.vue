@@ -37,7 +37,7 @@
             </v-col>
             <v-col cols="12" sm="2">
               <div class="i_con">
-                <v-icon color="blue darken-1" text size="30px">
+                <v-icon color="blue darken-1" text size="30px" @click="gitPermissionInfo(permission)">
                   mdi-lead-pencil</v-icon
                 >
                 <v-icon
@@ -51,6 +51,13 @@
             </v-col>
           </v-row>
         </v-card>
+        <update-permission
+                v-if="showForm"
+                :permissionInfo="permissionData"
+                @cancel="Cencel"
+                @update="UpdatePermission"
+              >
+        </update-permission>
       </div>
     </template>
     <div class="text-center">
@@ -82,15 +89,27 @@
 </template>
 
 <script>
+
+import axios from "../../../api/api.js";
+import UpdatePermission from "./UpdatePermission.vue";
 export default {
   props: ["datapermission"],
+<<<<<<< HEAD
   emits: ["deletePermission"],
+=======
+  emits: ["update-permission"],
+  components: {
+    "update-permission": UpdatePermission,
+  },
+>>>>>>> e82133a84e63e1b5b5092901f66d5fbef559a934
   data() {
     return {
-      search: "",
       permissionId: 0,
       dialog: false,
       url: "http://127.0.0.1:8000/storage/images/",
+      permissionData: [],
+      showForm: false,
+     
     };
   },
   methods: {
@@ -102,8 +121,32 @@ export default {
     deletePermission() {
       this.$emit("deletePermission", this.permissionId);
       this.dialog = false;
+<<<<<<< HEAD
     }
  
+=======
+    },
+
+    gitPermissionInfo(permission) {
+      this.showForm = true;
+      this.permissionData = permission
+      console.log(this.permissionData);
+    },
+    
+    Cencel(hidden) {
+      this.showForm = hidden;
+    },
+
+    UpdatePermission(id, permission, hidden) {
+     
+      axios.put("/permission/" + id, permission).then((res) => {
+        // console.log(res.data);
+        this.$emit("update-permission", res.data);
+        this.showForm = hidden;
+       
+      });
+    },
+>>>>>>> e82133a84e63e1b5b5092901f66d5fbef559a934
   },
 };
 </script>

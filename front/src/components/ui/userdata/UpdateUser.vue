@@ -1,5 +1,6 @@
 <template>
     <v-container>
+      <v-dialog v-model="dialog" max-width="500px">
         <template>
            <v-card>
         <v-card-title  class="orange lighten-1 text-h5">
@@ -73,6 +74,7 @@
         </v-card-actions>
       </v-card>
         </template>
+        </v-dialog>
     </v-container>
 </template>
 
@@ -82,7 +84,7 @@ export default {
   emits: ["update", "cancel"],
   data() {
     return {
-      dialog: false,
+      dialog: true,
       show1: false,
       roles: ["Socail Affair Officer", "Student"],
       students: [],

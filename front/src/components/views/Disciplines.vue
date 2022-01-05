@@ -1,11 +1,17 @@
 <template>
-<section>
-    <discipline-form class="discipline_btn" @addDiscipline="addDiscipline"></discipline-form>
+  <section>
+    <discipline-card 
+    :datadiscipline="disciplines"
+     @deleteDiscipline = "deleteDiscipline"
+     @update-discipline="disciplinedata"
+    ></discipline-card>
+        <discipline-form class="discipline_btn" @addDiscipline="addDiscipline"></discipline-form>
     <div class="search">
         <v-text-field outlined dense v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details placeholder="Search"></v-text-field>
     </div>
     <discipline-card :datadiscipline="disciplinesToDisplay"></discipline-card>
-</section>
+  </section>
+
 </template>
 
 <script>
@@ -40,6 +46,13 @@ export default {
     },
     mounted() {
         this.disciplinedata();
+    },
+
+    deleteDiscipline(disciplineId){
+      axios.delete("/discipline/" + disciplineId).then((response)=>{
+        console.log(response.data);
+        this.disciplinedata();
+      })
     },
     watch: {
         search: function (newValue) {
