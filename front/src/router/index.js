@@ -1,16 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import FormLogin from '../components/form/FormLogin.vue';
-import ForgotPassword from '../components/forgotPassword/CreateNewUser.vue';
-
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/forgotpassword',
-    name: 'ForgotPassword',
-    component: ForgotPassword
-  },
   {
     path: '/userNav',
     name: 'User',
@@ -19,7 +12,8 @@ const routes = [
   {
     path: '/studentlist',
     name: 'Student',
-    component: () => import('@/components/views/StudentList.vue')
+    component: () => import('@/components/views/StudentList.vue'),
+   
   },
   {
     path: '/permission',
@@ -47,7 +41,8 @@ const routes = [
     component: FormLogin
   },
  
-]
+];
+
 
 const router = new VueRouter({
   mode: 'history',

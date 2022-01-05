@@ -1,6 +1,7 @@
 <template>
     <v-container>
         <template>
+          <v-dialog v-model="dialog" max-width="500px">
            <v-card>
         <v-card-title  class="orange lighten-1 text-h5">
           Create User Account
@@ -80,6 +81,7 @@
           </v-btn>
         </v-card-actions>
       </v-card>
+      </v-dialog>
         </template>
     </v-container>
 </template>
@@ -91,7 +93,7 @@ export default {
   emits: ["update", "cancel"],
   data() {
     return {
-      dialog: false,
+      dialog: true,
       show1: false,
       roles: ["Socail Affair Officer", "Student"],
       students: [],
@@ -133,7 +135,6 @@ export default {
       };
      
       this.$emit("update", this.userInfo.id, user, false);
-      console.log(user);
       
     },
     cancel(){

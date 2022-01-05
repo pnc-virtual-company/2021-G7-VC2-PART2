@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Navbar v-if="isLogin" @log_out="isLogout"></Navbar>
+    <Navbar v-if="isLogin" @log_out="isLogout" class="navbar"></Navbar>
     <v-main>
       <router-view @log-in="showMeu" />
     </v-main>
@@ -21,18 +21,18 @@ export default {
   methods: {
     showMeu(loginn) {
       this.isLogin = loginn;
-      this.$router.push("/user").catch(() => {});
+      this.$router.push("/userNav").catch(() => {});
     },
     isLogout() {
       this.isLogin = false;
     },
   },
   mounted() {
-    let userLogin = JSON.parse(localStorage.getItem("userLogin"));
+    let userLogin = JSON.parse(localStorage.getItem("user"));
     if (userLogin !== null) {
       this.isLogin = true;
-      if (this.$router.history.current.path == "/user") {
-        this.$router.push("/user").catch(() => {});
+      if (this.$router.history.current.path == "/userNav") {
+        this.$router.push("/userNav").catch(() => {});
       }
     }else if (userLogin == null) {
       this.isLogin = false
@@ -40,6 +40,13 @@ export default {
   },
 };
 </script>
-<style >
-  
+<style scoped>
+  .navbar {
+  top: 0;
+  position: sticky;
+  position: -webkit-sticky;
+  z-index: 1;
+  padding: 0px;
+  border-right: solid 0.5px rgba(0,0,0,0.2);
+}
 </style>

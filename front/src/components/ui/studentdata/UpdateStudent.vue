@@ -1,5 +1,6 @@
 <template>
 <div>
+     <v-dialog v-model="dialog" max-width="500px">
     <v-card>
         <v-card-title  class="orange lighten-1 text-h5">
             Update Student
@@ -33,9 +34,10 @@
         <v-card-actions class="black lighten-1">
             <v-spacer></v-spacer>
             <v-btn @click="cancel" color="red darken-1" text> Cancel </v-btn>
-            <v-btn @click="Update" color="blue darken-1" text> Save </v-btn>
+            <v-btn @click="Update" color="blue darken-1" text> Update </v-btn>
         </v-card-actions>
     </v-card>
+    </v-dialog>
 </div>
 </template>
 
@@ -45,14 +47,17 @@ export default {
     emits: ["update", "cancel"],
     data() {
         return {
-            dialog: false,
+            dialog: true,
             first_name: "",
             last_name: "",
             phone: "",
             classes: "",
             gender: "",
             genders: ["Male", "Female"],
-            class_name: ["SNA", "WEB-A", "WEB-B"],
+            class_name: ["SNA-2019", "WEB-A-2019", "WEB-B-2019","SNA-2020", "WEB-A-2020", "WEB-B-2020",
+                        "SNA-2021", "WEB-A-2021", "WEB-B-2021","SNA-2022", "WEB-A-2022", "WEB-B-2022",
+                        "SNA-2023", "WEB-A-2023", "WEB-B-2023","SNA-2024", "WEB-A-2024", "WEB-B-2024",
+                        "SNA-2025", "WEB-A-2025", "WEB-B-2025","SNA-2026", "WEB-A-2026", "WEB-B-2026"],
         };
     },
     methods: {
@@ -67,7 +72,6 @@ export default {
             };
 
             this.$emit("update", this.studentInfo.id, student, false);
-            console.log(student)
         },
         cancel() {
             this.$emit('cancel', false);

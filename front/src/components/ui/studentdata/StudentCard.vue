@@ -5,7 +5,7 @@
             <v-card-title>
                 <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details @keyup="searchUsername"></v-text-field>
             </v-card-title>
-            <v-simple-table>
+            <v-simple-table >
                 <template v-slot:default>
                     <thead class="blue lighten-3">
                         <tr>
@@ -24,12 +24,16 @@
                             <td>{{ student.gender }}</td>
                             <td>{{ student.class }}</td>
                             <td>0{{ student.phone }}</td>
-
                             <td>
-
-                                <div class="i-con">
-                                    <v-icon @click="getStudentInfo(student)" color="blue darken-1" text>mdi-lead-pencil</v-icon>
-                                    <v-icon color="red darken-1" @click="getstudentId(student.id)">mdi-delete</v-icon>
+                                <div v-if="userAccount.role === 'Student'">
+                                    <div class="i-con">
+                                        <v-icon  color="blue darken-1" text>mdi-lead-pencil</v-icon>
+                                        <v-icon color="red darken-1">mdi-delete</v-icon>
+                                    </div>
+                                </div>
+                                <div class="i-con" v-else>
+                                        <v-icon @click="getStudentInfo(student)" color="blue darken-1" text>mdi-lead-pencil</v-icon>
+                                        <v-icon color="red darken-1" @click="getstudentId(student.id)">mdi-delete</v-icon>
                                 </div>
                             </td>
                         </tr>
@@ -40,7 +44,6 @@
             </v-simple-table>
         </v-card>
     </template>
-
     <div class="text-center">
       <v-dialog
         v-model="dialog"
@@ -83,7 +86,9 @@ export default {
             studentData: [],
             showForm: false,
             dialog: false,
-            deleteId: 0
+            deleteId: 0,
+            userAccount:JSON.parse(localStorage.getItem("user")),
+      
         };
     },
     methods: {
@@ -100,25 +105,23 @@ export default {
         searchUsername() {
             this.$emit("search-user", this.search);
         },
-
         getStudentInfo(student) {
             this.showForm = true;
             this.studentData = student;
-            console.log(this.studentData);
+            
         },
         Cencel(hidden) {
             this.showForm = hidden;
         },
         Updatestudent(id, student, hidden) {
-
             axios.put("/students/" + id, student).then((res) => {
-                console.log(res.data);
                 this.$emit("update-student", res.data);
                 this.showForm = hidden;
 
             });
         },
     },
+    
 };
 </script>
 

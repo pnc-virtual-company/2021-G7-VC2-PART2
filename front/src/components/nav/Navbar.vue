@@ -3,31 +3,31 @@
     <v-navigation-drawer v-model="sidebar" app absolute left temporary>
       <!-- 1 -->
       <div class="navResponsiv">
-        <v-btn active-class="grey-5 white--text" text v-if="appTitle.role === 'admin'">
+        <v-btn active-class="grey-5 white--text" text v-if="appTitle.role === 'admin'" class="d-flex justify-start">
           <v-icon left class="blue--text">mdi-home</v-icon>
           <router-link to="/userNav" tag="span" style="cursor: pointer">
             User
           </router-link>
         </v-btn>
-        <v-btn active-class="grey-5 white--text" text>
+        <v-btn active-class="grey-5 white--text" text class="d-flex justify-start">
           <v-icon left class="blue--text">mdi-account-multiple</v-icon>
           <router-link to="/studentlist" tag="span" style="cursor: pointer">
             Students
           </router-link>
         </v-btn>
-        <v-btn active-class="grey-5 white--text" text>
+        <v-btn active-class="grey-5 white--text" text class="d-flex justify-start">
           <v-icon left class="blue--text">mdi-clipboard-check</v-icon>
           <router-link to="/permission" tag="span" style="cursor: pointer">
             Permissions
           </router-link>
         </v-btn>
-        <v-btn active-class="grey-5 white--text" text>
+        <v-btn active-class="grey-5 white--text" text class="d-flex justify-start">
           <v-icon left class="blue--text">mdi-file-document</v-icon>
           <router-link to="/disciples" tag="span" style="cursor: pointer">
             Disciples
           </router-link>
         </v-btn>
-        <v-btn active-class="grey-5 white--text" @click="logOut" text>
+        <v-btn active-class="grey-5 white--text" @click="logOut" text class="d-flex justify-start">
           <v-icon left class="blue--text">mdi-login</v-icon>
           <router-link to="/logout" tag="span" style="cursor: pointer">
             Log Out
@@ -48,7 +48,7 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-xs-only">
-        <v-btn active-class="grey-5 white--text" text v-if="appTitle.role === 'admin'">
+        <v-btn active-class="grey-5 white--text" text v-if="appTitle.role !== 'Student'">
           <v-icon left class="blue--text">mdi-home</v-icon>
           <router-link to="/userNav" tag="span" style="cursor: pointer">
             User
@@ -68,7 +68,7 @@
         </v-btn>
         <v-btn active-class="grey-5 white--text" text>
           <v-icon left class="blue--text">mdi-file-document</v-icon>
-          <router-link to="/disciples" tag="span" style="cursor: pointer">
+          <router-link to="/disciplines" tag="span" style="cursor: pointer">
             Discipline
           </router-link>
         </v-btn>
@@ -80,7 +80,7 @@
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
-  </nav>
+</nav>
 </template>
 
 <script>
@@ -88,15 +88,22 @@
 export default {
   data() {
     return {
-      appTitle: JSON.parse(localStorage.getItem("userLogin")),
+      appTitle: JSON.parse(localStorage.getItem("user")),
       sidebar: false,
       group: false,
+      menuItems: [
+          { title: 'User', path: '/userNav', icon: 'mdi-home' },
+          { title: 'Studentlist', path: '/studentlist', icon: 'mdi-account-multiple' },
+          { title: 'Permission', path: '/permission', icon: 'mdi-clipboard-check' },
+          { title: 'Disciples', path: '/disciples', icon: 'mdi-file-document' },
+          { title: 'Logout', path: '/logout', icon: 'mdi-login' },
+     ]
     };
   },
   methods: {
     logOut() {
       
-      localStorage.clear("userId");
+      localStorage.clear("user");
       this.$emit("log_out");
       this.$router.push("/login");
      

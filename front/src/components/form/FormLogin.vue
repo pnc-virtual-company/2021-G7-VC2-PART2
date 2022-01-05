@@ -2,7 +2,7 @@
   <div class="text-center login">
     <form class="mx-auto form" style="width: 30%">
       <div class="user_icon">
-        <v-avatar color="grey darken-3" size="100">
+        <v-avatar color="grey darken-3" size="100" class="logo">
           <v-img
             class="elevation-6"
             alt=""
@@ -44,11 +44,8 @@
               @click:append="show1 = !show1"
             ></v-text-field>
           </v-col>
-          <v-col>
-            <router-link to="/forgotpassword" class="">Forgot password !</router-link>
-          </v-col>
           <v-col class="c_password pt-0 mt-0" cols="12" sm="12">
-            <v-btn color="blue" dark block @click="login"> LOG IN </v-btn>
+            <v-btn class="orange lighten-1" dark block @click="login"> LOG IN </v-btn>
             <span>The easy way to manage all students</span>
           </v-col>
         </v-row>
@@ -110,9 +107,9 @@ export default {
       if (this.email !== "" && this.password.length !== "") {
         axios.post("/login", data).then((res) => {
           this.$emit("log-in", true);
-          localStorage.setItem('userLogin',JSON.stringify(res.data.user));
+          localStorage.setItem('user',JSON.stringify(res.data.user));
           //if role is admin go to user page, otherwise student page
-          let roles = JSON.parse(localStorage.getItem("userLogin"))
+          let roles = JSON.parse(localStorage.getItem("user"))
           if(roles.role === "admin"){
             this.$router.push("/userNav")
           }else{
@@ -134,7 +131,13 @@ export default {
   justify-content: space-around;
 }
 .login {
-  margin-top: 60px;
+  background-image: url("../../assets/img/imgb.jpg");
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+.logo{
+  margin-top: 70px;
 }
 @import url("https://fonts.googleapis.com/css2?family=Pushster&family=Raleway:wght@300&display=swap");
 h2 {

@@ -35,6 +35,7 @@ class UserController extends Controller
             'role'=>'required'
         ]);
         $user = new User();
+        $user->student_id=$request->student_id;
         $user->userName=$request->userName;
         $user->student_id = $request->student_id;
         $user->email=$request->email;
@@ -101,6 +102,7 @@ class UserController extends Controller
     {
         //
         $user=User::findOrFail($id);
+        $user->student_id=$request->student_id;
         $user->userName=$request->userName;
         $user->student_id = $request->student_id;
         $user->email=$request->email;

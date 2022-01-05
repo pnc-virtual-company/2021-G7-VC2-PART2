@@ -5,14 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Permission extends Model
+class Discipline extends Model
 {
     use HasFactory;
-    protected $fillable = ['start_date', 'end_date', 'leave_type', 'description'];
-
+    protected $fillable = ['discipline_type', 'date_time', 'explaination'];
     public function students(){
         return $this->belongsTo(Student::class, 'student_id');
     }
-    
 
 }

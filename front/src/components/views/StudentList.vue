@@ -1,28 +1,35 @@
 <template>
   <section>
      <student-form @addStudent="addStudent" class="student_btn"></student-form>
-    <student-card
+    <student-card v-if="userAccount.role != 'Student'"
       :dataStudent="students"
       @deleteItem="deleteStudent"
       @search-user="searchStudent"
       @update-student="studentdata"
     ></student-card>
+    <data-per-student v-if="userAccount.role ==='Student'"></data-per-student>
+
   </section>
 </template>
 
 <script>
 import StudentForm from "../ui/studentdata/StudentForm.vue";
 import StudentCard from "../ui/studentdata/StudentCard.vue";
+import DataPerStudent from "../ui/studentdata/DataPerStudent.vue";
 import axios from "../../api/api.js";
 export default {
   name: "App",
   components: {
     "student-card": StudentCard,
     "student-form": StudentForm,
+    "data-per-student":DataPerStudent,
+
   },
   data() {
     return {
       students: [],
+      userAccount:JSON.parse(localStorage.getItem('user')),
+      countData:0
     };
   },
   methods: {
@@ -30,20 +37,19 @@ export default {
     studentdata() {
       axios.get("/students").then((response) => {
         this.students = response.data;
-        console.log(this.students)
       });
+      
     },
     // ___________Add new student into list______________
     addStudent(newStudent) {
-      axios.post("/students", newStudent).then((response) => {
+      axios.post("/students", newStudent).then(() => {
         this.studentdata();
-        console.log(response.data);
+      
       });
     },
     //______________ delete student in student list______________
     deleteStudent(studentId) {
-      axios.delete("/students/" + studentId).then((response) => {
-        console.log(response.data);
+      axios.delete("/students/" + studentId).then(() => {
         this.studentdata();
       });
     },
@@ -65,9 +71,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .student_btn {
-  margin-left: 84%;
+  margin-left: 87%;
   margin-top: 5%;
 }
 </style>
