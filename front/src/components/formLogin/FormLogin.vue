@@ -2,14 +2,14 @@
   <div class="text-center login">
     <form class="mx-auto form" style="width: 30%">
       <div class="user_icon">
-        <v-avatar color="grey darken-3" size="100">
+        <v-avatar size="100" class="logo">
           <v-img
             class="elevation-6"
             alt=""
             src="https://zenprospect-production.s3.amazonaws.com/uploads/pictures/60b386ff84a3630001b3bb0d/picture"
           ></v-img>
         </v-avatar>
-        <h2 >STUDENTS LIFE</h2>
+        <h2>STUDENTS LIFE</h2>
       </div>
       <div class="log">
         <div></div>
@@ -24,7 +24,6 @@
               :error-messages="emailErrors"
               @input="$v.email.$touch()"
               @blur="$v.email.$touch()"
-
             ></v-text-field>
           </v-col>
           <br />
@@ -44,12 +43,9 @@
               @click:append="show1 = !show1"
             ></v-text-field>
           </v-col>
-          <v-col>
-            <router-link to="/forgotpassword" class="">Forgot password !</router-link>
-          </v-col>
           <v-col class="c_password pt-0 mt-0" cols="12" sm="12">
-            <v-btn color="blue" dark block @click="login"> LOG IN </v-btn>
-            <span>The easy way to manage all students</span>
+            <v-btn class="btnLogin orange lighten-1 btnLogin" dark block @click="login"> LOG IN </v-btn>
+            <span class="text-info">The easy way to manage all students</span>
           </v-col>
         </v-row>
       </div>
@@ -110,22 +106,18 @@ export default {
       if (this.email !== "" && this.password.length !== "") {
         axios.post("/login", data).then((res) => {
           this.$emit("log-in", true);
-          localStorage.setItem('user',JSON.stringify(res.data.user));
+          localStorage.setItem("user", JSON.stringify(res.data.user));
           //if role is admin go to user page, otherwise student page
-          let roles = JSON.parse(localStorage.getItem("user"))
-          console.log(roles.role)
-          if(roles.role === "admin"){
-            this.$router.push("/user")
-          }else{
-            this.$router.push("/studentList")
+          let roles = JSON.parse(localStorage.getItem("user"));
+          if (roles.role === "admin") {
+            this.$router.push("/user");
+          } else {
+            this.$router.push("/studentList");
           }
-          
         });
       }
     },
   },
-
-  
 };
 </script>
     
@@ -135,10 +127,23 @@ export default {
   justify-content: space-around;
 }
 .login {
-  margin-top: 60px;
+  background-image: url("../../assets/img/imgb.jpg");
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+.logo {
+  margin-top: 70px;
+}
+.text-info {
+  font-weight: bold;
+  font-size: 17px;
 }
 @import url("https://fonts.googleapis.com/css2?family=Pushster&family=Raleway:wght@300&display=swap");
-h2 {
+h2, .btnLogin {
   font-family: "Pushster", cursive;
+}
+.btnLogin {
+  color: black;
 }
 </style>
