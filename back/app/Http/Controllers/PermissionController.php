@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 class PermissionController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
+     * Display a listinga
      * @return \Illuminate\Http\Response
      */
     public function getAllPermission()

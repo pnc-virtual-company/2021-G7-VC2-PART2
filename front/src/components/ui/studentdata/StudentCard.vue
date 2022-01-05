@@ -2,10 +2,7 @@
 <v-container>
     <template>
         <v-card>
-            <!-- <v-card-title>
-                <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details @keyup="searchUsername"></v-text-field>
-            </v-card-title> -->
-            <v-simple-table>
+            <v-simple-table >
                 <template v-slot:default>
                     <thead class="blue lighten-3">
                         <tr>
@@ -24,7 +21,6 @@
                             <td>{{ student.gender }}</td>
                             <td>{{ student.class }}</td>
                             <td>0{{ student.phone }}</td>
-
                             <td>
                                 <div v-if="userAccount.role === 'Student'">
                                     <div class="i-con">
@@ -36,7 +32,6 @@
                                         <v-icon @click="getStudentInfo(student)" color="blue darken-1" text>mdi-lead-pencil</v-icon>
                                         <v-icon color="red darken-1" @click="getstudentId(student.id)">mdi-delete</v-icon>
                                 </div>
-                               
                             </td>
                         </tr>
                         <update-student v-if="showForm" :studentInfo="studentData" @cancel="Cencel" @update="Updatestudent">
@@ -46,7 +41,6 @@
             </v-simple-table>
         </v-card>
     </template>
-
     <div class="text-center">
       <v-dialog
         v-model="dialog"
@@ -91,6 +85,7 @@ export default {
             dialog: false,
             deleteId: 0,
             userAccount:JSON.parse(localStorage.getItem("user")),
+      
         };
     },
     methods: {
@@ -110,6 +105,7 @@ export default {
         getStudentInfo(student) {
             this.showForm = true;
             this.studentData = student;
+            
         },
         Cencel(hidden) {
             this.showForm = hidden;

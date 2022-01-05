@@ -63,9 +63,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .user_btn {
-  margin-left: 87%;
+  margin-left: 89%;
   margin-top: 5%;
 }
 </style>

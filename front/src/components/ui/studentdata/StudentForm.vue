@@ -1,8 +1,8 @@
 <template>
-<div class="text">
+  <div class="text">
     <v-dialog v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on, attrs }">
-            <v-btn color="orange lighten-1" class="black--text ml-2" dark v-bind="attrs" v-on="on" v-if="userAccount.role != 'Student'">
+            <v-btn color="orange lighten-1" class="black--text create" dark v-bind="attrs" v-on="on" v-if="userAccount.role != 'Student'">
                 +Student
             </v-btn>
         </template>
@@ -28,66 +28,70 @@
                             <v-select :error-messages="classErrors" :items="class_name" v-model="classes" label="Class" prepend-icon="mdi-school" required @input="$v.classes.$touch()" @blur="$v.classes.$touch()"></v-select>
                         </v-col>
 
-                        <v-col cols="12" sm="12">
-                            <v-text-field :error-messages="phoneErrors" label="Phone" type="number" prepend-icon="mdi-cellphone" v-model="phone" required @input="$v.phone.$touch()" @blur="$v.phone.$touch()">
-                            </v-text-field>
-                        </v-col>
-                        <v-col cols="12" sm="12">
-                            <input type="file" label="Profile" @change="onFileSelected" />
-                        </v-col>
-                    </v-row>
-                </v-container>
-            </v-card-text>
+              <v-col cols="12" sm="12">
+                <v-text-field
+                  :error-messages="phoneErrors"
+                  label="Phone"
+                  type="number"
+                  prepend-icon="mdi-cellphone"
+                  v-model="phone"
+                  required
+                  @input="$v.phone.$touch()"
+                  @blur="$v.phone.$touch()"
+                >
+                </v-text-field>
+              </v-col>
+              <v-col cols="12" sm="12">
+                <input type="file" label="Profile" @change="onFileSelected" />
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-card-text>
 
-            <v-divider></v-divider>
+        <v-divider></v-divider>
 
-            <v-card-actions class="black lighten-1">
-                <v-spacer></v-spacer>
-                <v-btn color="red darken-1" text @click="dialog = false">
-                    Cancel
-                </v-btn>
-                <v-btn color="blue darken-1" text @click="createStudent">
-                    Save
-                </v-btn>
-            </v-card-actions>
-        </v-card>
+        <v-card-actions class="black lighten-1">
+          <v-spacer></v-spacer>
+          <v-btn color="red darken-1" text @click="dialog = false">
+            Cancel
+          </v-btn>
+          <v-btn color="blue darken-1" text @click="createStudent">
+            Save
+          </v-btn>
+        </v-card-actions>
+      </v-card>
     </v-dialog>
-</div>
+  </div>
 </template>
 
 <script>
-import {
-    validationMixin
-} from "vuelidate";
-import {
-    required,
-    maxLength
-} from "vuelidate/lib/validators";
+import { validationMixin } from "vuelidate";
+import { required, maxLength } from "vuelidate/lib/validators";
 export default {
-    emits: ["addStudent"],
-    mixins: [validationMixin],
-    validations: {
-        first_name: {
-            required,
-            maxLength: maxLength(10)
-        },
-        last_name: {
-            required,
-            maxLength: maxLength(10)
-        },
-        phone: {
-            required,
-            maxLength: maxLength(10)
-        },
-        gender: {
-            required
-        },
-        classes: {
-            required
-        },
-        image: {
-            required
-        },
+  emits: ["addStudent"],
+  mixins: [validationMixin],
+  validations: {
+    first_name: {
+      required,
+      maxLength: maxLength(10),
+    },
+    last_name: {
+      required,
+      maxLength: maxLength(10),
+    },
+    phone: {
+      required,
+      maxLength: maxLength(10),
+    },
+    gender: {
+      required,
+    },
+    classes: {
+      required,
+    },
+    image: {
+      required,
+    },
 
         checkbox: {
             checked(val) {
@@ -99,7 +103,10 @@ export default {
         return {
             checkbox: false,
             dialog: false,
-            class_name: ["SNA", "WEB-A", "WEB-B"],
+            class_name: ["SNA-2019", "WEB-A-2019", "WEB-B-2019","SNA-2020", "WEB-A-2020", "WEB-B-2020",
+                        "SNA-2021", "WEB-A-2021", "WEB-B-2021","SNA-2022", "WEB-A-2022", "WEB-B-2022",
+                        "SNA-2023", "WEB-A-2023", "WEB-B-2023","SNA-2024", "WEB-A-2024", "WEB-B-2024",
+                        "SNA-2025", "WEB-A-2025", "WEB-B-2025","SNA-2026", "WEB-A-2026", "WEB-B-2026"],
             genders: ["Male", "Female"],
             first_name: "",
             last_name: "",
@@ -191,9 +198,34 @@ export default {
             this.checkbox = false
         },
     },
-
-};
+    genderErrors() {
+      const errors = [];
+      if (!this.$v.gender.$dirty) return errors;
+      !this.$v.gender.required && errors.push("Gender is required");
+      return errors;
+    },
+    classErrors() {
+      const errors = [];
+      if (!this.$v.classes.$dirty) return errors;
+      !this.$v.classes.required && errors.push("Class is required");
+      return errors;
+    },
+    phoneErrors() {
+      const errors = [];
+      if (!this.$v.phone.$dirty) return errors;
+      !this.$v.phone.maxLength &&
+        errors.push("Phone must be at most 10 characters long");
+      !this.$v.phone.required && errors.push("Phone is required.");
+      return errors;
+    },
+    imageErrors() {
+      const errors = [];
+      if (!this.$v.picture.$dirty) return errors;
+      !this.$v.picture.required && errors.push("Image is required");
+      return errors;
+    },
+  }
 </script>
 <style scoped>
-
+  
 </style>

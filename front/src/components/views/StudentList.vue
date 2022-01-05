@@ -7,7 +7,8 @@
       @search-user="searchStudent"
       @update-student="studentdata"
     ></student-card>
-    <student-detail v-if="userAccount.role ==='Student'"></student-detail>
+    <data-per-student v-if="userAccount.role ==='Student'"></data-per-student>
+    <student-detail v-if="userAccount.role !='Student'"></student-detail>
 
   </section>
 </template>
@@ -15,13 +16,15 @@
 <script>
 import StudentForm from "../ui/studentdata/StudentForm.vue";
 import StudentCard from "../ui/studentdata/StudentCard.vue";
-import StudentDetail from "../ui/studentdata/StudentDetail.vue";
+import DataPerStudent from "../ui/studentdata/DataPerStudent.vue";
 import axios from "../../api/api.js";
+import StudentDetail from '../ui/studentdata/StudentDetail.vue';
 export default {
   name: "App",
   components: {
     "student-card": StudentCard,
     "student-form": StudentForm,
+    "data-per-student":DataPerStudent,
     "student-detail":StudentDetail
 
   },
@@ -29,6 +32,7 @@ export default {
     return {
       students: [],
       userAccount:JSON.parse(localStorage.getItem('user')),
+      countData:0
     };
   },
   methods: {
@@ -37,6 +41,7 @@ export default {
       axios.get("/students").then((response) => {
         this.students = response.data;
       });
+      
     },
     // ___________Add new student into list______________
     addStudent(newStudent) {
@@ -69,9 +74,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .student_btn {
-  margin-left: 84%;
+  margin-left: 87%;
   margin-top: 5%;
 }
 </style>

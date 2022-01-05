@@ -18,20 +18,18 @@
                     </thead>
                     <tbody class="lighten-4">
                         <tr v-for="(user, index) in dataUser" :key="index">
-                            <td>{{ user.userName}}</td>
-                            <td>{{ user.email }}</td>
-                            <td>{{ user.role }}</td>
-                            <td>
-                                <div class="i-con">
-                                    <v-icon color="blue darken-1" text @click="getUserInfo(user)">mdi-lead-pencil</v-icon>
-                                    <v-icon color="red darken-1" @click="getUserId(user.id)" v-if="user.role != 'admin'">mdi-delete</v-icon>
-                                </div>
-                            </td>
+                                
+                                <td v-if="user.role !== userAccount.role || user.role === 'admin' && userAccount.role === 'Social Affair Officer' || user.role === 'admin' ">{{ user.userName}}</td>
+                                <td v-if="user.role !== userAccount.role  || user.role === 'admin' && userAccount.role === 'Social Affair Officer' || user.role === 'admin' ">{{ user.email }}</td>
+                                <td v-if="user.role !== userAccount.role  || user.role === 'admin' && userAccount.role === 'Social Affair Officer' || user.role === 'admin' ">{{ user.role }}</td>
+                                <td v-if="user.role !== userAccount.role  || user.role === 'admin' && userAccount.role === 'Social Affair Officer' || user.role === 'admin' ">
+                                    <div class="i-con">
+                                        <v-icon color="blue darken-1" text @click="getUserInfo(user)">mdi-lead-pencil</v-icon>
+                                        <v-icon color="red darken-1" @click="getUserId(user.id)" v-if="user.role != 'admin'">mdi-delete</v-icon>
+                                    </div>
+                                </td>
                         </tr>
-                        <update-user v-if="showForm" 
-                        :userInfo="userData" 
-                        @cancel="Cencel" 
-                        @update="UpdateUser">
+                        <update-user v-if="showForm" :userInfo="userData" @cancel="Cencel" @update="UpdateUser">
                         </update-user>
                     </tbody>
                 </template>
@@ -80,7 +78,8 @@ export default {
             showForm: false,
             isHiddin: false,
             dialog: false,
-            deleteId: 0
+            deleteId: 0,
+            userAccount: JSON.parse(localStorage.getItem('user'))
         };
     },
     methods: {

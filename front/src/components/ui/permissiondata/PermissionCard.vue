@@ -2,34 +2,35 @@
 <v-container>
     <template>
         <div class="permission">
-            <v-card color="grey lighten-4" class="mx-auto card" max-width="2000" v-for="(permission, index) in datapermission" :key="index">
-                <v-row>
-                    <v-col cols="12" sm="2" class="logo">
+            <v-card color="grey lighten-4" class="mx-auto card" max-width="2000" max-height="130" v-for="(permission, index) in datapermission" :key="index">
+                <v-row >
+                    <v-col cols="12" sm="2" class="logo mt-4" >
                         <v-icon black size="60px"> mdi-link-variant </v-icon>
                     </v-col>
                     <v-divider vertical class="ma-3" color="white"></v-divider>
                     <v-col cols="12" sm="2">
-                        <v-avatar class="ma-3" size="120" tile>
+                        <v-avatar class="ma-3" size="90" tile>
+                            <!-- <v-img :src=" url + student.picture "></v-img> -->
                             <v-img src="https://sdmny.hunter.cuny.edu/wp-content/uploads/2017/04/male-headshot-placeholder.jpg"></v-img>
                         </v-avatar>
                     </v-col>
-                    <v-col cols="12" sm="3" class="text-center data">
+                    <v-col cols="12" sm="3" class="text-center data mt-4">
                         <h3>
                             {{ permission.students.first_name }}
                             {{ permission.students.last_name }}
                         </h3>
                         <span>{{ permission.students.class }}</span><br />
-                        <span class="num">5 days</span>
+                        <span v-html="Math.round(((new Date(permission.end_date)).getTime() - (new Date(permission.start_date)).getTime()) / (1000 *  3600 * 24))" ></span> <span>days</span>
                     </v-col>
-                    <v-col cols="12" sm="3" class="date">
-                        <v-chip class="ma-2 " color="yellow darken-4">
+                    <v-col cols="12" sm="3" class="date mt-4">
+                        <v-chip  color="yellow darken-4">
                             Start date: {{ permission.start_date }} </v-chip><br />
                         <v-chip class="ma-2 " color="yellow darken-4">
                             End date: {{ permission.end_date }}
                         </v-chip>
                     </v-col>
-                    <v-col cols="12" sm="2">
-                        <div class="i_con">
+                    <v-col cols="12" sm="2" >
+                        <div class="i_con mt-4" >
                             <v-icon color="blue darken-1" text size="30px" v-if="userAccount.role === 'admin' || userAccount.role === 'Socail Affair Officer'">
                                 mdi-lead-pencil</v-icon>
                             <v-icon color="red darken-1" text size="30px" @click="getPermissionId(permission.id)" v-if="userAccount.role === 'admin'|| userAccount.role === 'Socail Affair Officer'">mdi-delete</v-icon>

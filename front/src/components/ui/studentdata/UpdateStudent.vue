@@ -52,7 +52,10 @@ export default {
             classes: "",
             gender: "",
             genders: ["Male", "Female"],
-            class_name: ["SNA", "WEB-A", "WEB-B"],
+            class_name: ["SNA-2019", "WEB-A-2019", "WEB-B-2019","SNA-2020", "WEB-A-2020", "WEB-B-2020",
+                        "SNA-2021", "WEB-A-2021", "WEB-B-2021","SNA-2022", "WEB-A-2022", "WEB-B-2022",
+                        "SNA-2023", "WEB-A-2023", "WEB-B-2023","SNA-2024", "WEB-A-2024", "WEB-B-2024",
+                        "SNA-2025", "WEB-A-2025", "WEB-B-2025","SNA-2026", "WEB-A-2026", "WEB-B-2026"],
         };
     },
     methods: {

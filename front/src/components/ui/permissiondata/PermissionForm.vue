@@ -57,7 +57,7 @@ export default {
         return {
             dialog: false,
             students: [],
-            permissionType: ["Sick", "Urgent Case", "Accendent"],
+            permissionType: ["Authorize","Unauthorize"],
             id: null,
             startDate: null,
             endDate: null,

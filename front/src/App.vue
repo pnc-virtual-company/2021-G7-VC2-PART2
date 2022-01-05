@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Navbar v-if="isLogin" @log_out="isLogout"></Navbar>
+    <Navbar v-if="isLogin" @log_out="isLogout" class="navbar"></Navbar>
     <v-main>
       <router-view @log-in="showMeu" />
     </v-main>
@@ -40,6 +40,13 @@ export default {
   },
 };
 </script>
-<style >
-  
+<style scoped>
+  .navbar {
+  top: 0;
+  position: sticky;
+  position: -webkit-sticky;
+  z-index: 1;
+  padding: 0px;
+  border-right: solid 0.5px rgba(0,0,0,0.2);
+}
 </style>

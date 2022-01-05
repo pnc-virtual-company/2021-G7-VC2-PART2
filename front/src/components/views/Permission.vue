@@ -73,7 +73,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .permission_btn {
     margin-left: 73%;
     margin-top: 5%;
