@@ -41,7 +41,7 @@
                   color="red darken-1"
                   text
                   size="30px"
-                 @click="getDisciplineId(discipline.id)"
+                   @click="getDisciplineId(discipline.id)"
                   >mdi-delete</v-icon
                 ><br /><br /><br />
                 <v-col cols="auto">
@@ -141,7 +141,7 @@
             <v-btn @click="dialog = false" class="blue white--text" text>
               Cancel
             </v-btn>
-            <v-btn class="red white--text" text @click="deleteDiscipline">
+            <v-btn class="red white--text" text  @click="deleteDiscipline">
               Ok
             </v-btn>
           </v-card-actions>
@@ -155,7 +155,7 @@ import axios from "../../../api/api.js";
 import UpdateDiscipline from "./UpdateDiscipline.vue";
 export default {
   props: ["datadiscipline"],
-  emits: ["update-discipline"],
+  emits: ["update-discipline", "deleteDiscipline"],
   components: {
     "update-discipline": UpdateDiscipline,
   },
@@ -200,6 +200,7 @@ export default {
     deleteDiscipline(){
       this.$emit('deleteDiscipline', this.deleteId);
       this.dialog= false;
+      console.log("hi")
     },
   },
 };

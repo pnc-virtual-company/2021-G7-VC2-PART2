@@ -145,7 +145,7 @@ export default {
     return {
       checkbox: false,
       dialog: false,
-      class_name: ["SNA", "WEB-A", "WEB-B"],
+      class_name: ["WEB 2021A", "WEB 2021B", "SNA 2021", "WEB 2022A", "WEB 2022B", "SNA 2022"],
       genders: ["Male", "Female"],
       first_name: "",
       last_name: "",
