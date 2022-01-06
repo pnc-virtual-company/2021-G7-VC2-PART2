@@ -88,8 +88,8 @@
                                             <v-chip class="ma-2 ">{{permiss.end_date}}</v-chip>
                                         </v-col>
                                         <v-col cols="12" sm="1" class="text-center data">
+                                            <v-text>{{permiss.leave_type}}</v-text><br>
                                             <span class="font-weight-black " v-html="Math.round(((new Date(permiss.end_date)).getTime() - (new Date(permiss.start_date)).getTime()) / (1000 *  3600 * 24))"></span><span> days</span>
-
                                         </v-col>
                                     </v-row>
                                 </v-expansion-panel-header>
